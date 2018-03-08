@@ -12,9 +12,8 @@
 
 svjs are ES6 (ECMAScript 6) JavaScript modules, used for coding in [chessmail.de](http://www.chessmail.de).
 
-Main purpose of the svjs modules is, to prevent huge libraries, and to provide needed funcionality with the smallest and 
-cleanest amount code. All modules are used for coding a chess community with thousands of members and are therefore proved 
-for working.
+The main purpose of the svjs modules is, to prevent huge libraries, and to provide needed functionality with the smallest and 
+cleanest amount code possible. All modules are used for coding a chess community with thousands of members and therefore are proved for working.
 
 The svjs modules are:
 
