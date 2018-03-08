@@ -23,3 +23,7 @@ The svjs modules are:
 - [svjs-observe](https://github.com/shaack/svjs-observe) Module to observe object properties used for reactive coding the simple way.
 - [svjs-test](https://github.com/shaack/svjs-test) Very minimal module for unit testing directly in your browser.
 
+Created with svjs are:
+
+- [cm-chessboard](https://github.com/shaack/cm-chessboard) The Chessboard for chessmail.de, a SVG replacement of chessboard.js
+- [cm-pgn](https://github.com/shaack/cm-pgn) Parsing and rendering PGNs with nags, variations and comments. (Alphaversion, not productive)
