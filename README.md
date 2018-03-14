@@ -10,7 +10,7 @@
 
 ```
 
-svjs are ES6 (ECMAScript 6) JavaScript modules, used for coding in [chessmail.de](http://www.chessmail.de).
+svjs are ES6 (ECMAScript 6) JavaScript modules, used for coding [chessmail](http://www.chessmail.eu).
 
 The main purpose of the svjs modules is, to prevent huge libraries, and to provide needed functionality with the smallest and 
 cleanest amount of code possible.
