@@ -28,4 +28,4 @@ The svjs modules are:
 Created with svjs are:
 
 - [cm-chessboard](https://github.com/shaack/cm-chessboard) The Chessboard for chessmail.de, a SVG replacement of chessboard.js
-- [cm-pgn](https://github.com/shaack/cm-pgn) Parsing and rendering PGNs with nags, variations and comments. (Alphaversion, not productive)
+- [cm-pgn](https://github.com/shaack/cm-pgn) Parsing and rendering PGNs with nags, variations and comments.
