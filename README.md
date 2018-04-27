@@ -12,7 +12,7 @@
 
 svjs are ES6 (ECMAScript 6) JavaScript modules, used for coding [chessmail](http://www.chessmail.eu).
 
-The main purpose of the svjs modules is, to prevent huge libraries, and to provide needed functionality with the smallest and 
+The main purpose of the svjs modules is, to prevent the usage of large libraries, and to provide needed functionality with the smallest and 
 cleanest amount of code possible.
 
 All svjs modules have no external dependencies, they don't use jQuery or other frameworks. They are written with modern vanilla JavaScript in ECMAScript 6 syntax.
@@ -29,3 +29,4 @@ Created with svjs are:
 
 - [cm-chessboard](https://github.com/shaack/cm-chessboard) The Chessboard for chessmail.de, a SVG replacement of chessboard.js
 - [cm-pgn](https://github.com/shaack/cm-pgn) Parsing and rendering PGNs with nags, variations and comments.
+m
