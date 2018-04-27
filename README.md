@@ -25,6 +25,6 @@ The svjs modules are:
 - [svjs-test](https://github.com/shaack/svjs-test) Very minimal module for unit testing directly in your browser.
 - [svjs-app](https://github.com/shaack/svjs-app) Kind of minimal framework for ES6 JS apps.
 
-These Modules are using svjs:
+These modules are using svjs:
 
 - [cm-chessboard](https://github.com/shaack/cm-chessboard) The Chessboard for chessmail.de, a SVG replacement of chessboard.js
