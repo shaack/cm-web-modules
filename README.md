@@ -1,4 +1,4 @@
-# M
+# M.js
 
 M is a library of JavaScript ES6 (ECMAScript 6) modules, used for coding [chessmail](http://www.chessmail.eu).
 
