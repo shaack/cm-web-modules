@@ -1,7 +1,7 @@
 {
-  "name": "m",
-  "version": "1.0.0",
-  "description": "Collection of clean and small ES6 modules",
+  "name": "wm",
+  "version": "1.0.2",
+  "description": "Collection of clean and small ES6 modules for the web",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "es6",
+    "web",
     "modules",
     "js",
     "javascript"
