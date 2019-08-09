@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/svjs-message-broker
  * License: MIT, see file 'LICENSE'
  */
-import {MessageBroker} from "../src/wm/message-broker/MessageBroker.js"
+import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
 import assert from 'assert';
 
 describe("MessageBroker", function() {
