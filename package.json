@@ -3,8 +3,12 @@
   "version": "1.0.2",
   "description": "Collection of clean and small ES6 modules for the web",
   "main": "index.js",
+  "directories": {
+    "src": "source",
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --async-only --require babel-core/register ./test/message-broker.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/shaack/m/issues"
   },
-  "homepage": "https://github.com/shaack/m#readme"
+  "homepage": "https://github.com/shaack/m#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "mocha": "^5.2.0"
+  }
 }
