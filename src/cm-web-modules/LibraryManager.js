@@ -30,22 +30,22 @@ module.exports = class LibraryManager {
 
     /**
      * Add a module to the library
-     * @param moduleName Name of the module
-     * @param moduleSourceRoot  The source root inside the module folder
-     * @param moduleSource The module source folder or file inside the 'moduleSourceRoot'
+     * @param projectName Name of the project
+     * @param projectSourceRoot  The source root inside the module folder
+     * @param subfolder The module source folder or file inside the 'moduleSourceRoot'
      */
-    addModule(moduleName, moduleSourceRoot = "src", moduleSource = moduleName) {
+    addProject(projectName, projectSourceRoot = "src", subfolder = projectName) {
         let type = "dir"
-        if (moduleSource.endsWith(".js")) {
+        if (subfolder.endsWith(".js")) {
             type = "file"
         }
         try {
-            const fromAbsolute = this.props.nodeModulesPath + "/" + moduleName + "/" + moduleSourceRoot + "/" + moduleSource
+            const fromAbsolute = this.props.nodeModulesPath + "/" + projectName + "/" + projectSourceRoot + "/" + subfolder
             if (!fs.existsSync(fromAbsolute)) {
                 console.error("Not found: " + fromAbsolute)
             }
             const fromRelative = path.relative(this.projectRoot + "/" + this.props.projectLibFolder, fromAbsolute)
-            const toRelative = "./" + this.props.projectLibFolder + "/" + moduleSource
+            const toRelative = "./" + this.props.projectLibFolder + "/" + subfolder
             console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
             if (fs.existsSync(toRelative)) {
                 this.deleteSync(toRelative)
