@@ -10,9 +10,6 @@ const collectionMutationMethods = {
 
 const registry = new Map()
 
-/**
- * @deprecated Better use 'MessageBroker'
- */
 export class Observe {
 
     /**
