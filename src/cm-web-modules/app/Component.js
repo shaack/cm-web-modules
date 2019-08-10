@@ -6,10 +6,9 @@
 
 export class Component {
 
-    constructor(props = {}) {
+    constructor(app, props = {}) {
+        this.app = app
         this.props = props
-        this.state = {}
-        this.components = []
     }
 
 }

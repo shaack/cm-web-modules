@@ -4,17 +4,12 @@
  * License: MIT, see file 'LICENSE'
  */
 
-/** @var App */
-export let app = null
+export class App {
 
-class App {
     constructor(props = {}) {
         this.props = props
+        this.state = {}
         this.components = []
     }
-}
 
-export function init(props) {
-    app = new App(props)
-    return app
 }
