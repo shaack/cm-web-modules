@@ -6,6 +6,14 @@
 
 export class DomUtils {
 
+    static addClass(element, cssClass) {
+        if (element.getAttribute("class")) {
+            element.setAttribute("class", element.getAttribute("class") + " " + cssClass);
+        } else {
+            element.setAttribute("class", cssClass);
+        }
+    }
+
     static removeAllChildElements(element) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
