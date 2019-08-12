@@ -1,6 +1,7 @@
 /**
- * Author: shaack
- * Date: 23.11.2017
+ * Author and copyright: Stefan Haack (https://shaack.com)
+ * Repository: https://github.com/shaack/cm-web-modules
+ * License: MIT, see file 'LICENSE'
  */
 
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";

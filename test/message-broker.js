@@ -1,8 +1,9 @@
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
- * Repository: https://github.com/shaack/svjs-message-broker
+ * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
+
 import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
 import assert from 'assert';
 
