@@ -6,7 +6,7 @@
 
 export class Cache {
 
-    constructor(props) {
+    constructor(props = {}) {
         this.props = {
             clearInterval: 30000
         }
