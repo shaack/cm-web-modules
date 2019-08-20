@@ -1,9 +1,9 @@
+// noinspection JSUnresolvedVariable
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-
 window.AudioContext = window.AudioContext || window.webkitAudioContext
 
 const desiredSampleRate = 44100
@@ -12,8 +12,7 @@ let audioContext = new AudioContext()
 const mainGainNode = audioContext.createGain()
 mainGainNode.gain.value = 1
 mainGainNode.connect(audioContext.destination)
-if (/(iPhone|iPad)/i.test(navigator.userAgent) &&
-    audioContext.sampleRate !== desiredSampleRate) {
+if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== desiredSampleRate) {
     const buffer = audioContext.createBuffer(1, 1, desiredSampleRate)
     const sound = audioContext.createBufferSource()
     sound.buffer = buffer
@@ -25,6 +24,14 @@ if (/(iPhone|iPad)/i.test(navigator.userAgent) &&
         mainGainNode.connect(audioContext.destination)
     })
 }
+// patch for chrome needing user interaction
+const resumeAudio = function () {
+    if (window.AudioContext.state === "suspended") {
+        window.AudioContext.resume()
+    }
+    document.removeEventListener("click", resumeAudio)
+}
+document.addEventListener("click", resumeAudio)
 
 export class Audio {
 
