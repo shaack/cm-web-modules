@@ -31,7 +31,7 @@ describe("MessageBroker", function() {
         messageBroker.publish(new testMessage())
     })
 
-    it("sould publis a message with data to a subscriber", function(done) {
+    it("should publish a message with data to a subscriber", function(done) {
         const messageBroker = new MessageBroker()
 
         const testMessage = function testMessage(data) {
