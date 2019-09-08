@@ -10,26 +10,26 @@ export class MessageBroker {
         this.topics = []
     }
 
-    subscribe(topic, subscriber) {
+    subscribe(topic, callback) {
         if (this.topics[topic] === undefined) {
             this.topics[topic] = []
         }
-        if (this.topics[topic].indexOf(subscriber) === -1) {
-            this.topics[topic].push(subscriber)
+        if (this.topics[topic].indexOf(callback) === -1) {
+            this.topics[topic].push(callback)
         }
     }
 
-    unsubscribe(topic = null, subscriber = null) {
-        if(subscriber !== null && topic !== null) {
-            this.topics[topic].splice(this.topics[topic].indexOf(subscriber), 1)
-        } else if (subscriber === null && topic !== null) {
+    unsubscribe(topic = null, callback = null) {
+        if(callback !== null && topic !== null) {
+            this.topics[topic].splice(this.topics[topic].indexOf(callback), 1)
+        } else if (callback === null && topic !== null) {
             this.topics[topic] = []
-        } else if (topic === null && subscriber !== null) {
+        } else if (topic === null && callback !== null) {
             for (const topicName in this.topics) {
                 const topic = this.topics[topicName]
                 for (const topicSubscriber of topic) {
-                    if(topicSubscriber === subscriber) {
-                        this.unsubscribe(topicName, subscriber)
+                    if(topicSubscriber === callback) {
+                        this.unsubscribe(topicName, callback)
                     }
                 }
             }
@@ -43,15 +43,15 @@ export class MessageBroker {
         }
     }
 
-    publish(message, async = true) {
-        if (this.topics[message.constructor]) {
-            this.topics[message.constructor].forEach(function (subscriber) {
+    publish(topic, object = {}, async = true) {
+        if (this.topics[topic]) {
+            this.topics[topic].forEach(function (callback) {
                 if(async) {
                     setTimeout(function () {
-                        subscriber(message)
+                        callback(object)
                     })
                 } else {
-                    subscriber(message)
+                    return callback(object)
                 }
             })
         }

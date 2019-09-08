@@ -5,152 +5,157 @@
  */
 
 import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
-import assert from 'assert';
+import assert from 'assert'
 
-describe("MessageBroker", function() {
+describe("MessageBroker", function () {
 
     it("should allow subscription for a topic", function (done) {
         const messageBroker = new MessageBroker()
-        const subscriber = function() {
+        const callback = function () {
         }
-        messageBroker.subscribe("test1", subscriber)
-        assert.equal(messageBroker.topics["test1"][0], subscriber)
+        messageBroker.subscribe("test1", callback)
+        assert.equal(messageBroker.topics["test1"][0], callback)
         done()
     })
 
-    it("should publish a message to a subscriber", function (done) {
+    it("should publish a text message to a subscriber", function (done) {
         const messageBroker = new MessageBroker()
-        const testMessage = function testMessage() {
-        }
-        const subscriber = function(message) {
-            assert.equal(message.constructor, testMessage)
+        const topic = "test/topic/"
+        const testMessage = "Hello World!"
+        const subscriber = function (message) {
+            assert.equal(message, testMessage)
             done()
         }
-        messageBroker.subscribe(testMessage, subscriber)
-        assert.equal(messageBroker.topics[testMessage][0], subscriber)
-        messageBroker.publish(new testMessage())
+        messageBroker.subscribe(topic, subscriber)
+        assert.equal(messageBroker.topics[topic][0], subscriber)
+        messageBroker.publish(topic, testMessage)
     })
 
-    it("should publish a message with data to a subscriber", function(done) {
+    it("should publish a message with an object as data to a subscriber", function (done) {
         const messageBroker = new MessageBroker()
 
-        const testMessage = function testMessage(data) {
-            // noinspection JSUnusedGlobalSymbols
-            this.data = data
+        const topic = "test/topic"
+        const testMessage = {
+            name: "Peter",
+            age: 33
         }
-        const subscriber = function(message) {
-            assert.equal("Hello", message.data)
+        const subscriber1 = function (message) {
+            assert.equal("Peter", message.name)
+            assert.equal(33, message.age)
+            done()
+        }
+        const subscriber2 = function (message) {
+            assert.fail()
             done()
         }
 
-        messageBroker.subscribe(testMessage, subscriber)
-        assert.equal(messageBroker.topics[testMessage][0], subscriber)
-        messageBroker.publish(new testMessage("Hello"))
+        messageBroker.subscribe(topic, subscriber1)
+        messageBroker.subscribe("false/topic", subscriber2)
+        assert.equal(messageBroker.topics[topic][0], subscriber1)
+        messageBroker.publish(topic, testMessage)
     })
 
     it("should subscribe multiple subscribers and unsubscribe one for a topic", function (done) {
         const messageBroker = new MessageBroker()
 
-        const testMessage1 = function testMessage1(data) {
+        const topic1 = "topic/correct"
+        const topic2 = "topic/false"
+        const testMessage1 = {
             // noinspection JSUnusedGlobalSymbols
-            this.data = data
+            data: "Hello"
         }
-        const testMessage2 = function testMessage2() {
-        }
+        const testMessage2 = {}
 
-        const subscriber1 = function() {
+        const subscriber1 = function () {
             assert.fail()
         }
-        const subscriber2 = function(message) {
+        const subscriber2 = function (message) {
             assert.equal("Hello", message.data)
             done()
         }
-        const subscriber3 = function() {
+        const subscriber3 = function () {
             assert.fail()
         }
 
-        messageBroker.subscribe(testMessage1, subscriber1)
-        messageBroker.subscribe(testMessage1, subscriber2)
-        messageBroker.subscribe(testMessage2, subscriber3)
+        messageBroker.subscribe(topic1, subscriber1)
+        messageBroker.subscribe(topic1, subscriber2)
+        messageBroker.subscribe(topic2, subscriber3)
         assert.equal(2, Object.keys(messageBroker.topics).length)
-        assert.equal(2, messageBroker.topics[testMessage1].length)
-        assert.equal(1, messageBroker.topics[testMessage2].length)
+        assert.equal(2, messageBroker.topics[topic1].length)
+        assert.equal(1, messageBroker.topics[topic2].length)
 
-        messageBroker.unsubscribe(testMessage1, subscriber1)
+        messageBroker.unsubscribe(topic1, subscriber1)
 
         assert.equal(2, Object.keys(messageBroker.topics).length)
-        assert.equal(1, messageBroker.topics[testMessage1].length)
-        assert.equal(1, messageBroker.topics[testMessage2].length)
+        assert.equal(1, messageBroker.topics[topic1].length)
+        assert.equal(1, messageBroker.topics[topic2].length)
 
-        assert.equal(messageBroker.topics[testMessage1][0], subscriber2)
-        assert.equal(messageBroker.topics[testMessage2][0], subscriber3)
+        assert.equal(messageBroker.topics[topic1][0], subscriber2)
+        assert.equal(messageBroker.topics[topic2][0], subscriber3)
 
-        messageBroker.publish(new testMessage1("Hello"))
+        messageBroker.publish(topic1, testMessage1)
     })
 
-    it("should unsubscribe all callbacks for a topic", function(done) {
+    it("should unsubscribe all callbacks for a topic", function (done) {
         const messageBroker = new MessageBroker()
 
-        const testMessage1 = function testMessage1() {
-        }
-        const testMessage2 = function testMessage2() {
-        }
+        const topic1 = "test/topic1"
+        const topic2 = "test/topic2"
 
-        const subscriber1 = function() {
+        const subscriber1 = function () {
             assert.fail()
         }
-        const subscriber2 = function() {
+        const subscriber2 = function () {
             assert.fail()
         }
-        const subscriber3 = function() {
+        const subscriber3 = function () {
             done()
         }
 
-        messageBroker.subscribe(testMessage1, subscriber1)
-        messageBroker.subscribe(testMessage1, subscriber2)
-        messageBroker.subscribe(testMessage2, subscriber3)
+        messageBroker.subscribe(topic1, subscriber1)
+        messageBroker.subscribe(topic1, subscriber2)
+        messageBroker.subscribe(topic2, subscriber3)
 
-        messageBroker.unsubscribe(testMessage1)
+        messageBroker.unsubscribe(topic1)
 
         assert.equal(1, Object.keys(messageBroker.topics).length)
-        assert.equal(undefined, messageBroker.topics[testMessage1])
-        assert.equal(1, messageBroker.topics[testMessage2].length)
+        assert.equal(undefined, messageBroker.topics[topic1])
+        assert.equal(1, messageBroker.topics[topic2].length)
 
-        assert.equal(messageBroker.topics[testMessage2][0], subscriber3)
+        assert.equal(messageBroker.topics[topic2][0], subscriber3)
 
-        messageBroker.publish(new testMessage1())
-        messageBroker.publish(new testMessage2())
+        messageBroker.publish(topic1)
+        messageBroker.publish(topic2)
     })
 
-    it("should unsubscribe all topics for a callback", function(done) {
+    it("should unsubscribe all topics for a callback", function (done) {
         const messageBroker = new MessageBroker()
 
-        const testMessage1 = function testMessage1() {
-        }
-        const testMessage2 = function testMessage2() {
-        }
+        const topic1 = "test/topic1"
+        const topic2 = "test/topic2"
 
-        const subscriber1 = function() {
+        const subscriber1 = function () {
             assert.fail()
         }
-        const subscriber2 = function() {
+        const subscriber2 = function () {
             done()
         }
 
-        messageBroker.subscribe(testMessage1, subscriber1)
-        messageBroker.subscribe(testMessage1, subscriber2)
-        messageBroker.subscribe(testMessage2, subscriber1)
+        messageBroker.subscribe(topic1, subscriber1)
+        messageBroker.subscribe(topic1, subscriber2)
+        messageBroker.subscribe(topic2, subscriber1)
 
         messageBroker.unsubscribe(null, subscriber1)
 
         assert.equal(1, Object.keys(messageBroker.topics).length)
-        assert.equal(1, messageBroker.topics[testMessage1].length)
-        assert.equal(undefined, messageBroker.topics[testMessage2])
+        assert.equal(1, messageBroker.topics[topic1].length)
+        assert.equal(undefined, messageBroker.topics[topic2])
 
-        assert.equal(messageBroker.topics[testMessage1][0], subscriber2)
+        assert.equal(messageBroker.topics[topic1][0], subscriber2)
 
-        messageBroker.publish(new testMessage1())
-        messageBroker.publish(new testMessage2())
+        messageBroker.publish(topic1)
+        messageBroker.publish(topic2)
     })
+
 
 })
