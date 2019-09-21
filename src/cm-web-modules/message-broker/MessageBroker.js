@@ -49,21 +49,21 @@ export class MessageBroker {
         const breadcrumbArray = topic.split("/")
         let wildcardTopic = ""
         for (const topicPart of breadcrumbArray) {
-            this.callback(wildcardTopic + "#", object, async)
+            this.callback(wildcardTopic + "#", topic, object, async)
             wildcardTopic += topicPart + "/"
         }
-        this.callback(topic, object, async)
+        this.callback(topic, topic, object, async)
     }
 
-    callback(topic, object = {}, async = true) {
-        if (this.topics[topic]) {
-            this.topics[topic].forEach(function (callback) {
+    callback(wildcardTopic, topic, object = {}, async = true) {
+        if (this.topics[wildcardTopic]) {
+            this.topics[wildcardTopic].forEach(function (callback) {
                 if(async) {
                     setTimeout(function () {
-                        callback(object)
+                        callback(object, topic)
                     })
                 } else {
-                    return callback(object)
+                    return callback(object, topic)
                 }
             })
         }

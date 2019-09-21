@@ -56,10 +56,12 @@ describe("MessageBroker", function () {
 
     it("should subscribe to a topic with wildcard", function (done) {
         const messageBroker = new MessageBroker()
-        messageBroker.subscribe("test/#", function() {
+        messageBroker.subscribe("test/#", function(data, topic) {
+            assert.equal(data, "thedata")
+            assert.equal(topic, "test/the/wildcard")
             done()
         })
-        messageBroker.publish("test/the/wildcard")
+        messageBroker.publish("test/the/wildcard", "thedata")
     })
 
     it("should subscribe to all topics with wildcard #", function (done) {
