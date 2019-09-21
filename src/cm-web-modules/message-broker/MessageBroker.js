@@ -26,9 +26,11 @@ export class MessageBroker {
             this.topics[topic] = []
         } else if (topic === null && callback !== null) {
             for (const topicName in this.topics) {
+                // noinspection JSUnfilteredForInLoop
                 const topic = this.topics[topicName]
                 for (const topicSubscriber of topic) {
                     if(topicSubscriber === callback) {
+                        // noinspection JSUnfilteredForInLoop
                         this.unsubscribe(topicName, callback)
                     }
                 }
@@ -44,6 +46,16 @@ export class MessageBroker {
     }
 
     publish(topic, object = {}, async = true) {
+        const breadcrumbArray = topic.split("/")
+        let wildcardTopic = ""
+        for (const topicPart of breadcrumbArray) {
+            this.callback(wildcardTopic + "#", object, async)
+            wildcardTopic += topicPart + "/"
+        }
+        this.callback(topic, object, async)
+    }
+
+    callback(topic, object = {}, async = true) {
         if (this.topics[topic]) {
             this.topics[topic].forEach(function (callback) {
                 if(async) {

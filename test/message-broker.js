@@ -3,7 +3,6 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-
 import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
 import assert from 'assert'
 
@@ -53,6 +52,22 @@ describe("MessageBroker", function () {
         messageBroker.subscribe("false/topic", subscriber2)
         assert.equal(messageBroker.topics[topic][0], subscriber1)
         messageBroker.publish(topic, testMessage)
+    })
+
+    it("should subscribe to a topic with wildcard", function (done) {
+        const messageBroker = new MessageBroker()
+        messageBroker.subscribe("test/#", function() {
+            done()
+        })
+        messageBroker.publish("test/the/wildcard")
+    })
+
+    it("should subscribe to all topics with wildcard #", function (done) {
+        const messageBroker = new MessageBroker()
+        messageBroker.subscribe("#", function() {
+            done()
+        })
+        messageBroker.publish("test/the/wildcard/more")
     })
 
     it("should subscribe multiple subscribers and unsubscribe one for a topic", function (done) {
