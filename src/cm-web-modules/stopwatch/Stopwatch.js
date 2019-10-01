@@ -31,7 +31,7 @@ export class Stopwatch {
             this.dateAtLatestStart = new Date()
             this.timer = setInterval(() => {
                 this.tick()
-            }, 100)
+            }, 250)
             this.timerStateChanged(this.running())
             this.timerSecondsChanged(this.secondsExpiredSinceLastPause)
         }
