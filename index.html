@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+<p>
+    seconds: <span id="seconds-output">0</span><br/>
+    running: <span id="state-output">false</span>
+</p>
+<p>
+    <button id="button-start">Start</button>
+    <button id="button-stop">Stop</button>
+    <button id="button-reset">Reset</button>
+</p>
+<script type="module">
+    import {Stopwatch} from "./src/cm-web-modules/stopwatch/Stopwatch.js"
+    const stopwatch = new Stopwatch({
+        onStateChanged: (running) => {
+            // console.log("onStateChanged", running)
+            stateOutput.innerText = running
+        },
+        onSecondsChanged: (seconds) => {
+            // console.log("onSecondsChanged", seconds)
+            secondsOutput.innerText = seconds
+        }
+    })
+    const buttonStart = document.getElementById("button-start")
+    const buttonStop = document.getElementById("button-stop")
+    const buttonReset = document.getElementById("button-reset")
+    const secondsOutput = document.getElementById("seconds-output")
+    const stateOutput = document.getElementById("state-output")
+
+    buttonStart.addEventListener("click", () => {
+        stopwatch.start()
+    })
+    buttonStop.addEventListener("click", () => {
+        stopwatch.stop()
+    })
+    buttonReset.addEventListener("click", () => {
+        stopwatch.reset()
+    })
+</script>
+</body>
+</html>
