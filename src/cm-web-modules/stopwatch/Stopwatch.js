@@ -11,15 +11,15 @@ export class Stopwatch {
         this.startDate = null
         this.endDate = null
         this.dateAtLatestStart = null
+        this.secondsExpiredTillLastPause = 0
         this.secondsExpiredSinceLastStart = 0
-        this.secondsExpiredSinceLastPause = 0
         this.timer = null
         this.timerStateChanged = props.onStateChanged
         this.timerSecondsChanged = props.onSecondsChanged
     }
 
     secondsExpired() {
-        return this.secondsExpiredSinceLastPause + this.secondsExpiredSinceLastStart
+        return this.secondsExpiredTillLastPause + this.secondsExpiredSinceLastStart
     }
 
     start() {
@@ -33,7 +33,7 @@ export class Stopwatch {
                 this.tick()
             }, 250)
             this.timerStateChanged(this.running())
-            this.timerSecondsChanged(this.secondsExpiredSinceLastPause)
+            this.timerSecondsChanged(this.secondsExpiredTillLastPause)
         }
     }
 
@@ -42,7 +42,7 @@ export class Stopwatch {
             clearInterval(this.timer)
             this.timer = null
             this.endDate = new Date()
-            this.secondsExpiredSinceLastPause = this.secondsExpired()
+            this.secondsExpiredTillLastPause = this.secondsExpired()
             this.secondsExpiredSinceLastStart = 0
             this.timerStateChanged(this.running())
         }
@@ -54,7 +54,7 @@ export class Stopwatch {
             this.timer = null
         }
         this.secondsExpiredSinceLastStart = 0
-        this.secondsExpiredSinceLastPause = 0
+        this.secondsExpiredTillLastPause = 0
         this.timerSecondsChanged(this.secondsExpired())
         this.timerStateChanged(this.running())
     }
