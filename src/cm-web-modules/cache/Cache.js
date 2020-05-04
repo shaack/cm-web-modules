@@ -12,8 +12,8 @@ export class Cache {
         }
         Object.assign(this.props, props)
         if (props.clearInterval && props.clearInterval > 0) {
-            window.setInterval(function () {
-                this.cache = {}
+            setInterval(() => {
+                this.clearAll()
             }, props.clearInterval)
         }
         this.cache = {}
@@ -25,6 +25,14 @@ export class Cache {
 
     get(key) {
         return this.cache[key]
+    }
+
+    clear(key) {
+        this.cache[key] = null
+    }
+
+    clearAll() {
+        this.cache = {}
     }
 
 }

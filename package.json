@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --async-only --require babel-core/register ./test/message-broker.js"
+    "test": "mocha --async-only --require babel-core/register ./test/*"
   },
   "repository": {
     "type": "git",
