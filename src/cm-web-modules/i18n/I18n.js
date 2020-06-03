@@ -18,9 +18,9 @@ export class I18n {
             if (htmlLang) {
                 this.locale = htmlLang
             }
-        }
-        if (!this.locale) {
-            this.locale = navigator.language
+            if (!this.locale) {
+                this.locale = navigator.language
+            }
         }
         this.lang = this.locale.substr(0, 2)
         this.translations = {}

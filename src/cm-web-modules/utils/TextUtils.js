@@ -15,11 +15,12 @@ const entityMap = {
 
 export class TextUtils {
 
-    static replaceAll(str, obj) {
+    static replaceAll(str, replacementsObj, ignoreCase = false) {
         let retStr = str
-        let x
-        for (x in obj) {
-            retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
+        const flags = ignoreCase ? "gi" : "g"
+        for (let needle in replacementsObj) {
+            // noinspection JSUnfilteredForInLoop
+            retStr = retStr.replace(new RegExp(needle, flags), replacementsObj[needle])
         }
         return retStr
     }
