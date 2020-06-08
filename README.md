@@ -37,6 +37,9 @@ In `postinstall.js`, add the used modules via `manager.addProject("module-name")
 The source of the module is than copied to `PROJECT_ROOT/lib/modules/name`. It provides
 the same include-folder (/lib) for the local and for the via npm installed modules.
 
+You must call `npm install` after every `npm update`, because it is only automatically started by
+the initial install.  
+
 Example `postinstall.js`
 ```js
 const LibraryManager = require("cm-web-modules/src/LibraryManager.js")
