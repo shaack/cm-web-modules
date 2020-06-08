@@ -26,8 +26,7 @@
             stateOutput.innerText = running
         },
         onSecondsChanged: (seconds) => {
-            // console.log("onSecondsChanged", seconds)
-            secondsOutput.innerText = seconds
+            secondsOutput.innerText = seconds.toFixed(1)
         }
     })
     const buttonStart = document.getElementById("button-start")

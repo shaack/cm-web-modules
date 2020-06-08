@@ -11,8 +11,8 @@ export class Stopwatch {
         this.startDate = null
         this.endDate = null
         this.dateAtLatestStart = null
-        this.secondsExpiredTillLastPause = 0
-        this.secondsExpiredSinceLastStart = 0
+        this.secondsExpiredTillLastPause = 0.0
+        this.secondsExpiredSinceLastStart = 0.0
         this.timer = null
         this.timerStateChanged = props.onStateChanged
         this.timerSecondsChanged = props.onSecondsChanged
@@ -31,7 +31,7 @@ export class Stopwatch {
             this.dateAtLatestStart = new Date()
             this.timer = setInterval(() => {
                 this.tick()
-            }, 250)
+            }, 100)
             this.timerStateChanged(this.running())
             this.timerSecondsChanged(this.secondsExpiredTillLastPause)
         }
@@ -49,18 +49,17 @@ export class Stopwatch {
     }
 
     reset() {
-        if (this.running()) {
-            clearInterval(this.timer)
-            this.timer = null
-        }
         this.secondsExpiredSinceLastStart = 0
         this.secondsExpiredTillLastPause = 0
+        this.startDate = new Date()
+        this.dateAtLatestStart = new Date()
         this.timerSecondsChanged(this.secondsExpired())
         this.timerStateChanged(this.running())
+
     }
 
     tick() {
-        const newSecondsExpired = DateUtils.diffInSeconds(this.dateAtLatestStart.getTime(), new Date().getTime())
+        const newSecondsExpired = (DateUtils.diffInMs(this.dateAtLatestStart.getTime(), new Date().getTime()) / 1000)
         if (newSecondsExpired !== this.secondsExpiredSinceLastStart) {
             this.secondsExpiredSinceLastStart = newSecondsExpired
             this.timerSecondsChanged(this.secondsExpired())
