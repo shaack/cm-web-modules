@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/shaack/m#readme",
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "chai": "^4.2.0"
+    "mocha": "^5.2.0"
   }
 }
