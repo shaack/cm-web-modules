@@ -1,0 +1,1 @@
+var es5Variable = "test value"
