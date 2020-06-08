@@ -7,6 +7,9 @@
 import {ES5Utils} from "../../src/cm-web-modules/utils/ES5Utils.js"
 import {Test} from "../../src/cm-web-modules/test/Test.js"
 
+/**
+ * @Deprecated
+ */
 export class TestES5Utils extends Test {
 
     testLoadScript() {
