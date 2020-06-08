@@ -28,7 +28,7 @@ export class Cache {
     }
 
     clear(key) {
-        this.cache[key] = null
+        this.cache[key] = undefined
     }
 
     clearAll() {

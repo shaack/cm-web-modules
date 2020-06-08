@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {ES5Utils} from "../../src/cm-web-modules/utils/ES5Utils.js"
+import {ES5Utils} from "../src/cm-web-modules/utils/ES5Utils.js"
 import {Test} from "../../src/cm-web-modules/test/Test.js"
 
 export class TestES5Utils extends Test {

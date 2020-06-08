@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --async-only --require babel-core/register ./test/*"
+    "test": "echo request test/test.html for testing"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,7 @@
   },
   "homepage": "https://github.com/shaack/m#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "chai": "^4.2.0"
   }
 }
