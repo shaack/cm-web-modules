@@ -22,7 +22,7 @@ The `cm-web-modules` modules are:
 
 The LibraryManager is the glue between the web-modules. 
 
-It in configured in `postinstall.js`. Add `postinstall.js` to the automtically excuted install-scripts from npm by adding it to `package.json` like this
+It is configured in `postinstall.js`. Add `postinstall.js` to the automtically excuted install-scripts from npm by adding it to `package.json` like this
 
 `package.json`
 ```json
