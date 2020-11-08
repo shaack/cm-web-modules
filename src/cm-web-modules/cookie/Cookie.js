@@ -8,12 +8,14 @@ const additionalAttributes = "Path=/; SameSite=Strict;"
 
 export class Cookie {
 
-    static create(name, value = "", maxAge = undefined) {
+    static write(name, value = "", maxAge = undefined) {
         let maxAgeAttribute = ""
-        if (maxAge) {
+        if (maxAge !== undefined) {
             maxAgeAttribute = "Max-Age=" + maxAge + "; "
         }
-        document.cookie = name + "=" + value + "; " + maxAgeAttribute + additionalAttributes
+        const content = name + "=" + value + "; " + maxAgeAttribute + additionalAttributes
+        console.log("write", content)
+        document.cookie = content
     }
 
     static read(name) {
@@ -29,7 +31,7 @@ export class Cookie {
     }
 
     static delete(name) {
-        document.cookie = name + "=; Max-Age=0; " + additionalAttributes
+        this.write(name, "", 0)
     }
 
 }
