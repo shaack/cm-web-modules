@@ -13,9 +13,7 @@ export class Cookie {
         if (maxAge !== undefined) {
             maxAgeAttribute = "Max-Age=" + maxAge + "; "
         }
-        const content = name + "=" + value + "; " + maxAgeAttribute + additionalAttributes
-        console.log("write", content)
-        document.cookie = content
+        document.cookie = name + "=" + value + "; " + maxAgeAttribute + additionalAttributes
     }
 
     static read(name) {
