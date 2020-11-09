@@ -6,6 +6,15 @@
 
 const additionalAttributes = "Path=/; SameSite=Strict;"
 
+export const DURATION = {
+    "second": 1,
+    "minute": 60,
+    "hour": 3600,
+    "day": 86400,
+    "week": 604800,
+    "year": 31536000
+}
+
 export class Cookie {
 
     static write(name, value = "", maxAge = undefined) {
