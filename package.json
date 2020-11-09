@@ -8,11 +8,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo request test/test.html for testing"
+    "test": "echo request test/test.html in a browser for testing"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaack/m.git"
+    "url": "git+https://github.com/shaack/cm-web-modules.git"
   },
   "keywords": [
     "es6",
@@ -24,9 +24,9 @@
   "author": "shaack.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaack/m/issues"
+    "url": "https://github.com/shaack/cm-web-modules/issues"
   },
-  "homepage": "https://github.com/shaack/m#readme",
+  "homepage": "https://github.com/shaack/cm-web-modules#readme",
   "devDependencies": {
     "mocha": "^5.2.0"
   }
