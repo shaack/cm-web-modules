@@ -11,6 +11,7 @@ The `cm-web-modules` modules are:
 - [App](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/app) Kind of minimal framework for ES6 JS apps.
 - [Audio](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/audio) Module for the [Web Audio API](https://developer.mozilla.org/de/docs/Web/API/Web_Audio_API). For playing audio samples in a web page.
 - [Cache](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/cache)
+- [Cookie](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/cookie) Module to read, write and delete cookies
 - [i18n](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/i18n)
 - [MessageBroker](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/message-broker)
 - [Observe](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/observe) Module to observe object properties used for reactive coding the simple way.
