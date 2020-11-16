@@ -6,11 +6,15 @@
 
 export class DomUtils {
 
+    /**
+     * @deprecated use element.classList.add("mystyle");
+     */
     static addClass(element, cssClass) {
+        console.warn('DomUtils.addClass is deprecated, use element.classList.add("className")')
         if (element.getAttribute("class")) {
-            element.setAttribute("class", element.getAttribute("class") + " " + cssClass);
+            element.setAttribute("class", element.getAttribute("class") + " " + cssClass)
         } else {
-            element.setAttribute("class", cssClass);
+            element.setAttribute("class", cssClass)
         }
     }
 

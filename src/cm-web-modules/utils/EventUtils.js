@@ -6,8 +6,8 @@
 
 export class EventUtils {
 
-    static delegate(element, event, selector, handler) {
-        element.addEventListener(event, function (event) {
+    static delegate(element, eventName, selector, handler) {
+        element.addEventListener(eventName, function (event) {
             let target = event.target
             while (target && target !== this) {
                 if (target.matches(selector)) {

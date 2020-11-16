@@ -15,15 +15,15 @@ export class DateUtils {
     }
 
     static diffInMinutes(from, to) {
-        return Math.floor((to - from) / 1000 / 60)
+        return Math.floor((to - from) / 60000)
     }
 
     static diffInHours(from, to) {
-        return Math.floor((to - from) / 1000 / 60 / 60)
+        return Math.floor((to - from) / 3600000)
     }
 
     static diffInDays(from, to) {
-        return Math.floor((to - from) / 1000 / 60 / 60 / 24)
+        return Math.floor((to - from) / 86400000)
     }
 
 }
