@@ -3,9 +3,11 @@
 // source: https://github.com/remy/bind/
 /* eslint-env browser */
 //
-// ES6 Version by https://shaack.com, just added "export"
-export var Bind = (function Bind(global = {}) {
-
+// ES6 Version by https://shaack.com
+// - added "export"
+// - added index from arrays in html.push(transform(value, target, index))
+export var Bind = (function Bind(global) {
+  'use strict';
   // support check
   if (!Function.bind || !Object.defineProperty) {
     throw new Error('Prerequisite APIs not available.');
@@ -13,12 +15,13 @@ export var Bind = (function Bind(global = {}) {
 
   var debug = false;
 
+  // this is a conditional because we're also supporting node environment
+  var $;
+  try { $ = document.querySelectorAll.bind(document); } catch (e) {}
   var array = [];
   var isArray = Array.isArray;
   var o = 'object';
-  var pass = function (v) {
-    return v;
-  };
+  var pass = function (v) {return v; };
   var tryit = function (fn) {
     return function () {
       try {
@@ -76,7 +79,7 @@ export var Bind = (function Bind(global = {}) {
           // now let the native array do it's thing
           return;
         }
-        var newLength = v * 1; // do a simple coersion
+        var newLength =  v * 1; // do a simple coersion
         // note: if `v` is a fraction, then it *should* throw an exception
         // "Invalid array length" but we don't support right now.
         if (length !== newLength) {
@@ -113,19 +116,6 @@ export var Bind = (function Bind(global = {}) {
     if (settings.ready && object.__callback) {
       return target;
     }
-
-    // don't rebind
-    if (object instanceof Bind) {
-      return object;
-    }
-
-    // this is a conditional because we're also supporting node environment
-    var $;
-    try {
-      var context = settings.context || document;
-      $ = context.querySelectorAll.bind(context);
-    } catch (e) {}
-
     // loop through each property, and make getters & setters for
     // each type of "regular" value. If the key/value pair is an
     // object, then recursively call extend with the target and
@@ -140,9 +130,7 @@ export var Bind = (function Bind(global = {}) {
       // create a new copy of the mapping path
       var path = [].slice.call(_path);
       var callback;
-      var transform = function (v) {
-        return safe(v);
-      };
+      var transform = function (v) { return safe(v); };
       var parse = pass;
 
       // now create a path, so that obj { user: { name: xxx }} is
@@ -150,10 +138,6 @@ export var Bind = (function Bind(global = {}) {
       path.push(key);
 
       var selector = settings.mapping[path.join('.')];
-
-      if (debug) {
-        console.log('key: %s / %s', key, path.join('.'), selector);
-      }
 
       // then we've got an advanced config - rather than 1-1 mapping
       if (selector && selector.toString() === '[object Object]') {
@@ -171,20 +155,14 @@ export var Bind = (function Bind(global = {}) {
         selector = selector.dom;
       }
 
-      var elements;
-      if (typeof selector === 'string') {
-        // cache the matched elements. Note the :) is because qSA won't allow an
-        // empty (or undefined) string so I like the smilie.
-        elements = $(selector || '☺');
-      } else if (global.Element && selector instanceof global.Element) {
-        elements = [selector];
-      }
-
       // look for the path in the mapping arg, and if the gave
       // us a callback, use that, otherwise...
       if (typeof selector === 'function') {
         callback = selector;
-      } else if (elements) {
+      } else if (typeof selector === 'string') {
+        // cache the matched elements. Note the :) is because qSA won't allow an
+        // empty (or undefined) string so I like the smilie.
+        var elements = $(selector || '☺');
         if (elements.length === 0) {
           console.warn('No elements found against "' + selector + '" selector');
         }
@@ -193,20 +171,7 @@ export var Bind = (function Bind(global = {}) {
         // matched from the selector (set up below), that checks
         // the node type, and either sets the input.value or
         // element.innerHTML to the value
-        var valueSetters = ['OPTION', 'INPUT', 'PROGRESS', 'TEXTAREA'];
-
-        if (value === null || value === undefined) {
-          if (valueSetters.indexOf(elements[0].nodeName) !== -1) {
-            if (elements[0].hasOwnProperty('checked')) {
-              value = parse(elements[0].value === 'on' ? elements[0].checked : elements[0].value);
-            } else {
-              value = parse(elements[0].value);
-            }
-          } else {
-            value = parse(elements[0].innerHTML);
-          }
-        }
-
+        var valueSetters = ['SELECT', 'INPUT', 'PROGRESS'];
         var oldCallback = callback;
         callback = function (value) {
           // make it a live selection
@@ -222,7 +187,7 @@ export var Bind = (function Bind(global = {}) {
               if (valueSetters.indexOf(element.nodeName) !== -1) {
                 // TODO select[multiple]
                 // special case for multi-select items
-                var result = transform(value, target);
+                var result = transform(value);
                 if (element.type === 'checkbox') {
                   if (value instanceof Array) {
                     var found = value.filter(function (value) {
@@ -234,8 +199,6 @@ export var Bind = (function Bind(global = {}) {
                     if (found.length === 0) {
                       element.checked = false;
                     }
-                  } else if (typeof value === 'boolean') {
-                    element.checked = value;
                   }
                 } else if (element.type === 'radio') {
                   element.checked = element.value === result;
@@ -253,22 +216,12 @@ export var Bind = (function Bind(global = {}) {
                 if (!(value instanceof Array)) {
                   value = [value];
                 }
-                var html = [];
-
-                var i = 0 // shaack patch
+                var html = '';
+                var index = 0
                 forEach(value, function (value) {
-                  html.push(transform(value, target, i++));
+                  html += transform(value, target, index);
                 });
-                // peek the first item, if it's a node, append
-                // otherwise set the innerHTML
-                if (typeof html[0] === 'object') {
-                  element.innerHTML = ''; // blow away original
-                  html.forEach(function (el) {
-                    element.appendChild(el);
-                  });
-                } else {
-                  element.innerHTML = html.join('');
-                }
+                element.innerHTML = html;
               }
             });
           }
@@ -280,32 +233,29 @@ export var Bind = (function Bind(global = {}) {
         // let's make the binding two way...
         // note that this doesn't support event delegation
         forEach(elements, function (element) {
-          if (element.nodeName === 'INPUT' || element.nodeName === 'SELECT' || element.nodeName === 'TEXTAREA') {
-
-            // build up the event handler function
+          if (element.nodeName === 'INPUT' || element.nodeName === 'SELECT') {
             var oninput = function () {
               // we set a dirty flag against this dom node to prevent a
               // circular update / max stack explode
               this.__dirty = true;
               var result;
               if (element.type === 'checkbox') {
-                var inputs = (element.form || document).querySelectorAll('input[name="' + element.name + '"][type="checkbox"]');
+                var inputs = (element.form || document).querySelectorAll('input[name="' + element.name + '"][type="' + element.type + '"]');
                 if (target[key] instanceof Array) {
                   var results = [];
                   forEach(inputs, function (input) {
                     if (input.checked) {
-                      results.push(parse(input.value === 'on' ? input.checked : input.value));
+                      results.push(parse(input.value));
                     }
                   });
                   result = results;
                 } else {
-                  result = parse(this.value === 'on' ? this.checked : this.value);
+                  result = this.checked ? parse(this.value) : null;
                 }
               } else {
                 if (element.type === 'radio') {
-                  result = parse(this.value === 'on' ? this.checked : this.value);
-                }
-                if (typeof target[key] === 'number') {
+                  result = this.checked ? parse(this.value) : null;
+                } if (typeof target[key] === 'number') {
                   result = parse(this.value * 1);
                 } else {
                   result = parse(this.value);
@@ -325,7 +275,6 @@ export var Bind = (function Bind(global = {}) {
             };
 
             var event = {
-              // select: 'change',
               checkbox: 'change',
               radio: 'change',
             }[element.type];
@@ -367,10 +316,6 @@ export var Bind = (function Bind(global = {}) {
         path.reduce(function (prev, curr, i) {
           if (prev && prev[curr] && curr) {
             instance = instance[curr];
-
-            if (instance === null || instance === undefined) {
-              return prev[curr] || {};
-            }
             if (typeof prev[curr].__callback === 'function') {
               var v = i === path.length - 1 ? value : instance;
               if (instance.__dirty) {
@@ -402,7 +347,7 @@ export var Bind = (function Bind(global = {}) {
         }
 
         if (dirty && always) {
-          instance = always.instance;
+          var instance = always.instance;
           always.callback.call(settings.instance, __export(instance instanceof Array ? [] : {}, instance));
         }
       };
@@ -429,9 +374,7 @@ export var Bind = (function Bind(global = {}) {
             value = v;
           }
 
-          if (debug) {
-            console.log('set: key(%s): %s -> %s', key, JSON.stringify(old), JSON.stringify(v));
-          }
+          if (debug) console.log('set: key(%s): %s -> %s', key, JSON.stringify(old), JSON.stringify(v));
 
           // expose the callback so that child properties can call the
           // parent callback function
@@ -446,9 +389,7 @@ export var Bind = (function Bind(global = {}) {
             findCallback(value);
           } else {
             // defer the callback until we're fully booted
-            if (typeof settings.mapping[path.join('.')] !== 'undefined') {
-              settings.deferred.push(findCallback.bind(target, value, old));
-            }
+            settings.deferred.push(findCallback.bind(target, value, old));
           }
         },
         get: function () {
@@ -460,9 +401,7 @@ export var Bind = (function Bind(global = {}) {
       try {
         Object.defineProperty(target, key, definition);
       } catch (e) {
-        if (debug) {
-          console.log('failed on Object.defineProperty', e.toString(), e.stack);
-        }
+        // console.log(e.toString(), e.stack);
       }
 
       // finally, set the target aka the returned value's property to the value
@@ -503,11 +442,10 @@ export var Bind = (function Bind(global = {}) {
       if (typeof value === o && value !== null && value instanceof Array) {
         target[key] = [].map.call(value, function (value) {
           return value instanceof Object ?
-            __export(target[key] || {}, value) :
-            value;
+              __export(target[key] || {}, value) :
+              value;
         });
-      } else if (typeof value === o && value !== null && !isArray(value) &&
-        value.toString() === '[Object object]') {
+      } else if (typeof value === o && value !== null && !isArray(value)) {
         target[key] = __export(target[key] || {}, value);
       } else {
         target[key] = value;
@@ -518,13 +456,12 @@ export var Bind = (function Bind(global = {}) {
   }
 
 
-  function Bind(obj, mapping, context) {
+  function Bind(obj, mapping) {
     if (!this || this === global) {
       return new Bind(obj, mapping);
     }
 
     var settings = {
-      context: context || global.document,
       mapping: mapping || {},
       callbacks: {},
       deferred: [],

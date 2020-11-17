@@ -9,12 +9,19 @@
 <input type="text" class="number"/>
 </label>
 <div class="number"></div>
+<select class="number">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
 
 <script type="module">
 
     import {Bind} from "../../src/cm-web-modules/app/bind/lib/bind.js"
     const bind = Bind({
-        number: 10
+        number: 3
     }, {
         number: ".number"
     })

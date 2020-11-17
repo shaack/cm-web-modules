@@ -7,6 +7,11 @@ import {EventUtils} from "../utils/EventUtils.js"
 import {Bind} from "./bind/lib/bind.js"
 
 // daligator Web Framework
+/**
+ * state: hold all reactive date
+ * mappings: Bind.js mappings, redraw the output after state change
+ * actions: Change the state from gui input
+ */
 export class Component {
     constructor(props = {}, state, mappings, actions, context) {
         this.props = props
