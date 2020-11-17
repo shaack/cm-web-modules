@@ -34,8 +34,4 @@ export class Component {
             }
         }
     }
-
-    actions() {
-        return null
-    }
 }
