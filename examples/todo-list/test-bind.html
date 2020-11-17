@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Bind</title>
+</head>
+<body>
+<label>Number
+<input type="text" class="number"/>
+</label>
+<div class="number"></div>
+
+<script type="module">
+
+    import {Bind} from "../../src/cm-web-modules/app/bind/lib/bind.js"
+    const bind = Bind({
+        number: 10
+    }, {
+        number: ".number"
+    })
+</script>
+</body>
+</html>
