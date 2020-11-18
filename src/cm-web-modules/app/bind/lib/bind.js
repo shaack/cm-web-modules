@@ -3,7 +3,7 @@
 // source: https://github.com/remy/bind/
 /* eslint-env browser */
 //
-// ES6 Version by Stefan Haack
+// ES6 Version by Stefan Haack, this is a tweaked 1.1.2 of Bind.js
 // - fixed the "SELECT" issue https://github.com/remy/bind.js/pull/35/commits/d202c2056ea7506cd152682fe5b9ffd254a51a5d
 // - added "export"
 // - added index for arrays in html.push(transform(value, target, index))
