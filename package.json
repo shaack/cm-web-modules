@@ -31,6 +31,6 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
-    "bind.js": "^1.1.2"
+    "bind.js": "^1.1.4"
   }
 }
