@@ -11,6 +11,16 @@ export class MessageBroker {
     }
 
     subscribe(topic, callback) {
+        if(!topic) {
+            const message = "subscribe: no topic"
+            console.error(message, callback)
+            throw new Error(message)
+        }
+        if(!callback) {
+            const message = "subscribe: no callback"
+            console.error(message, topic)
+            throw new Error(message)
+        }
         if (this.topics[topic] === undefined) {
             this.topics[topic] = []
         }
@@ -46,6 +56,11 @@ export class MessageBroker {
     }
 
     publish(topic, object = {}, async = true) {
+        if(!topic) {
+            const message = "publish: no topic"
+            console.error(message, callback)
+            throw new Error(message)
+        }
         const breadcrumbArray = topic.split("/")
         let wildcardTopic = ""
         for (const topicPart of breadcrumbArray) {
