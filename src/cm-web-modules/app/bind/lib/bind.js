@@ -219,7 +219,7 @@ export var Bind = (function Bind(global) {
                 var html = '';
                 var index = 0
                 forEach(value, function (value) {
-                  html += transform(value, target, index);
+                  html += transform(value, target, index++);
                 });
                 element.innerHTML = html;
               }
