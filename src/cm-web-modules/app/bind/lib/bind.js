@@ -3,8 +3,7 @@
 // source: https://github.com/remy/bind/
 /* eslint-env browser */
 //
-// ES6 Version by Stefan Haack, this is a tweaked 1.1.2 of Bind.js
-// - fixed the "SELECT" issue https://github.com/remy/bind.js/pull/35/commits/d202c2056ea7506cd152682fe5b9ffd254a51a5d
+// ES6 Version by Stefan Haack, this is a tweaked 1.1.4 of Bind.js
 // - added "export"
 // - added index for arrays in html.push(transform(value, target, index))
 export var Bind = (function Bind(global) {
@@ -22,7 +21,7 @@ export var Bind = (function Bind(global) {
   var pass = function (v) {
     return v;
   };
-  var tryit = function (fn) {
+  var tryIt = function (fn) {
     return function () {
       try {
         return fn.apply(this, arguments);
@@ -171,10 +170,10 @@ export var Bind = (function Bind(global) {
           callback = selector.callback;
         }
         if (selector.transform) {
-          transform = tryit(selector.transform.bind({ safe: safe }));
+          transform = tryIt(selector.transform.bind({ safe: safe }));
         }
         if (selector.parse) {
-          parse = tryit(selector.parse);
+          parse = tryIt(selector.parse);
         }
         // finally assign the DOM selector to the selector var so code
         // can continue as it was
@@ -184,7 +183,7 @@ export var Bind = (function Bind(global) {
       var elements;
       if (typeof selector === 'string') {
         // cache the matched elements. Note the :) is because qSA won't allow an
-        // empty (or undefined) string so I like the smilie.
+        // empty (or undefined) string so I like the smiley.
         elements = $(selector || '☺');
       } else if (global.Element && selector instanceof global.Element) {
         elements = [selector];
@@ -543,7 +542,7 @@ export var Bind = (function Bind(global) {
 
   function __export(target, object) {
     if (!(object instanceof Object)) {
-      return object; // this is a primative
+      return object; // this is a primitive
     }
 
     forEach(Object.getOwnPropertyNames(object), function (key) {
@@ -602,9 +601,9 @@ export var Bind = (function Bind(global) {
       // but reference the passed in "new" value or `this` keyword
       // this can be worked around by wrapping the following code
       // in a setTimeout(fn, 0) - but this means any changes that are
-      // synchonous in the code that creates the bind object, will
+      // synchronous in the code that creates the bind object, will
       // run *before* this callback loop runs. Basically: race.
-      forEach(settings.deferred, function deferreds(fn) {
+      forEach(settings.deferred, function (fn) {
         fn();
       });
     }
