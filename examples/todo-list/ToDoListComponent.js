@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "../../../src/cm-web-modules/app/Component.js"
+import {Component} from "../../src/cm-web-modules/app/Component.js"
 
 export class ToDoListComponent extends Component {
 
