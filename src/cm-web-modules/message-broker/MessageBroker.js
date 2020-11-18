@@ -12,12 +12,12 @@ export class MessageBroker {
 
     subscribe(topic, callback) {
         if(!topic) {
-            const message = "subscribe: no topic"
+            const message = "subscribe: topic needed"
             console.error(message, callback)
             throw new Error(message)
         }
         if(!callback) {
-            const message = "subscribe: no callback"
+            const message = "subscribe: callback needed"
             console.error(message, topic)
             throw new Error(message)
         }
@@ -57,8 +57,8 @@ export class MessageBroker {
 
     publish(topic, object = {}, async = true) {
         if(!topic) {
-            const message = "publish: no topic"
-            console.error(message, callback)
+            const message = "publish: topic needed"
+            console.error(message, object)
             throw new Error(message)
         }
         const breadcrumbArray = topic.split("/")
