@@ -3,9 +3,8 @@
 // source: https://github.com/remy/bind/
 /* eslint-env browser */
 //
-// ES6 Version by Stefan Haack, this is a tweaked 1.1.4 of Bind.js
-// - added "export"
-// - added index for arrays in html.push(transform(value, target, index))
+// ES6 Version by Stefan Haack, this is a tweaked 1.1.6 of Bind.js
+// => just added "export"
 export var Bind = (function Bind(global) {
   'use strict';
   // support check
@@ -150,7 +149,8 @@ export var Bind = (function Bind(global) {
       var path = [].slice.call(_path);
       var callback;
       var transform = function (v) {
-        return safe(v);
+        if (typeof v === 'string') return safe(v);
+        return v;
       };
       var parse = pass;
 
@@ -238,8 +238,8 @@ export var Bind = (function Bind(global) {
                 // special case for multi-select items
                 var result = transform(value, target);
                 if (element.type === 'checkbox') {
-                  if (value instanceof Array) {
-                    var found = value.filter(function (value) {
+                  if (result instanceof Array) {
+                    var found = result.filter(function (value) {
                       if (value === element.value) {
                         element.checked = element.value === value;
                         return true;
@@ -249,7 +249,9 @@ export var Bind = (function Bind(global) {
                       element.checked = false;
                     }
                   } else if (typeof result === 'boolean') {
-                    element.checked = value;
+                    element.checked = result;
+                  } else {
+                    // console.log('no op');
                   }
                 } else if (element.type === 'radio') {
                   element.checked = element.value === result;
@@ -268,9 +270,9 @@ export var Bind = (function Bind(global) {
                   value = [value];
                 }
                 var html = [];
-                let index = 0
+
                 forEach(value, function (value) {
-                  html.push(transform(value, target, index++));
+                  html.push(transform(value, target));
                 });
                 // peek the first item, if it's a node, append
                 // otherwise set the innerHTML

@@ -15,27 +15,34 @@ export class ToDoListComponent extends Component {
             input: "input[type='text']",
             todos: {
                 dom: "ul.list-output",
-                transform: (value, bind, index) => {
-                    return '<li><label><input data-index="' + index + '" type="checkbox" ' + (value.done ? " checked" : "") + '/>' + value.text + '</label></li>'
+                transform: (value) => {
+                    return '<li><label><input data-id="' + value.id + '" type="checkbox" ' + (value.done ? " checked" : "") + '/>' + value.text + '</label></li>'
                 }
             }
         }, {
             "add": (ignored) => {
                 if (this.state.input) {
-                    this.state.todos.push(new ToDo(this.state.input))
+                    this.state.todos.unshift(new ToDo(this.state.input))
                     this.state.input = ""
                 }
             },
             "check": (event) => {
-                this.state.todos[event.target.dataset.index].done = event.target.checked
+                for (const todo of this.state.todos) {
+                    if(todo.id === parseInt(event.target.dataset.id, 10)) {
+                        todo.done = event.target.checked
+                        break
+                    }
+                }
             }
         }, context)
     }
 
 }
 
+let id = 1
 class ToDo {
     constructor(text) {
+        this.id = id++
         this.text = text
         this.done = false
     }
