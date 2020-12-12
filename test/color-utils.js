@@ -39,6 +39,9 @@ describe("ColorUtils", function () {
     it("should convert HSL to Hex", function () {
         const hex = ColorUtils.hslToHex({h: 228, s: 96, l: 56})
         Assert.equals(hex, "#234efb")
+        const hex2 = ColorUtils.hslToHex({h: 360, s: 96, l: 56})
+        console.log(hex2)
+        Assert.equals(hex, "#fb2323")
     })
 
     it("should convert Hex to HSL", function () {
