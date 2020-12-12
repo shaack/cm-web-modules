@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>Mocha Tests</title>
-    <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
+    <link href="../node_modules/mocha/mocha.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="mocha"></div>
@@ -13,9 +13,11 @@
 <script type="module" src="./cache.js"></script>
 <script type="module" src="./cookie.js"></script>
 <script type="module" src="./message-broker.js"></script>
+<script type="module" src="./text-utils.js"></script>
+<script type="module" src="./color-utils.js"></script>
 <script type="module">
-    mocha.checkLeaks();
-    mocha.run();
+    mocha.checkLeaks()
+    mocha.run()
 </script>
 </body>
 </html>
