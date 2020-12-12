@@ -40,7 +40,6 @@ describe("ColorUtils", function () {
         const hex = ColorUtils.hslToHex({h: 228, s: 96, l: 56})
         Assert.equals(hex, "#234efb")
         const hex2 = ColorUtils.hslToHex({h: 0, s: 96, l: 56})
-        console.log(hex2)
         Assert.equals(hex2, "#fb2323")
     })
 
