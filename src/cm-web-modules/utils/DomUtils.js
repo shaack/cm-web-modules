@@ -7,7 +7,7 @@
 export class DomUtils {
 
     /**
-     * @deprecated use element.classList.add("mystyle");
+     * @deprecated use element.classList.add("className");
      */
     static addClass(element, cssClass) {
         console.warn('DomUtils.addClass is deprecated, use element.classList.add("className")')
@@ -29,7 +29,7 @@ export class DomUtils {
     }
 
     static getFormInputValues(formElement) {
-        const inputs = formElement.querySelectorAll("input,select,checkbox")
+        const inputs = formElement.querySelectorAll("input,select")
         const values = {}
         inputs.forEach((input) => {
             if (input.type === "checkbox") {
@@ -39,6 +39,14 @@ export class DomUtils {
             }
         })
         return values
+    }
+
+    static setCustomProperty(name, value, element = document.documentElement) {
+        element.style.setProperty("--" + name, value.trim())
+    }
+
+    static getCustomProperty(name, element = document.documentElement) {
+        return getComputedStyle(element).getPropertyValue('--' + name).trim()
     }
 
 }

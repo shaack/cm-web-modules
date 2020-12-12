@@ -31,6 +31,6 @@ describe("Cookie", function () {
         Assert.equals(Cookie.read("testCookie5"), "123")
         setTimeout(() => {
             Assert.equals(Cookie.read("testCookie5"), undefined)
-        }, 1100)
+        }, 1010)
     })
 })

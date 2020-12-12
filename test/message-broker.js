@@ -8,13 +8,12 @@ import {Assert} from "../src/cm-web-modules/assert/Assert.js"
 
 describe("MessageBroker", function () {
 
-    it("should allow subscription for a topic", function (done) {
+    it("should allow subscription for a topic", function () {
         const messageBroker = new MessageBroker()
         const callback = function () {
         }
         messageBroker.subscribe("test1", callback)
         Assert.equals(messageBroker.topics["test1"][0], callback)
-        done()
     })
 
     it("should publish a text message to a subscriber", function (done) {
@@ -43,8 +42,8 @@ describe("MessageBroker", function () {
             Assert.equals(33, message.age)
             done()
         }
-        const subscriber2 = function (message) {
-            assert.fail()
+        const subscriber2 = function () {
+            Assert.fail()
             done()
         }
 
@@ -81,17 +80,16 @@ describe("MessageBroker", function () {
             // noinspection JSUnusedGlobalSymbols
             data: "Hello"
         }
-        const testMessage2 = {}
 
         const subscriber1 = function () {
-            assert.fail()
+            Assert.fail()
         }
         const subscriber2 = function (message) {
             Assert.equals("Hello", message.data)
             done()
         }
         const subscriber3 = function () {
-            assert.fail()
+            Assert.fail()
         }
 
         messageBroker.subscribe(topic1, subscriber1)
@@ -120,10 +118,10 @@ describe("MessageBroker", function () {
         const topic2 = "test/topic2"
 
         const subscriber1 = function () {
-            assert.fail()
+            Assert.fail()
         }
         const subscriber2 = function () {
-            assert.fail()
+            Assert.fail()
         }
         const subscriber3 = function () {
             done()
@@ -152,7 +150,7 @@ describe("MessageBroker", function () {
         const topic2 = "test/topic2"
 
         const subscriber1 = function () {
-            assert.fail()
+            Assert.fail()
         }
         const subscriber2 = function () {
             done()

@@ -7,12 +7,11 @@ import {Assert} from "../src/cm-web-modules/assert/Assert.js"
 
 describe("Cache", function () {
 
-    it("should store in cache", function (done) {
+    it("should store in cache", function () {
         const cache = new Cache()
         cache.put("mykey", "myvalue")
         Assert.equals(cache.get("mykey"), "myvalue")
         Assert.equals(cache.get("notmykey"), undefined)
-        done()
     })
 
     it("should invalidate cache", function (done) {
@@ -29,7 +28,7 @@ describe("Cache", function () {
         }, 110)
     })
 
-    it("should invalidate key", function (done) {
+    it("should invalidate key", function () {
         const cache = new Cache()
         cache.put("mykey1", "myvalue1")
         cache.put("mykey2", "myvalue2")
@@ -41,6 +40,5 @@ describe("Cache", function () {
         cache.clearAll()
         Assert.equals(cache.get("mykey1"), undefined)
         Assert.equals(cache.get("mykey2"), undefined)
-        done()
     })
 })

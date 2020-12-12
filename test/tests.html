@@ -1,8 +1,17 @@
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Mocha Tests</title>
     <link href="../node_modules/mocha/mocha.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --dom-utils-test-var: #777;
+            --body-bg: #eee;
+        }
+        body {
+            background-color: var(--body-bg);
+        }
+    </style>
 </head>
 <body>
 <div id="mocha"></div>
@@ -14,6 +23,7 @@
 <script type="module" src="./cookie.js"></script>
 <script type="module" src="./message-broker.js"></script>
 <script type="module" src="./text-utils.js"></script>
+<script type="module" src="./dom-utils.js"></script>
 <script type="module" src="./color-utils.js"></script>
 <script type="module">
     mocha.checkLeaks()

@@ -27,4 +27,8 @@ export class Assert {
         }
     }
 
+    static fail(message = DEFAULT_MESSAGE) {
+        throw new TestError(message)
+    }
+
 }
