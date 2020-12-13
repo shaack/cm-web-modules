@@ -41,6 +41,10 @@ export class DomUtils {
         return values
     }
 
+    static isBrowserDarkMode() {
+        return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    }
+
     static setCustomProperty(name, value, element = document.documentElement) {
         element.style.setProperty("--" + name, value.trim())
     }
