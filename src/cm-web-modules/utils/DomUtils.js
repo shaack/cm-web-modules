@@ -45,6 +45,27 @@ export class DomUtils {
         return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
     }
 
+    static browserSupportsPreferredColoScheme() {
+        return window.matchMedia &&
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ||
+                window.matchMedia('(prefers-color-scheme: light)').matches)
+    }
+
+    static loadJs(src) {
+        const element = document.createElement('script')
+        element.setAttribute("type", "text/javascript")
+        element.setAttribute("src", src)
+        document.getElementsByTagName("head")[0].appendChild(element)
+    }
+
+    static loadCss(src) {
+        const element = document.createElement("link")
+        element.setAttribute("rel", "stylesheet")
+        element.setAttribute("type", "text/css")
+        element.setAttribute("href", src)
+        document.getElementsByTagName("head")[0].appendChild(element)
+    }
+
     static setCustomProperty(name, value, element = document.documentElement) {
         element.style.setProperty("--" + name, value.trim())
     }
