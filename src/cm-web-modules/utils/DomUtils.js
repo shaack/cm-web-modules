@@ -45,7 +45,7 @@ export class DomUtils {
         return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
     }
 
-    static browserSupportsPreferredColoScheme() {
+    static browserSupportsPreferredColorScheme() {
         return window.matchMedia &&
             (window.matchMedia('(prefers-color-scheme: dark)').matches ||
                 window.matchMedia('(prefers-color-scheme: light)').matches)
