@@ -26,12 +26,12 @@ if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== de
 }
 // patch for chrome needing user interaction
 const resumeAudio = function () {
-    if (window.AudioContext.state === "suspended") {
-        window.AudioContext.resume()
+    if (audioContext.state !== "running") {
+        audioContext.resume()
+        document.removeEventListener("mousedown", resumeAudio)
     }
-    document.removeEventListener("click", resumeAudio)
 }
-document.addEventListener("click", resumeAudio)
+document.addEventListener("mousedown", resumeAudio)
 
 export class Audio {
 
