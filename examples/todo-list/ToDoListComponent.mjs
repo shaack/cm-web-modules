@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "../../src/cm-web-modules/app/Component.js"
+import {Component} from "../../src/cm-web-modules/app/Component.mjs"
 
 export class ToDoListComponent extends Component {
 
@@ -21,13 +21,13 @@ export class ToDoListComponent extends Component {
             }
         }, {
             "add": (ignored) => {
-                if (this.state.input) {
-                    this.state.todos.unshift(new ToDo(this.state.input))
-                    this.state.input = ""
+                if (this.bind.input) {
+                    this.bind.todos.unshift(new ToDo(this.bind.input))
+                    this.bind.input = ""
                 }
             },
             "check": (event) => {
-                for (const todo of this.state.todos) {
+                for (const todo of this.bind.todos) {
                     if(todo.id === parseInt(event.target.dataset.id, 10)) {
                         todo.done = event.target.checked
                         break

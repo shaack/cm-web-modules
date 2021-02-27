@@ -3,19 +3,19 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {EventUtils} from "../utils/EventUtils.js"
-import {Bind} from "./bind/lib/bind.js"
+import {EventUtils} from "../utils/EventUtils.mjs"
+import {Bind} from "./bind/lib/bind.mjs"
 
 // daligator Web Framework
 /**
- * state: hold all reactive date
+ * state: hold all reactive data
  * mappings: Bind.js mappings, redraw the output after state change
  * actions: Change the state from gui input
  */
 export class Component {
     constructor(props = {}, state, mappings, actions, context) {
         this.props = props
-        this.state = Bind(state, mappings, context)
+        this.bind = Bind(state, mappings, context)
         this.actions = actions
         this.addActions(context)
     }

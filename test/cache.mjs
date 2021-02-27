@@ -2,8 +2,8 @@
  * Author: Stefan Haack (https://shaack.com)
  * Date: 2020-05-04
  */
-import {Cache} from "../src/cm-web-modules/cache/Cache.js"
-import {Assert} from "../src/cm-web-modules/assert/Assert.js"
+import {Cache} from "../src/cm-web-modules/cache/Cache.mjs"
+import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
 
 describe("Cache", function () {
 

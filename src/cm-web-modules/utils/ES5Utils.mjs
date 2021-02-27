@@ -6,7 +6,7 @@
 
 export class ES5Utils {
     /**
-     * dynamically load a ES5 script
+     * dynamically load an ES5 script
      * from: https://humanwhocodes.com/blog/2009/07/28/the-best-way-to-load-external-javascript
      * @param url
      * @returns {Promise<loaded>}
