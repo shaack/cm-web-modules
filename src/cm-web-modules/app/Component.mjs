@@ -11,6 +11,8 @@ import {Bind} from "./bind/lib/bind.mjs"
  * state: hold all reactive data
  * mappings: Bind.js mappings, redraw the output after state change
  * actions: Change the state from gui input
+ *
+ * TODO separate this from "cm-web-modules" to "cm-app" or so
  */
 export class Component {
     constructor(props = {}, state, mappings, actions, context) {

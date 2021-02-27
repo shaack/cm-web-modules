@@ -29,8 +29,5 @@
   "homepage": "https://github.com/shaack/cm-web-modules#readme",
   "devDependencies": {
     "mocha": "^5.2.0"
-  },
-  "dependencies": {
-    "bind.js": "^1.1.4"
   }
 }
