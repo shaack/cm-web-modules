@@ -17,7 +17,7 @@ import {Bind} from "./bind/lib/bind.mjs"
 export class Component {
     constructor(props = {}, state, mappings, actions, context) {
         this.props = props
-        this.bind = Bind(state, mappings, context)
+        this.state = Bind(state, mappings, context)
         this.actions = actions
         this.addActions(context)
     }
