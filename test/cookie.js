@@ -2,8 +2,8 @@
  * Author: Stefan Haack (https://shaack.com)
  * Date: 2020-11-09
  */
-import {Cookie, DURATION} from "../src/cm-web-modules/cookie/Cookie.mjs"
-import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
+import {Cookie, DURATION} from "../src/cm-web-modules/cookie/Cookie.js"
+import {Assert} from "../src/cm-web-modules/assert/Assert.js"
 
 describe("Cookie", function () {
     it("should store and read a session cookie", () => {

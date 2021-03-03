@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
-import {DomUtils} from "../src/cm-web-modules/utils/DomUtils.mjs"
+import {Assert} from "../src/cm-web-modules/assert/Assert.js"
+import {DomUtils} from "../src/cm-web-modules/utils/DomUtils.js"
 
 describe("DomUtils", function () {
 

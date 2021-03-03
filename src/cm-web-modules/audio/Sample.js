@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {Audio} from "./Audio.mjs"
+import {Audio} from "./Audio.js"
 
 export class Sample {
 

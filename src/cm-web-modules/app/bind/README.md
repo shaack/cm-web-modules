@@ -23,7 +23,7 @@ Create a `new Bind` based on an object and a mapping. The mapping uses a key/val
 
 There is also an *advanced* value that allows finer grain control over the binding (seen in the `skills` value in the example below).
 
-The node version can be installed using `npm install -S bind.mjs`.
+The node version can be installed using `npm install -S bind.js`.
 
 ## Example [(JS Bin)](http://jsbin.com/fupipe/edit?html,js,output)
 

@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
-import {ColorUtils} from "../src/cm-web-modules/utils/ColorUtils.mjs"
+import {Assert} from "../src/cm-web-modules/assert/Assert.js"
+import {ColorUtils} from "../src/cm-web-modules/utils/ColorUtils.js"
 
 describe("ColorUtils", function () {
 

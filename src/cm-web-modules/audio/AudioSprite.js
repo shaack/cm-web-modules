@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {Sample} from "./Sample.mjs"
+import {Sample} from "./Sample.js"
 
 export class AudioSprite extends Sample {
 

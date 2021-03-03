@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
-import {TextUtils} from "../src/cm-web-modules/utils/TextUtils.mjs"
+import {Assert} from "../src/cm-web-modules/assert/Assert.js"
+import {TextUtils} from "../src/cm-web-modules/utils/TextUtils.js"
 
 describe("TextUtils", function () {
 

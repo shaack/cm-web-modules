@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {DateUtils} from "../utils/DateUtils.mjs"
+import {DateUtils} from "../utils/DateUtils.js"
 
 export class Stopwatch {
 

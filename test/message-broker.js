@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.mjs"
-import {Assert} from "../src/cm-web-modules/assert/Assert.mjs"
+import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
+import {Assert} from "../src/cm-web-modules/assert/Assert.js"
 
 describe("MessageBroker", function () {
 
