@@ -6,15 +6,15 @@
 import {EventUtils} from "../utils/EventUtils.js"
 import {Bind} from "./bind/lib/bind.js"
 
-// daligator Web Framework
 /**
- * state: hold all reactive data
+ * state: holds all reactive data
  * mappings: Bind.js mappings, redraw the output after state change
  * actions: Change the state from gui input
  *
- * TODO separate this from "cm-web-modules" to "cm-app" or so
+ * TODO separate this from "cm-web-modules" to "cm-app" or "dAlligator"
  */
 export class Component {
+
     constructor(props = {}, state, mappings, actions, context) {
         this.props = props
         this.state = Bind(state, mappings, context)
@@ -22,7 +22,9 @@ export class Component {
         this.addActions(context)
     }
 
-    // searches for "data-event-listener" attributes
+    /**
+     * Searches for "data-event-listener" attributes in the HTML
+     */
     addActions(context) {
         const eventListenerElements = context.querySelectorAll("[data-event-listener]")
         for (const eventListenerElement of eventListenerElements) {
@@ -41,4 +43,5 @@ export class Component {
             }
         }
     }
+
 }

@@ -15,6 +15,7 @@ module.exports = class LibraryManager {
      * @param props Configuration properties
      */
     constructor(projectRoot, props) {
+        console.warn("LibraryManager is deprecated, use https://github.com/shaack/modrator instead.")
         this.projectRoot = projectRoot
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
