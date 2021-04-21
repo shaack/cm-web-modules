@@ -3,18 +3,18 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Assert} from "../src/cm-web-modules/assert/Assert.js"
+import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
 import {DomUtils} from "../src/cm-web-modules/utils/DomUtils.js"
 
 describe("DomUtils", function () {
 
     it("should read :root property", function () {
-        Assert.equals(DomUtils.getCustomProperty("dom-utils-test-var"), "#777")
+        assert.equals(DomUtils.getCustomProperty("dom-utils-test-var"), "#777")
     })
 
     it("should write and read :root property", function() {
         DomUtils.setCustomProperty("my-property", "lalelu")
-        Assert.equals(DomUtils.getCustomProperty("my-property"), "lalelu")
+        assert.equals(DomUtils.getCustomProperty("my-property"), "lalelu")
     })
 
     it("should set body-bg", function() {

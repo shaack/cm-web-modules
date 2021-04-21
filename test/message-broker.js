@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
+import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
 import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
-import {Assert} from "../src/cm-web-modules/assert/Assert.js"
 
 describe("MessageBroker", function () {
 
@@ -13,7 +13,7 @@ describe("MessageBroker", function () {
         const callback = function () {
         }
         messageBroker.subscribe("test1", callback)
-        Assert.equals(messageBroker.topics["test1"][0], callback)
+        assert.equals(messageBroker.topics["test1"][0], callback)
     })
 
     it("should publish a text message to a subscriber", function (done) {
@@ -21,11 +21,11 @@ describe("MessageBroker", function () {
         const topic = "test/topic/"
         const testMessage = "Hello World!"
         const subscriber = function (message) {
-            Assert.equals(message, testMessage)
+            assert.equals(message, testMessage)
             done()
         }
         messageBroker.subscribe(topic, subscriber)
-        Assert.equals(messageBroker.topics[topic][0], subscriber)
+        assert.equals(messageBroker.topics[topic][0], subscriber)
         messageBroker.publish(topic, testMessage)
     })
 
@@ -38,8 +38,8 @@ describe("MessageBroker", function () {
             age: 33
         }
         const subscriber1 = function (message) {
-            Assert.equals("Peter", message.name)
-            Assert.equals(33, message.age)
+            assert.equals("Peter", message.name)
+            assert.equals(33, message.age)
             done()
         }
         const subscriber2 = function () {
@@ -49,15 +49,15 @@ describe("MessageBroker", function () {
 
         messageBroker.subscribe(topic, subscriber1)
         messageBroker.subscribe("false/topic", subscriber2)
-        Assert.equals(messageBroker.topics[topic][0], subscriber1)
+        assert.equals(messageBroker.topics[topic][0], subscriber1)
         messageBroker.publish(topic, testMessage)
     })
 
     it("should subscribe to a topic with wildcard", function (done) {
         const messageBroker = new MessageBroker()
         messageBroker.subscribe("test/#", function(data, topic) {
-            Assert.equals(data, "thedata")
-            Assert.equals(topic, "test/the/wildcard")
+            assert.equals(data, "thedata")
+            assert.equals(topic, "test/the/wildcard")
             done()
         })
         messageBroker.publish("test/the/wildcard", "thedata")
@@ -85,7 +85,7 @@ describe("MessageBroker", function () {
             Assert.fail()
         }
         const subscriber2 = function (message) {
-            Assert.equals("Hello", message.data)
+            assert.equals("Hello", message.data)
             done()
         }
         const subscriber3 = function () {
@@ -95,18 +95,18 @@ describe("MessageBroker", function () {
         messageBroker.subscribe(topic1, subscriber1)
         messageBroker.subscribe(topic1, subscriber2)
         messageBroker.subscribe(topic2, subscriber3)
-        Assert.equals(2, Object.keys(messageBroker.topics).length)
-        Assert.equals(2, messageBroker.topics[topic1].length)
-        Assert.equals(1, messageBroker.topics[topic2].length)
+        assert.equals(2, Object.keys(messageBroker.topics).length)
+        assert.equals(2, messageBroker.topics[topic1].length)
+        assert.equals(1, messageBroker.topics[topic2].length)
 
         messageBroker.unsubscribe(topic1, subscriber1)
 
-        Assert.equals(2, Object.keys(messageBroker.topics).length)
-        Assert.equals(1, messageBroker.topics[topic1].length)
-        Assert.equals(1, messageBroker.topics[topic2].length)
+        assert.equals(2, Object.keys(messageBroker.topics).length)
+        assert.equals(1, messageBroker.topics[topic1].length)
+        assert.equals(1, messageBroker.topics[topic2].length)
 
-        Assert.equals(messageBroker.topics[topic1][0], subscriber2)
-        Assert.equals(messageBroker.topics[topic2][0], subscriber3)
+        assert.equals(messageBroker.topics[topic1][0], subscriber2)
+        assert.equals(messageBroker.topics[topic2][0], subscriber3)
 
         messageBroker.publish(topic1, testMessage1)
     })
@@ -133,11 +133,11 @@ describe("MessageBroker", function () {
 
         messageBroker.unsubscribe(topic1)
 
-        Assert.equals(1, Object.keys(messageBroker.topics).length)
-        Assert.equals(undefined, messageBroker.topics[topic1])
-        Assert.equals(1, messageBroker.topics[topic2].length)
+        assert.equals(1, Object.keys(messageBroker.topics).length)
+        assert.equals(undefined, messageBroker.topics[topic1])
+        assert.equals(1, messageBroker.topics[topic2].length)
 
-        Assert.equals(messageBroker.topics[topic2][0], subscriber3)
+        assert.equals(messageBroker.topics[topic2][0], subscriber3)
 
         messageBroker.publish(topic1)
         messageBroker.publish(topic2)
@@ -162,11 +162,11 @@ describe("MessageBroker", function () {
 
         messageBroker.unsubscribe(null, subscriber1)
 
-        Assert.equals(1, Object.keys(messageBroker.topics).length)
-        Assert.equals(1, messageBroker.topics[topic1].length)
-        Assert.equals(undefined, messageBroker.topics[topic2])
+        assert.equals(1, Object.keys(messageBroker.topics).length)
+        assert.equals(1, messageBroker.topics[topic1].length)
+        assert.equals(undefined, messageBroker.topics[topic2])
 
-        Assert.equals(messageBroker.topics[topic1][0], subscriber2)
+        assert.equals(messageBroker.topics[topic1][0], subscriber2)
 
         messageBroker.publish(topic1)
         messageBroker.publish(topic2)

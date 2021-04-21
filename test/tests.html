@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Mocha Tests</title>
-    <link href="../node_modules/mocha/mocha.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Tests</title>
     <style>
         :root {
             --dom-utils-test-var: #777;
@@ -14,20 +14,15 @@
     </style>
 </head>
 <body>
-<div id="mocha"></div>
-
-<script src="../node_modules/mocha/mocha.js"></script>
-
-<script>mocha.setup('bdd')</script>
-<script type="module" src="cache.js"></script>
-<script type="module" src="cookie.js"></script>
-<script type="module" src="message-broker.js"></script>
-<script type="module" src="text-utils.js"></script>
-<script type="module" src="dom-utils.js"></script>
-<script type="module" src="color-utils.js"></script>
 <script type="module">
-    mocha.checkLeaks()
-    mocha.run()
+    import {teevi} from "../node_modules/teevi/src/teevi.js"
+    import "./cache.js"
+    import "./color-utils.js"
+    import "./cookie.js"
+    import "./dom-utils.js"
+    import "./message-broker.js"
+    import "./text-utils.js"
+    teevi.run()
 </script>
 </body>
 </html>
