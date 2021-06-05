@@ -1,4 +1,4 @@
-# The Daligator Framework
+# The cm-app Framework
 
 An SOV (State Observer) Framework.
 
