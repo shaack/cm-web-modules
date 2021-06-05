@@ -9,7 +9,9 @@ import {Bind} from "./bind/lib/bind.js"
 /**
  * state: holds all reactive data
  * mappings: Bind.js mappings, redraw the output after state change
- * actions: Change the state from gui input. Actions are added automatically with a 'data-event-listener' attribute
+ * actions: Change the state from gui input. Actions are added automatically with a 'data-event-listener' attribut
+ *
+ * See example '/examples/todo-list/ToDoListComponent.js'
  */
 export class Component {
 
