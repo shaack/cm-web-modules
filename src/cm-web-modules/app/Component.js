@@ -9,7 +9,7 @@ import {Bind} from "./bind/lib/bind.js"
 /**
  * state: holds all reactive data
  * mappings: Bind.js mappings, redraw the output after state change
- * actions: Change the state from gui input
+ * actions: Change the state from gui input. Actions are added automtically by a 'data-event-listener' attribute 
  *
  * TODO separate this from "cm-web-modules" to "cm-app"
  */
