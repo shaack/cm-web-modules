@@ -10,43 +10,42 @@ const fs = require('fs')
 module.exports = class LibraryManager {
 
     /**
-     * Create a curator
+     * Create the LibraryManager
      * @param projectRoot Your project root, mostly `__dirname`
      * @param props Configuration properties
      */
-    constructor(projectRoot, props) {
-        console.warn("LibraryManager is deprecated, use https://github.com/shaack/modrator instead.")
+    constructor(projectRoot = __dirname, props = {}) {
         this.projectRoot = projectRoot
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
-            projectLibFolder: "lib", // library folder where the module sources are linked/copied to
+            libraryFolder: "lib", // library folder where the module sources are copied or linked to
             mode: "copy" // set to "symlink" to symlink sources instead of copying
         }
         Object.assign(this.props, props)
-        if (!fs.existsSync(this.props.projectLibFolder)) {
-            console.log("mkdir", this.props.projectLibFolder)
-            fs.mkdirSync(this.props.projectLibFolder)
+        if (!fs.existsSync(this.props.libraryFolder)) {
+            console.log("mkdir", this.props.libraryFolder)
+            fs.mkdirSync(this.props.libraryFolder)
         }
     }
 
     /**
-     * Add a module to the library
-     * @param projectName Name of the project
-     * @param projectSourceRoot  The source root inside the module folder
-     * @param subfolder The module source folder or file inside the 'moduleSourceRoot'
+     * Add the modules of a node package to the library
+     * @param packageName Name of the npm package
+     * @param packageSourceRoot The source root inside the package folder
+     * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
-    addProject(projectName, projectSourceRoot = "src", subfolder = projectName) {
+    addPackage(packageName, packageSourceRoot = "src", fileOrFolder = packageName) {
         let type = "dir"
-        if (subfolder.endsWith(".js")) {
+        if (fileOrFolder.endsWith(".js")) {
             type = "file"
         }
         try {
-            const fromAbsolute = this.props.nodeModulesPath + "/" + projectName + "/" + projectSourceRoot + "/" + subfolder
+            const fromAbsolute = this.props.nodeModulesPath + "/" + packageName + "/" + packageSourceRoot + "/" + fileOrFolder
             if (!fs.existsSync(fromAbsolute)) {
                 console.error("Not found: " + fromAbsolute)
             }
-            const fromRelative = path.relative(this.projectRoot + "/" + this.props.projectLibFolder, fromAbsolute)
-            const toRelative = "./" + this.props.projectLibFolder + "/" + subfolder
+            const fromRelative = path.relative(this.projectRoot + "/" + this.props.libraryFolder, fromAbsolute)
+            const toRelative = "./" + this.props.libraryFolder + "/" + fileOrFolder
             console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
             if (fs.existsSync(toRelative)) {
                 this.deleteSync(toRelative)
