@@ -8,14 +8,12 @@ import {TextUtils} from "../src/cm-web-modules/utils/TextUtils.js"
 
 describe("TextUtils", function () {
 
-    it("should replace case sensitive", function (done) {
-        assert.equals(TextUtils.replaceAll("abBc123", {"b": "X", "c": "Y"}), "aXBY123")
-        done()
+    it("should replace case sensitive", function () {
+        assert.equal(TextUtils.replaceAll("abBc123", {"b": "X", "c": "Y"}), "aXBY123")
     })
 
-    it("should replace case insensitive", function (done) {
-        assert.equals(TextUtils.replaceAll("abBc123", {"b": "X", "c": "Y"}, true), "aXXY123")
-        done()
+    it("should replace case insensitive", function () {
+        assert.equal(TextUtils.replaceAll("abBc123", {"b": "X", "c": "Y"}, true), "aXXY123")
     })
 
 })

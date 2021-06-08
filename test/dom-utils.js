@@ -9,12 +9,12 @@ import {DomUtils} from "../src/cm-web-modules/utils/DomUtils.js"
 describe("DomUtils", function () {
 
     it("should read :root property", function () {
-        assert.equals(DomUtils.getCustomProperty("dom-utils-test-var"), "#777")
+        assert.equal(DomUtils.getCustomProperty("dom-utils-test-var"), "#777")
     })
 
     it("should write and read :root property", function() {
         DomUtils.setCustomProperty("my-property", "lalelu")
-        assert.equals(DomUtils.getCustomProperty("my-property"), "lalelu")
+        assert.equal(DomUtils.getCustomProperty("my-property"), "lalelu")
     })
 
     it("should set body-bg", function() {

@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/shaack/cm-web-modules#readme",
   "devDependencies": {
-    "teevi": "^2.1.7"
+    "teevi": "^2.1.10"
   }
 }
