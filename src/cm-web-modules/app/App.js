@@ -4,11 +4,12 @@
  * License: MIT, see file 'LICENSE'
  */
 
-export class Component {
+export class App {
 
-    constructor(app, props = {}) {
-        this.app = app
+    constructor(props = {}) {
         this.props = props
+        this.state = {}
+        this.components = []
     }
 
 }
