@@ -28,6 +28,12 @@ module.exports = class LibraryManager {
         }
     }
 
+    /** @deprecated */
+    addProject(packageName, packageSourceRoot = "src", fileOrFolder = packageName) {
+        console.warn("addProject() is deprecated, use addPackage()")
+        this.addPackage(packageName, packageSourceRoot, fileOrFolder)
+    }
+
     /**
      * Add the modules of a node package to the library
      * @param packageName Name of the npm package
