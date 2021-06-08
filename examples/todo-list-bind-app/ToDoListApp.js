@@ -3,9 +3,9 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "../../src/cm-web-modules/app/Component.js"
+import {BindApp} from "../../src/cm-web-modules/app/BindApp.js"
 
-export class ToDoListComponent extends Component {
+export class ToDoListApp extends BindApp {
 
     constructor(context) {
         super({}, {
@@ -28,7 +28,7 @@ export class ToDoListComponent extends Component {
             },
             "check": (event) => {
                 for (const todo of this.state.todos) {
-                    if(todo.id === parseInt(event.target.dataset.id, 10)) {
+                    if (todo.id === parseInt(event.target.dataset.id, 10)) {
                         todo.done = event.target.checked
                         break
                     }
@@ -40,6 +40,7 @@ export class ToDoListComponent extends Component {
 }
 
 let id = 1
+
 class ToDo {
     constructor(text) {
         this.id = id++

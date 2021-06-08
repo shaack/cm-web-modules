@@ -6,9 +6,15 @@
 
 export class Component {
 
-    constructor(app, props = {}) {
-        this.app = app
+    constructor(parent, props = {}) {
+        this.parent = parent
+        this.childs = []
         this.props = props
+        this.state = {} // components local state
+    }
+
+    addChild(componentClass, props) {
+        this.childs.push(new componentClass(this, props))
     }
 
 }
