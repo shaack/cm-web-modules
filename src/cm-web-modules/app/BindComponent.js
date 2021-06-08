@@ -11,21 +11,21 @@ import {Bind} from "./bind/lib/bind.js"
  * mappings: Bind.js mappings, redraw the output after state change
  * actions: Change the state from gui input. Actions are added automatically with a 'data-event-listener' attribut
  *
- * See example '/examples/todo-list-app-bind-app/ToDoListApp.js'
+ * See example '/examples/todo-app-bind-app/ToDoApp.js'
  */
-export class BindApp {
+export class BindComponent {
 
-    constructor(props = {}, state, mappings, actions, context) {
+    constructor(context, props = {}, state, mappings, actions) {
         this.props = props
+        // noinspection JSCheckFunctionSignatures
         this.state = Bind(state, mappings, context)
         this.actions = actions
-        this.addActions(context)
     }
 
     /**
      * Searches for "data-event-listener" attributes in the HTML
      */
-    addActions(context) {
+    addDataActions(context) {
         const eventListenerElements = context.querySelectorAll("[data-event-listener]")
         for (const eventListenerElement of eventListenerElements) {
             const eventName = eventListenerElement.dataset.eventListener

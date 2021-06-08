@@ -3,12 +3,12 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {BindApp} from "../../src/cm-web-modules/app/BindApp.js"
+import {BindComponent} from "../../src/cm-web-modules/app/BindComponent.js"
 
-export class ToDoListApp extends BindApp {
+export class ToDoComponent extends BindComponent {
 
     constructor(context) {
-        super({}, {
+        super(context, {}, {
             input: "",
             todos: []
         }, {
@@ -16,11 +16,11 @@ export class ToDoListApp extends BindApp {
             todos: {
                 dom: "ul.list-output",
                 transform: (value) => {
-                    return '<li><label><input data-id="' + value.id + '" type="checkbox" ' + (value.done ? " checked" : "") + '/>' + value.text + '</label></li>'
+                    return `<li><label><input data-id="${value.id}" type="checkbox" ${(value.done ? " checked" : "")}/>${value.text}</label></li>`
                 }
             }
         }, {
-            "add": (ignored) => {
+            "add": () => {
                 if (this.state.input) {
                     this.state.todos.unshift(new ToDo(this.state.input))
                     this.state.input = ""
@@ -34,7 +34,8 @@ export class ToDoListApp extends BindApp {
                     }
                 }
             }
-        }, context)
+        })
+        this.addDataActions(context)
     }
 
 }
