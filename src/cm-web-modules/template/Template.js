@@ -8,12 +8,7 @@ export class Template {
     constructor(template) {
         this.template = TextUtils.escapeStringLiteral(template)
         this.render = function (replacements) {
-            const replacementsSanitized = {}
-            const keys = Object.keys(replacements)
-            for (const key of keys) {
-                replacementsSanitized[key] = TextUtils.escapeStringLiteral(replacements[key])
-            }
-            return new Function("return `" + TextUtils.escapeHtml(this.template) + "`;").call(replacementsSanitized)
+            return new Function("return `" + this.template + "`;").call(replacements)
         }
     }
 }

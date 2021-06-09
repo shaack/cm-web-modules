@@ -12,7 +12,7 @@ describe("Template", function () {
         assert.equal(template.render({"greeting": "Hello", "who": "World"}), "Hello World!")
     })
     it("should render a hacker template", () => {
-        const template = new Template("${this.greeting} ${this.who}!")
-        assert.equal(template.render({"greeting": "Hello", "who": "${test}'\"´`"}), "Hello ${test}'\"´&#96;!")
+        const template = new Template("${this.greeting} ${this.who}!`")
+        assert.equal(template.render({"greeting": "Hello", "who": "${test}'\"´`"}), "Hello ${test}'\"´`!&#96;")
     })
 })
