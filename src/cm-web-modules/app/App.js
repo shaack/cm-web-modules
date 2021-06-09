@@ -10,6 +10,6 @@ import {Component} from "./Component.js";
  */
 export class App extends Component {
     constructor(context = undefined, props = {}) {
-        super(undefined, context, props);
+        super(undefined, context, props)
     }
 }

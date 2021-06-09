@@ -3,8 +3,8 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {EventUtils} from "../utils/EventUtils.js"
-import {Bind} from "./bind/lib/bind.js"
+import {EventUtils} from "../../utils/EventUtils.js"
+import {Bind} from "./lib/bind.js"
 
 /**
  * state: holds all reactive data

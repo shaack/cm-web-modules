@@ -8,18 +8,18 @@ import {EventUtils} from "../utils/EventUtils.js";
 export class Component {
 
     constructor(parent, context, props = {}) {
+        this.parent = parent
         this.context = context
         this.props = props
         this.state = {}
         this.actions = {}
         this.elements = {}
-        this.parent = undefined
-        this.childs = []
+        this.components = []
     }
 
     addComponent(component) {
         component.parent = this
-        this.childs.push(component)
+        this.components.push(component)
     }
 
     /**

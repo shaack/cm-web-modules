@@ -17,4 +17,5 @@ export class ToDoApp extends App {
         this.addComponent(new InputComponent(this, context.querySelector(".InputComponent")))
         this.addComponent(new ListOutputComponent(this, context.querySelector(".ListOutputComponent")))
     }
+
 }

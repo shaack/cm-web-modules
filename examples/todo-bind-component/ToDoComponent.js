@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {BindComponent} from "../../src/cm-web-modules/app/BindComponent.js"
+import {BindComponent} from "../../src/cm-web-modules/app/bind/BindComponent.js"
 
 export class ToDoComponent extends BindComponent {
 
