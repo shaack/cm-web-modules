@@ -13,13 +13,10 @@ export class Component {
         this.state = {}
         this.actions = {}
         this.elements = {}
-        this.components = []
-        this.parent = undefined
-    }
-
-    addComponent(component) {
-        component.parent = this
-        this.components.push(component)
+        this.app = undefined
+        this.initialization = Promise.resolve().then(() => {
+            this.addDataEventListeners(context)
+        })
     }
 
     /**

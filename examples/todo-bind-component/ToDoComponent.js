@@ -9,7 +9,7 @@ import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js";
 export class ToDoComponent extends Component {
 
     constructor(context) {
-        super(undefined, context, {})
+        super(context, {})
         this.state = Bind({
             input: "",
             todos: []
@@ -38,7 +38,6 @@ export class ToDoComponent extends Component {
                 }
             }
         }
-        this.addDataEventListeners(context)
     }
 
 }

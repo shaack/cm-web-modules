@@ -3,13 +3,19 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "./Component.js";
 
 /**
  * An App is a Component without parent.
  */
-export class App extends Component {
-    constructor(context = undefined, props = {}) {
-        super(undefined, context, props)
+export class App {
+    constructor(context, props) {
+        this.context = context
+        this.props = props
+        this.state = {}
+        this.initialization = Promise.resolve()
+    }
+
+    addComponent(component) {
+        component.app = this
     }
 }
