@@ -7,14 +7,14 @@ import {EventUtils} from "../utils/EventUtils.js";
 
 export class Component {
 
-    constructor(parent, context, props = {}) {
-        this.parent = parent
+    constructor(context, props = {}) {
         this.context = context
         this.props = props
         this.state = {}
         this.actions = {}
         this.elements = {}
         this.components = []
+        this.parent = undefined
     }
 
     addComponent(component) {
