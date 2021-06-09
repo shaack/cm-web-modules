@@ -33,6 +33,10 @@ export class TextUtils {
         }
     }
 
+    static escapeStringLiteral(literal) {
+        return literal.replace("`", "&#96;")
+    }
+
     static escapeHtml(str) {
         return String(str).replace(/[&<>"'\/]/g, (s) => {
             return entityMap[s]
