@@ -11,9 +11,7 @@ export class Template {
             const replacementsSanitized = {}
             const keys = Object.keys(replacements)
             for (const key of keys) {
-                const sanititzed = TextUtils.escapeStringLiteral(replacements[key])
-                console.log(key, replacements[key], sanititzed)
-                replacementsSanitized[key] = sanititzed
+                replacementsSanitized[key] = TextUtils.escapeStringLiteral(replacements[key])
             }
             return new Function("return `" + TextUtils.escapeHtml(this.template) + "`;").call(replacementsSanitized)
         }
