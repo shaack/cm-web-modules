@@ -14,8 +14,8 @@ export class ToDoApp extends App {
         this.state = {
             todos: []
         }
-        this.addComponent(new InputComponent(this, context.querySelector(".InputComponent")))
-        this.addComponent(new ListOutputComponent(this, context.querySelector(".ListOutputComponent")))
+        this.addComponent(new InputComponent(context.querySelector(".InputComponent")))
+        this.addComponent(new ListOutputComponent(context.querySelector(".ListOutputComponent")))
     }
 
 }

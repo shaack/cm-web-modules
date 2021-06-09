@@ -18,12 +18,12 @@
 </select>
 
 <script type="module">
-    import {Bind} from "../../src/cm-web-modules/app/bind/lib/bind.js"
-    const bind = Bind({
+    import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js"
+    Bind({
         number: 3
     }, {
         number: ".number"
-    })
+    });
 </script>
 </body>
 </html>

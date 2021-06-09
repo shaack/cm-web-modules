@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {Component} from "../../src/cm-web-modules/app/Component.js"
-import {Bind} from "../../src/cm-web-modules/app/bind/lib/bind.js";
+import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js";
 
 export class ToDoComponent extends Component {
 

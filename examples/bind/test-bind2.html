@@ -9,7 +9,7 @@
 <pre id="output"></pre>
 <p>Score: <input type=number max=100 min=0 class="score"></p>
 <p>Score: <input type="range" min=0 max=100 value=0 class="score"></p>
-<p>Score: <progress class="score" min=0 max=100 value=0></p>
+<p>Score: <progress class="score" min=0 max=100 value=0></progress></p>
 <p>Name: <input class="name" value="---"> <br>(echoed: <span class="name">(echoed name)</span>)</p>
 
 
@@ -36,9 +36,9 @@
 <!-- <script src="https://cdn.rawgit.com/remy/bind/928c52ce335d6fd2c824b536a97efa460554b9e0/lib/bind.js"></script> -->
 <script type="module">
 
-    import {Bind} from "../../src/cm-web-modules/app/bind/lib/bind.js"
+    import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js"
 
-    var data = new Bind({
+    Bind({
         me: {
             fav: 'one',
             ts: ['one', 'two'],
