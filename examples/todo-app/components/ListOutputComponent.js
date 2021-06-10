@@ -8,8 +8,8 @@ import {Observe} from "../../../src/cm-web-modules/observe/Observe.js";
 import {EventUtils} from "../../../src/cm-web-modules/utils/EventUtils.js";
 
 export class ListOutputComponent extends Component {
-    constructor(element, props) {
-        super(element, props)
+    constructor(element) {
+        super(element)
         this.element = element
         this.actions = {
             "check": (event) => {
