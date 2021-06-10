@@ -8,11 +8,15 @@ import {Template} from "../src/cm-web-modules/template/Template.js";
 
 describe("Template", function () {
     it("should render a simple template", () => {
-        const template = new Template("${this.greeting} ${this.who}!")
+        const template = new Template("${greeting} ${who}!")
         assert.equal(template.render({"greeting": "Hello", "who": "World"}), "Hello World!")
     })
     it("should render a hacker template", () => {
-        const template = new Template("${this.greeting} ${this.who}!`")
-        assert.equal(template.render({"greeting": "Hello", "who": "${test}'\"´`"}), "Hello ${test}'\"´`!&#96;")
+        const template = new Template("${greeting} ${who}!")
+        assert.equal(template.render({"greeting": "Hello", "who": "${test}'\"´`"}), "Hello ${test}'\"´`!")
+    })
+    it("should render a simple template with missing replacements", () => {
+        const template = new Template("${greeting} ${who}!")
+        assert.equal(template.render({"greeting": "Hello"}), "Hello ${who}!")
     })
 })

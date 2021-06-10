@@ -16,6 +16,7 @@ const entityMap = {
 export class TextUtils {
 
     static replaceAll(str, replacementsObj, ignoreCase = false) {
+        console.warn("replaceAll is deprecated and will be removed in future versions")
         let retStr = str
         const flags = ignoreCase ? "gi" : "g"
         for (let needle in replacementsObj) {
@@ -31,10 +32,6 @@ export class TextUtils {
         } else {
             return str
         }
-    }
-
-    static escapeStringLiteral(literal) {
-        return literal.replace("`", "&#96;")
     }
 
     static escapeHtml(str) {
