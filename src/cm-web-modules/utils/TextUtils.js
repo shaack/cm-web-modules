@@ -28,7 +28,6 @@ export class TextUtils {
         })
     }
 
-    // https://stackoverflow.com/questions/7467840/nl2br-equivalent-in-javascript
     static nl2br(raw) {
         return String(raw).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br/>');
     }
