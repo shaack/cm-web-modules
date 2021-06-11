@@ -19,4 +19,8 @@ describe("Template", function () {
         const template = new Template("${greeting} ${who}!")
         assert.equal(template.render({"greeting": "Hello"}), "Hello ${who}!")
     })
+    it("should render a template in HTML", () => {
+        const template = new Template(document.getElementById("myTemplate"))
+        assert.equal(template.render({"greeting": "Hello", "who": "World"}), "Hello <b>World</b>!")
+    })
 })

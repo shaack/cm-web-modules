@@ -4,12 +4,23 @@
  */
 
 export class Template {
-    constructor(template) {
-        this.template = template
+    constructor(templateOrContent) {
+        if(templateOrContent instanceof HTMLElement) {
+            this.content = ""
+            for (const childNode of templateOrContent.content.childNodes) {
+                if(childNode.nodeType === Node.TEXT_NODE) {
+                    this.content += childNode.wholeText
+                } else if(childNode.nodeType === Node.ELEMENT_NODE) {
+                    this.content += childNode.outerHTML
+                }
+            }
+        } else if (typeof templateOrContent === 'string' || templateOrContent instanceof String) {
+            this.content = templateOrContent
+        }
     }
 
     render(replacements) {
-        return this.template.replace(/\${(.*?)}/g, (toReplace, key) => {
+        return this.content.replace(/\${(.*?)}/g, (toReplace, key) => {
             if(replacements[key] === undefined) {
                 return toReplace
             } else {

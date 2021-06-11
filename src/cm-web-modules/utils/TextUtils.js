@@ -15,17 +15,6 @@ const entityMap = {
 
 export class TextUtils {
 
-    static replaceAll(str, replacementsObj, ignoreCase = false) {
-        console.warn("replaceAll is deprecated and will be removed in future versions")
-        let retStr = str
-        const flags = ignoreCase ? "gi" : "g"
-        for (let needle in replacementsObj) {
-            // noinspection JSUnfilteredForInLoop
-            retStr = retStr.replace(new RegExp(needle, flags), replacementsObj[needle])
-        }
-        return retStr
-    }
-
     static crop(str, maxLength) {
         if (str.length > maxLength) {
             return str.substring(0, maxLength) + "…"
