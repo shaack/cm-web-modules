@@ -5,8 +5,15 @@
  */
 import {EventUtils} from "../utils/EventUtils.js";
 
+/**
+ * A Component is a kind of controller which couples js and html elements
+ */
 export class Component {
 
+    /**
+     * @param context The context of the Component in HTML
+     * @param props The Component configuration
+     */
     constructor(context, props = {}) {
         this.context = context
         this.props = props
@@ -20,7 +27,11 @@ export class Component {
     }
 
     /**
-     * Searches for "data-event-listener" attributes in the HTML
+     * Searches for "data-event-listener" attributes in the HTML, and couples them with actions.
+     * Tag Attributes:
+     *  - `data-event-listener`: The event "click", "change",...
+     *  - `data-action`: The action in this.actions, called on the event
+     *  - `data-delegate`: Query selector, to delegate the event from a child element, see example 'examples/todo-app'
      */
     addDataEventListeners(context) {
         const eventListenerElements = context.querySelectorAll("[data-event-listener]")
