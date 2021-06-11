@@ -9,8 +9,7 @@ const entityMap = {
     "<": "&lt;",
     ">": "&gt;",
     '"': '&quot;',
-    "'": '&#39;',
-    "/": '&#x2F;'
+    "'": '&#39;'
 }
 
 export class TextUtils {
@@ -23,10 +22,15 @@ export class TextUtils {
         }
     }
 
-    static escapeHtml(str) {
-        return String(str).replace(/[&<>"'\/]/g, (s) => {
+    static escapeHtml(raw) {
+        return String(raw).replace(/[&<>"']/g, (s) => {
             return entityMap[s]
         })
+    }
+
+    // https://stackoverflow.com/questions/7467840/nl2br-equivalent-in-javascript
+    static nl2br(raw) {
+        return String(raw).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br/>');
     }
 
 }
