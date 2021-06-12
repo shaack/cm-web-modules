@@ -7,18 +7,18 @@ export class Tag {
 
     constructor(context, name, props = {}) {
         this.props = {
-            querySelector: name
+            querySelector: "cm-" + name
         }
         Object.assign(this.props, props)
         this.context = context
         this.name = name
-        this.tagElements = undefined
+        this.elements = undefined
     }
 
     redraw() {
-        this.tagElements = this.context.querySelectorAll(this.props.querySelector)
+        this.elements = this.context.querySelectorAll(this.props.querySelector)
         this.preRedraw().then(() => {
-            for (const element of this.tagElements) {
+            for (const element of this.elements) {
                 element.innerHTML = this.render(element)
             }
         })
