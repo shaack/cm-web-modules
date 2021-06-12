@@ -19,10 +19,7 @@ export class Tag {
         this.elements = this.context.querySelectorAll(this.props.querySelector)
         this.preRedraw().then(() => {
             for (const element of this.elements) {
-                const result = this.render(element)
-                if(result) {
-                    element.innerHTML = result
-                }
+                element.innerHTML = this.render(element)
             }
             this.postRedraw()
         })
