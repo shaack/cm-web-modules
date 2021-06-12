@@ -1,6 +1,6 @@
 {
   "name": "cm-web-modules",
-  "version": "1.9.12",
+  "version": "1.9.13",
   "description": "Collection of clean and small ES6 modules for the web",
   "main": "src/LibraryManager.js",
   "directories": {
