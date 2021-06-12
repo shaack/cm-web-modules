@@ -19,8 +19,12 @@ export class Tag {
         this.elements = this.context.querySelectorAll(this.props.querySelector)
         this.preRedraw().then(() => {
             for (const element of this.elements) {
-                element.innerHTML = this.render(element)
+                const result = this.render(element)
+                if(result) {
+                    element.innerHTML = result
+                }
             }
+            this.postRedraw()
         })
     }
 
@@ -44,8 +48,13 @@ export class Tag {
     }
 
     // called after this.tagElements is filled
+    // to fetch data
     preRedraw() {
         return Promise.resolve()
+    }
+
+    // called after all tags are drawn
+    postRedraw() {
     }
 
     render(element) {
