@@ -13,7 +13,7 @@ export class ListOutputComponent extends Component {
         this.element = element
         this.actions = {
             "check": (event) => {
-                for (const todo of this.app.state.todos) {
+                for (const todo of this.parent.state.todos) {
                     if (todo.id === parseInt(event.target.dataset.id, 10)) {
                         todo.done = event.target.checked
                         break
@@ -25,9 +25,9 @@ export class ListOutputComponent extends Component {
             this.actions.check(event)
         })
         this.initialization.then(() => {
-            Observe.property(this.app.state, "todos", () => {
+            Observe.property(this.parent.state, "todos", () => {
                 let html = ""
-                for (const value of this.app.state.todos) {
+                for (const value of this.parent.state.todos) {
                     html += `<li><label><input data-id="${value.id}" type="checkbox" ${(value.done ? "checked" : "")} />${value.text}</label></li>`
                 }
                 this.element.innerHTML = html

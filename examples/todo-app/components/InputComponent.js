@@ -15,10 +15,14 @@ export class InputComponent extends Component {
         this.actions = {
             "add": () => {
                 if (this.elements.input.value) {
-                    this.app.state.todos.unshift(new ToDo(this.elements.input.value))
+                    this.parent.state.todos.unshift(new ToDo(this.elements.input.value))
                     this.elements.input.value = ""
                 }
+                console.log(this.parent.state)
             }
         }
+        this.initialization.then(() => {
+            this.addDataEventListeners()
+        })
     }
 }

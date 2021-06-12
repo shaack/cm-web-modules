@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div id="ToDoApp">
+<div id="ToDoComponent">
     <h1>ToDo List Example</h1>
     <div class="InputComponent">
         <label>Todo <input type="text"/></label>
@@ -17,7 +17,7 @@
 </div>
 <script type="module">
     import {ToDoApp} from "./ToDoApp.js";
-    new ToDoApp(document.getElementById("ToDoApp"))
+    const app = new ToDoApp()
 </script>
 </body>
 </html>

@@ -10,20 +10,24 @@ import {EventUtils} from "../utils/EventUtils.js";
  */
 export class Component {
 
-    /**
-     * @param context The context of the Component in HTML
-     * @param props The Component configuration
-     */
     constructor(context, props = {}) {
-        this.context = context
         this.props = props
         this.state = {}
+        this.parent = undefined
+        this.app = undefined
+        this.context = context
         this.actions = {}
         this.elements = {}
-        this.app = undefined
-        this.initialization = Promise.resolve().then(() => {
-            this.addDataEventListeners(context)
-        })
+        this.initialization = Promise.resolve()
+    }
+
+    /**
+     * Add child components
+     * @param component
+     */
+    addComponent(component) {
+        component.parent = this
+        component.app = this.app
     }
 
     /**
@@ -33,14 +37,14 @@ export class Component {
      *  - `data-action`: The action in this.actions, called on the event
      *  - `data-delegate`: Query selector, to delegate the event from a child element, see example 'examples/todo-app'
      */
-    addDataEventListeners(context) {
-        const eventListenerElements = context.querySelectorAll("[data-event-listener]")
+    addDataEventListeners() {
+        const eventListenerElements = this.context.querySelectorAll("[data-event-listener]")
         for (const eventListenerElement of eventListenerElements) {
             const eventName = eventListenerElement.dataset.eventListener
             const action = eventListenerElement.dataset.action
             const delegate = eventListenerElement.dataset.delegate
             if (!this.actions[action]) {
-                console.error("You have to add the action \"" + action + "\" to your component.")
+                console.error(this.context, "You have to add the action \"" + action + "\" to your component.")
             }
             if (delegate) {
                 EventUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
@@ -50,6 +54,7 @@ export class Component {
                 eventListenerElement.addEventListener(eventName, this.actions[action].bind(this))
             }
         }
+        return this
     }
 
 }

@@ -1,0 +1,54 @@
+/**
+ * Author: Stefan Haack (https://shaack.com)
+ * Date: 2021-06-11
+ */
+
+export class Tag {
+
+    constructor(context, name, props = {}) {
+        this.props = {
+            querySelector: name
+        }
+        Object.assign(this.props, props)
+        this.context = context
+        this.name = name
+        this.tagElements = undefined
+    }
+
+    redraw() {
+        this.tagElements = this.context.querySelectorAll(this.props.querySelector)
+        this.preRedraw().then(() => {
+            for (const element of this.tagElements) {
+                element.innerHTML = this.render(element)
+            }
+        })
+    }
+
+    // API for child classes
+
+    rawValue(element) {
+        let rawValue = this.state(element).rawValue
+        if(!rawValue) {
+            rawValue = element.textContent
+            this.state(element).rawValue = rawValue
+        }
+        return rawValue
+    }
+
+    state(element) {
+        const propertyName = "TagState"
+        if(!element[propertyName]) {
+            element[propertyName] = {}
+        }
+        return element[propertyName]
+    }
+
+    // called after this.tagElements is filled
+    preRedraw() {
+        return Promise.resolve()
+    }
+
+    render(element) {
+        return "[" + this.name + " " + this.rawValue(element) + "]";
+    }
+}
