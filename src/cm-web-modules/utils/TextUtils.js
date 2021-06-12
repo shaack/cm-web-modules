@@ -32,4 +32,12 @@ export class TextUtils {
         return String(raw).replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br/>');
     }
 
+    // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+    static linkify(text) {
+        const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+        return text.replace(urlRegex, function (url) {
+            return '<a href="' + url + '">' + url + '</a>'
+        })
+    }
+
 }
