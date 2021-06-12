@@ -22,4 +22,8 @@ ein Test.`
         console.log(TextUtils.nl2br(raw))
         assert.equal(TextUtils.nl2br(raw), `Das<br/>ist<br/>ein Test.`)
     })
+    it("should linkify", () => {
+        const raw = "Das ist ein https://chessmail.de/~shaack Link."
+        assert.equal(TextUtils.linkify(raw), "Das ist ein <a href=\"https://chessmail.de/~shaack\">https://chessmail.de/~shaack</a> Link.")
+    })
 })
