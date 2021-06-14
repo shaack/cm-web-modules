@@ -3,7 +3,9 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {EventUtils} from "../utils/EventUtils.js";
+import {EventUtils} from "../utils/EventUtils.js"
+
+const DEBUG = false // set `true`, to make some console logging
 
 /**
  * A Component is a kind of controller which couples js and html elements
@@ -39,6 +41,9 @@ export class Component {
      */
     addDataEventListeners() {
         const eventListenerElements = this.context.querySelectorAll("[data-event-listener]")
+        if(DEBUG) {
+            console.log("eventListenerElements", this.context, eventListenerElements)
+        }
         for (const eventListenerElement of eventListenerElements) {
             const eventName = eventListenerElement.dataset.eventListener
             const action = eventListenerElement.dataset.action
@@ -48,9 +53,15 @@ export class Component {
             }
             if (delegate) {
                 EventUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
+                    if(DEBUG) {
+                        console.log("delegate", action, target)
+                    }
                     this.actions[action](target)
                 })
             } else {
+                if(DEBUG) {
+                    console.log("addEventListener", eventName, action)
+                }
                 eventListenerElement.addEventListener(eventName, this.actions[action].bind(this))
             }
         }
