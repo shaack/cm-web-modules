@@ -57,4 +57,12 @@ export class DomUtils {
         return getComputedStyle(element).getPropertyValue('--' + name).trim()
     }
 
+    static hide(element) {
+        element.style.display = "none"
+    }
+
+    static show(element) {
+        element.style.display = ""
+    }
+
 }
