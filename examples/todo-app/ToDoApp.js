@@ -11,6 +11,8 @@ export class ToDoApp extends App {
 
     constructor() {
         super()
-        this.addComponent(new ToDoComponent(document.body))
+        this.addComponent(new ToDoComponent(document.body).initialization.then(() => {
+            console.log("ToDoComponent is initialized")
+        }))
     }
 }

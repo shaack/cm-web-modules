@@ -20,7 +20,15 @@ export class Component {
         this.context = context
         this.actions = {}
         this.elements = {}
-        this.initialization = Promise.resolve()
+        this.initialization = this.initialize()
+    }
+
+    /**
+     * implement in child, doing some initialization and resolving this.initialize()
+     * @returns {Promise<void>}
+     */
+    initialize() {
+        return Promise.resolve()
     }
 
     /**
@@ -30,6 +38,7 @@ export class Component {
     addComponent(component) {
         component.parent = this
         component.app = this.app
+        return component.initialization
     }
 
     /**

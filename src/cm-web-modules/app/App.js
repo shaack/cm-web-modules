@@ -12,9 +12,19 @@ export class App {
     constructor(props = {}) {
         this.props = props
         this.state = {}
+        this.initialization = this.initialize()
+    }
+
+    /**
+     * implement in child, doing some initialization and resolving this.initialize()
+     * @returns {Promise<void>}
+     */
+    initialize() {
+        return Promise.resolve()
     }
 
     addComponent(component) {
         component.app = this
+        return component.initialization
     }
 }
