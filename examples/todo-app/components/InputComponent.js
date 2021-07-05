@@ -3,12 +3,12 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "../../../src/cm-web-modules/app/Component.js"
 import {ToDo} from "../model/ToDo.js";
+import {Component} from "../../../src/cm-web-modules/app/Component.js"
 
 export class InputComponent extends Component {
-    constructor(context, props = {}) {
-        super(context, props)
+    constructor(parent, context, props = {}) {
+        super(parent, context, props)
         this.elements = {
             input: context.querySelector("input[type='text']")
         }
@@ -21,8 +21,6 @@ export class InputComponent extends Component {
                 console.log(this.parent.state)
             }
         }
-        this.initialization.then(() => {
-            this.addDataEventListeners()
-        })
+        this.addDataEventListeners()
     }
 }

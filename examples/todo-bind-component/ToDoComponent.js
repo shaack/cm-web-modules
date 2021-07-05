@@ -3,13 +3,13 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {Component} from "../../src/cm-web-modules/app/Component.js"
 import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js";
+import {Component} from "../../src/cm-web-modules/app/Component.js"
 
 export class ToDoComponent extends Component {
 
     constructor(context) {
-        super(context, {})
+        super(undefined, context, {})
         this.state = Bind({
             input: "",
             todos: []
@@ -38,6 +38,7 @@ export class ToDoComponent extends Component {
                 }
             }
         }
+        this.addDataEventListeners()
     }
 
 }

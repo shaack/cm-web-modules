@@ -5,17 +5,21 @@
  */
 import {InputComponent} from "./components/InputComponent.js";
 import {ListOutputComponent} from "./components/ListOutputComponent.js";
-import {Component} from "../../src/cm-web-modules/app/Component.js";
+import {Component} from "../../src/cm-web-modules/app/Component.js"
 
 export class ToDoComponent extends Component {
 
-    constructor(context) {
-        super(context)
+    constructor(app, context) {
+        super(app, context)
         this.state = {
             todos: []
         }
-        this.addComponent(new InputComponent(context.querySelector(".InputComponent")))
-        this.addComponent(new ListOutputComponent(context.querySelector(".ListOutputComponent")))
+        new InputComponent(this, context.querySelector(".InputComponent")).initialization.then(() => {
+            console.log("InputComponent initialized")
+        })
+        new ListOutputComponent(this, context.querySelector(".ListOutputComponent")).initialization.then(() => {
+            console.log("ListOutputComponent initialized")
+        })
     }
 
 }

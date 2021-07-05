@@ -3,42 +3,17 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
+
 import {EventUtils} from "../utils/EventUtils.js"
+import {Service} from "./Service.js"
 
-const DEBUG = false // set `true`, to make some console logging
+export class Component extends Service {
 
-/**
- * A Component is a kind of controller which couples js and html elements
- */
-export class Component {
-
-    constructor(context, props = {}) {
-        this.props = props
-        this.state = {}
-        this.parent = undefined
-        this.app = undefined
+    constructor(parent, context, props = {}) {
+        super(parent, props)
         this.context = context
         this.actions = {}
         this.elements = {}
-        this.initialization = this.initialize()
-    }
-
-    /**
-     * implement in child, doing some initialization and resolving this.initialize()
-     * @returns {Promise<void>}
-     */
-    initialize() {
-        return Promise.resolve()
-    }
-
-    /**
-     * Add child components
-     * @param component
-     */
-    addComponent(component) {
-        component.parent = this
-        component.app = this.app
-        return component.initialization
     }
 
     /**
@@ -50,7 +25,7 @@ export class Component {
      */
     addDataEventListeners() {
         const eventListenerElements = this.context.querySelectorAll("[data-event-listener]")
-        if(DEBUG) {
+        if(this.props.debug) {
             console.log("eventListenerElements", this.context, eventListenerElements)
         }
         for (const eventListenerElement of eventListenerElements) {
@@ -62,13 +37,13 @@ export class Component {
             }
             if (delegate) {
                 EventUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
-                    if(DEBUG) {
+                    if(this.props.debug) {
                         console.log("delegate", action, target)
                     }
                     this.actions[action](target)
                 })
             } else {
-                if(DEBUG) {
+                if(this.props.debug) {
                     console.log("addEventListener", eventName, action)
                 }
                 eventListenerElement.addEventListener(eventName, this.actions[action].bind(this))
@@ -78,3 +53,4 @@ export class Component {
     }
 
 }
+

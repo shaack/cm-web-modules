@@ -1,13 +1,13 @@
 # App
 
-App => Component
-    => Component => Widget
+App => Service
+    => Service => Widget
 
 ## App
 
 props, state
 
-## Component
+## Service
 
 app, context, props, state
 
