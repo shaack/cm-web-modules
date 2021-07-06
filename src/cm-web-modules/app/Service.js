@@ -28,7 +28,9 @@ export class Service {
      * @returns {Promise<void>}
      */
     initialize() {
-        return Promise.resolve()
+        return new Promise((resolve) => {
+            resolve(this)
+        })
     }
 
 }
