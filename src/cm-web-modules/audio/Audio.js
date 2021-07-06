@@ -24,11 +24,11 @@ if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== de
         mainGainNode.connect(audioContext.destination)
     })
 }
-// patch for chrome needing user interaction
+// start context after user interaction
 const resumeAudio = function () {
     if (audioContext.state !== "running") {
-        audioContext.resume()
         document.removeEventListener("mousedown", resumeAudio)
+        return audioContext.resume()
     }
 }
 document.addEventListener("mousedown", resumeAudio)
