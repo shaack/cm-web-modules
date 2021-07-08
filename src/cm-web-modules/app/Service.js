@@ -10,11 +10,11 @@
 export class Service {
 
     constructor(parent, props = {}) {
+        this.parent = parent
         if (parent) {
             if (!parent.parent) { // is App or base component
                 this.app = parent
             } else {
-                this.parent = parent
                 this.app = parent.app
             }
         }
