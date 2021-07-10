@@ -6,7 +6,7 @@
 
 export class EncryptionUtils {
 
-    static createKey(length = 32) {
+    static createKey(length = 10) {
         let key = ""
         const iterations = length / 10
         for (let i = 0; i < iterations; i++) {
