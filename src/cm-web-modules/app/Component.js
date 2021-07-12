@@ -9,8 +9,8 @@ import {Service} from "./Service.js"
 
 export class Component extends Service {
 
-    constructor(parent, context, props = {}) {
-        super(parent, props)
+    constructor(parent, context, props = {}, state = {}) {
+        super(parent, props, state)
         this.context = context
         this.actions = {}
         this.elements = {}

@@ -8,7 +8,7 @@ import {Service} from "./Service.js"
 
 export class App extends Service {
 
-    constructor(props = {}) {
-        super(undefined, props)
+    constructor(props = {}, state = {}) {
+        super(undefined, props, state)
     }
 }

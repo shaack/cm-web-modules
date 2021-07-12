@@ -9,7 +9,7 @@
  */
 export class Service {
 
-    constructor(parent, props = {}) {
+    constructor(parent, props = {}, state = {}) {
         this.parent = parent
         if (parent) {
             if (!parent.parent) { // is App or base component
@@ -19,7 +19,7 @@ export class Service {
             }
         }
         this.props = props
-        this.state = {}
+        this.state = state
         this.initialization = this.initialize()
     }
 
