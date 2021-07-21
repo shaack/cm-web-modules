@@ -68,15 +68,10 @@ export class DomUtils {
         return getComputedStyle(element).getPropertyValue('--' + name).trim()
     }
 
-    static createElement(name, attributes = {}, content = "") {
-        const element = document.createElement(name)
-        if(content) {
-            element.innerHTML = content
-        }
-        for (const [key, value] of Object.entries(attributes)) {
-            element.setAttribute(key, value)
-        }
-        return element
+    static createElement(html) {
+        const template = document.createElement('template')
+        template.innerHTML = html.trim()
+        return template.content.firstChild
     }
 
 }
