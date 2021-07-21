@@ -157,7 +157,7 @@ export class Observe {
             });
 
             const property = object[propertyName]
-            let mutationMethods = null
+            let mutationMethods = []
             if (property instanceof Array) {
                 isCollection = true
                 mutationMethods = collectionMutationMethods.array
@@ -168,24 +168,7 @@ export class Observe {
                 isCollection = true
                 mutationMethods = collectionMutationMethods.map
             }
-            if (isCollection) { // handling for Collections
-                mutationMethods.forEach(function (methodName) {
-                    object[propertyName][methodName] = function () {
-                        // object[propertyName].constructor.prototype[methodName] is Array or Set or...
-                        object[propertyName].constructor.prototype[methodName].apply(this, arguments)
-                        const methodArguments = arguments
-                        registryObject.observedProperties.get(propertyName).observers.forEach(function (observer) {
-                            const params = {
-                                propertyName: propertyName,
-                                methodName: methodName,
-                                arguments: methodArguments,
-                                newValue: object[propertyName]
-                            }
-                            observer(params)
-                        })
-                    }
-                })
-            } else if (delete object[propertyName]) { // handling for simple properties
+            if (delete object[propertyName]) { // handling for simple properties
                 Object.defineProperty(object, propertyName, {
                     get: function () {
                         return registryObject.observedProperties.get(propertyName).value
@@ -203,6 +186,25 @@ export class Observe {
                     enumerable: true,
                     configurable: true
                 })
+                if (isCollection) { // handling for Collections
+                    mutationMethods.forEach(function (methodName) {
+                        object[propertyName][methodName] = function () {
+                            // object[propertyName].constructor.prototype[methodName] is Array or Set or...
+                            // noinspection JSPotentiallyInvalidConstructorUsage
+                            object[propertyName].constructor.prototype[methodName].apply(this, arguments)
+                            const methodArguments = arguments
+                            registryObject.observedProperties.get(propertyName).observers.forEach(function (observer) {
+                                const params = {
+                                    propertyName: propertyName,
+                                    methodName: methodName,
+                                    arguments: methodArguments,
+                                    newValue: object[propertyName]
+                                }
+                                observer(params)
+                            })
+                        }
+                    })
+                }
             } else {
                 console.error("Error: Observe.property", propertyName, "failed")
             }
