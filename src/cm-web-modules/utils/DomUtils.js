@@ -13,7 +13,7 @@ export class DomUtils {
 
     // https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport
     static isElementInViewport(element) {
-        const rect = element.getBoundingClientRect();
+        const rect = element.getBoundingClientRect()
         return (
             rect.top >= 0 &&
             rect.left >= 0 &&
@@ -72,6 +72,10 @@ export class DomUtils {
         const template = document.createElement('template')
         template.innerHTML = html.trim()
         return template.content.firstChild
+    }
+
+    static insertAfter(newChild, refChild) {
+        refChild.parentNode.insertBefore(newChild, refChild.nextSibling)
     }
 
 }
