@@ -4,8 +4,8 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {EventUtils} from "../utils/EventUtils.js"
 import {Service} from "./Service.js"
+import {DomUtils} from "../utils/DomUtils.js"
 
 export class Component extends Service {
 
@@ -36,7 +36,7 @@ export class Component extends Service {
                 console.error(this.context, "You have to add the action \"" + action + "\" to your component.")
             }
             if (delegate) {
-                EventUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
+                DomUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
                     if(this.props.debug) {
                         console.log("delegate", action, target)
                     }

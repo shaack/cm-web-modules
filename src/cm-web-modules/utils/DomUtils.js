@@ -78,4 +78,22 @@ export class DomUtils {
         refChild.parentNode.insertBefore(newChild, refChild.nextSibling)
     }
 
+    static delegate(element, eventName, selector, handler) {
+        const eventListener = function (event) {
+            let target = event.target
+            while (target && target !== this) {
+                if (target.matches(selector)) {
+                    handler.call(target, event)
+                }
+                target = target.parentNode
+            }
+        }
+        element.addEventListener(eventName, eventListener)
+        return {
+            remove: function () {
+                element.removeEventListener(eventName, eventListener)
+            }
+        }
+    }
+
 }
