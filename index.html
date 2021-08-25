@@ -22,10 +22,9 @@
     import {Stopwatch} from "./src/cm-web-modules/stopwatch/Stopwatch.js"
     const stopwatch = new Stopwatch({
         onStateChanged: (running) => {
-            // console.log("onStateChanged", running)
             stateOutput.innerText = running
         },
-        onSecondsChanged: (seconds) => {
+        onTimeChanged: (seconds) => {
             secondsOutput.innerText = seconds.toFixed(1)
         }
     })
