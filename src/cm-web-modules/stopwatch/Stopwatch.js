@@ -8,6 +8,12 @@ import {DateUtils} from "../utils/DateUtils.js"
 export class Stopwatch {
 
     constructor(props = {}) {
+        this.props = {
+            onStateChanged: undefined,
+            onSecondsChanged: undefined,
+            tickResolution: 100
+        }
+        Object.assign(this.props, props)
         this.startDate = null
         this.endDate = null
         this.dateAtLatestStart = null
@@ -31,7 +37,7 @@ export class Stopwatch {
             this.dateAtLatestStart = new Date()
             this.timer = setInterval(() => {
                 this.tick()
-            }, 100)
+            }, this.props.tickResolution)
             this.timerStateChanged(this.running())
             this.timerSecondsChanged(this.secondsExpiredTillLastPause)
         }
