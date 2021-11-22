@@ -9,7 +9,7 @@ import {Component} from "../../src/cm-web-modules/app/Component.js"
 export class ToDoComponent extends Component {
 
     constructor(context) {
-        super(undefined, context, {})
+        super(context, {})
         this.state = Bind({
             input: "",
             todos: []
