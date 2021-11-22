@@ -5,11 +5,15 @@
  */
 
 import {App} from "../../src/cm-web-modules/app/App.js"
-import {ToDoComponent} from "./ToDoComponent.js"
+import {InputComponent} from "./components/InputComponent.js";
+import {ListOutputComponent} from "./components/ListOutputComponent.js";
 
 export class ToDoApp extends App {
-    constructor() {
-        super()
-        new ToDoComponent(this, document.body)
+    constructor(context) {
+        super({}, {
+            todos: []
+        })
+        new InputComponent(context.querySelector(".InputComponent"), this.state)
+        new ListOutputComponent(context.querySelector(".ListOutputComponent"), this.state)
     }
 }

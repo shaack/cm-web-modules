@@ -9,10 +9,10 @@ import {DomUtils} from "../utils/DomUtils.js"
 
 export class Component extends Service {
 
-    constructor(props = {}, state = {}) {
+    constructor(context, props = {}, state = {}) {
         super(props, state)
+        this.context = context
         this.actions = {}
-        this.context = undefined
     }
 
     /**
