@@ -9,28 +9,9 @@
  */
 export class Service {
 
-    constructor(parent, props = {}, state = {}) {
-        this.parent = parent
-        if (parent) {
-            if (!parent.parent) { // is App or base component
-                this.app = parent
-            } else {
-                this.app = parent.app
-            }
-        }
+    constructor(props = {}, state = {}) {
         this.props = props
         this.state = state
-        this.initialization = this.initialize()
-    }
-
-    /**
-     * implement in childs
-     * @returns {Promise<void>}
-     */
-    initialize() {
-        return new Promise((resolve) => {
-            resolve(this)
-        })
     }
 
 }

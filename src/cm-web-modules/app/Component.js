@@ -9,11 +9,10 @@ import {DomUtils} from "../utils/DomUtils.js"
 
 export class Component extends Service {
 
-    constructor(parent, context, props = {}, state = {}) {
-        super(parent, props, state)
-        this.context = context
+    constructor(props = {}, state = {}) {
+        super(props, state)
         this.actions = {}
-        this.elements = {}
+        this.context = undefined
     }
 
     /**
@@ -23,17 +22,17 @@ export class Component extends Service {
      *  - `data-action`: The action in this.actions, called on the event
      *  - `data-delegate`: Query selector, to delegate the event from a child element, see example 'examples/todo-app'
      */
-    addDataEventListeners() {
-        const eventListenerElements = this.context.querySelectorAll("[data-event-listener]")
+    addDataEventListeners(context = this.context) {
+        const eventListenerElements = context.querySelectorAll("[data-event-listener]")
         if(this.props.debug) {
-            console.log("eventListenerElements", this.context, eventListenerElements)
+            console.log("eventListenerElements", context, eventListenerElements)
         }
         for (const eventListenerElement of eventListenerElements) {
             const eventName = eventListenerElement.dataset.eventListener
             const action = eventListenerElement.dataset.action
             const delegate = eventListenerElement.dataset.delegate
             if (!this.actions[action]) {
-                console.error(this.context, "You have to add the action \"" + action + "\" to your component.")
+                console.error(context, "You have to add the action \"" + action + "\" to your component.")
             }
             if (delegate) {
                 DomUtils.delegate(eventListenerElement, eventName, delegate, (target) => {

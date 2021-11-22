@@ -8,7 +8,7 @@ import {Observe} from "../../src/cm-web-modules/observe/Observe.js";
 
 export class ToDoComponent extends Component {
     constructor(context) {
-        super(undefined, context)
+        super()
         this.state = {
             todos: []
         }
@@ -16,7 +16,6 @@ export class ToDoComponent extends Component {
             input: context.querySelector("input[type='text']"),
             listOutput: context.querySelector(".list-output")
         }
-        console.log(this.elements)
         this.actions = {
             "add": () => {
                 if (this.elements.input.value) {
@@ -33,16 +32,14 @@ export class ToDoComponent extends Component {
                 }
             }
         }
-        this.initialization.then(() => {
-            Observe.property(this.state, "todos", () => {
-                let html = ""
-                for (const value of this.state.todos) {
-                    html += `<li><label><input data-id="${value.id}" type="checkbox" ${(value.done ? "checked" : "")} />${value.text}</label></li>`
-                }
-                this.elements.listOutput.innerHTML = html
-            })
-            this.addDataEventListeners()
+        Observe.property(this.state, "todos", () => {
+            let html = ""
+            for (const value of this.state.todos) {
+                html += `<li><label><input data-id="${value.id}" type="checkbox" ${(value.done ? "checked" : "")} />${value.text}</label></li>`
+            }
+            this.elements.listOutput.innerHTML = html
         })
+        this.addDataEventListeners(context) // map element events to actions
     }
 }
 
