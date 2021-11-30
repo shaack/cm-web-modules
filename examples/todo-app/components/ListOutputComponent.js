@@ -4,11 +4,11 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {Component} from "../../../src/cm-web-modules/app/Component.js"
+import {UiComponent} from "../../../src/cm-web-modules/app/UiComponent.js"
 import {Observe} from "../../../src/cm-web-modules/observe/Observe.js";
 import {EventUtils} from "../../../src/cm-web-modules/utils/EventUtils.js";
 
-export class ListOutputComponent extends Component {
+export class ListOutputComponent extends UiComponent {
     constructor(context, state) {
         super(context, {}, state)
         this.actions = {

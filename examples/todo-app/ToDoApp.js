@@ -4,11 +4,11 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {App} from "../../src/cm-web-modules/app/App.js"
+import {Component} from "../../src/cm-web-modules/app/Component.js"
 import {InputComponent} from "./components/InputComponent.js";
 import {ListOutputComponent} from "./components/ListOutputComponent.js";
 
-export class ToDoApp extends App {
+export class ToDoApp extends Component {
     constructor(context) {
         super({}, {
             todos: []

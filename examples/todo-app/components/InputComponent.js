@@ -4,9 +4,9 @@
  * License: MIT, see file 'LICENSE'
  */
 import {ToDo} from "../model/ToDo.js";
-import {Component} from "../../../src/cm-web-modules/app/Component.js"
+import {UiComponent} from "../../../src/cm-web-modules/app/UiComponent.js"
 
-export class InputComponent extends Component {
+export class InputComponent extends UiComponent {
     constructor(context, state) {
         super(context, {}, state)
         this.elements = {
