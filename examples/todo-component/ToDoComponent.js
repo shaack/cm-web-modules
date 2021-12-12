@@ -3,7 +3,7 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {UiComponent} from "../../src/cm-web-modules/app/UiComponent.js"
+import {UiComponent} from "../../src/cm-web-modules/app/Component.js"
 import {Observe} from "../../src/cm-web-modules/observe/Observe.js";
 
 export class ToDoComponent extends UiComponent {

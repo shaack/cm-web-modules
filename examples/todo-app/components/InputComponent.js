@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {ToDo} from "../model/ToDo.js";
-import {UiComponent} from "../../../src/cm-web-modules/app/UiComponent.js"
+import {UiComponent} from "../../../src/cm-web-modules/app/Component.js"
 
 export class InputComponent extends UiComponent {
     constructor(context, state) {

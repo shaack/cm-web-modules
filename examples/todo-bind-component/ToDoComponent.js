@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {Bind} from "../../node_modules/bind.mjs/src/bind.mjs/Bind.js";
-import {UiComponent} from "../../src/cm-web-modules/app/UiComponent.js"
+import {UiComponent} from "../../src/cm-web-modules/app/Component.js"
 
 export class ToDoComponent extends UiComponent {
     constructor(context) {

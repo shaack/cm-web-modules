@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {UiComponent} from "../../../src/cm-web-modules/app/UiComponent.js"
+import {UiComponent} from "../../../src/cm-web-modules/app/Component.js"
 import {Observe} from "../../../src/cm-web-modules/observe/Observe.js";
 import {EventUtils} from "../../../src/cm-web-modules/utils/EventUtils.js";
 
