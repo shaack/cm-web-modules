@@ -6,6 +6,13 @@
 
 export class DomUtils {
 
+    static documentReady(callback) {
+        document.addEventListener("DOMContentLoaded", callback)
+        if (document.readyState === "interactive" || document.readyState === "complete") {
+            callback()
+        }
+    }
+
     // https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
     static isElementVisible(element) {
         return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)
