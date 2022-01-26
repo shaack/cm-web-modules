@@ -8,16 +8,125 @@ The `cm-web-modules` modules have no external dependencies, they don't use jQuer
 
 The `cm-web-modules` modules are:
 
-- [App](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/app) Kind of minimal framework for ES6 JS apps.
-- [Audio](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/audio) Module for the [Web Audio API](https://developer.mozilla.org/de/docs/Web/API/Web_Audio_API). For playing audio samples in a web page.
-- [Cache](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/cache)
-- [Cookie](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/cookie) Module to read, write and delete cookies
-- [i18n](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/i18n)
-- [MessageBroker](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/message-broker)
-- [Observe](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/observe) Module to observe object properties used for reactive coding the simple way.
-- [Stopwatch](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/stopwatch)
-- [SVG](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/svg) Module to render SVG elements and load sprites.
-- [Utils](https://github.com/shaack/cm-web-modules/tree/master/src/cm-web-modules/utils)
+## Modules
+
+### Audio
+
+Module for the [Web Audio API](https://developer.mozilla.org/de/docs/Web/API/Web_Audio_API). For playing audio samples in a web page.
+
+### Cache
+
+Cache data on client site.
+
+### Cookie
+
+Module to read, write and delete cookies.
+
+### I18n
+
+Module to handle the internationalisation of frontend text.
+
+```js
+const i18n = new I18n(props)
+```
+
+default props:
+
+```js
+this.props = {
+    locale: null,
+    fallbackLang: "en" // used, when the translation was not found for locale
+}
+```
+
+load language files:
+
+```js
+i18n.load("translations.json").then(() => {
+    // do this after loading
+})
+```
+
+where the json file has the form
+
+```json
+{
+  "de": {
+    "start_game": "Ein neues Spiel starten",
+    "undo_move": "Zug zurück nehmen"
+  },
+  "en": {
+    "start_game": "Start a new game",
+    "undo_move": "Undo move"
+  }
+}
+```
+
+or directly add the translations in your js code
+
+```js
+i18n.load({
+    de: {
+        "0_starts_game": "$0 startet ein neues Spiel",
+        "undo_move": "Zug zurück nehmen"
+    },
+    en: {
+        "0_starts_game": "$0 starts a new game",
+        "undo_move": "Undo move"
+    }
+})
+```
+
+Use placeholder $n [0-9] to replace them when using.  
+
+To handle the translations in your frontend code use
+
+```js
+i18n.t("0_starts_game", ["John Doe"])
+i18n.t("undo_move")
+```
+to render the needed text in the needed language. You can specify
+the language in the `props` when calling new or it uses the browser
+preferences.
+
+### MessageBroker
+
+### Observe
+
+Module to observe object properties used for reactive coding the simple way.
+
+### Stopwatch
+
+```js
+const stopwatch = new Stopwatch({
+    onStateChanged: (running) => {
+        stateOutput.innerText = running
+    },
+    onTimeChanged: (seconds) => {
+        secondsOutput.innerText = seconds.toFixed(1)
+    }
+})
+buttonStart.addEventListener("click", () => {
+    stopwatch.start()
+})
+buttonStop.addEventListener("click", () => {
+    stopwatch.stop()
+})
+buttonReset.addEventListener("click", () => {
+    stopwatch.reset()
+})
+```
+
+### SVG
+
+Module to render SVG elements and load sprites.
+
+### Template
+
+### Utils
+
+ArrayUtils, ColorUtils, CoreUtils, DateUtils, DomUtils, EncryptionUtils,
+EventUtils, TextUtils
 
 ## LibraryManager
 
