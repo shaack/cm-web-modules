@@ -72,7 +72,7 @@ export class I18n {
             return "?" + code + "?"
         }
         if (values && values.length > 0) {
-            let i = 1
+            let i = 0
             for (const value of values) {
                 translation = translation.replace(new RegExp("\\$" + i, "g"), value)
                 i++
