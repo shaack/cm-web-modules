@@ -9,6 +9,7 @@ export class DomUtils {
     static documentReady(callback) {
         document.addEventListener("DOMContentLoaded", callback)
         if (document.readyState === "interactive" || document.readyState === "complete") {
+            document.removeEventListener("DOMContentLoaded", callback)
             callback()
         }
     }
