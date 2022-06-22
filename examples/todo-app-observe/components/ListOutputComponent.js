@@ -25,7 +25,6 @@ export class ListOutputComponent extends UiComponent {
             this.actions.check(event)
         })
 
-        /*
         Observe.property(this.state, "todos", () => {
             let html = ""
             for (const value of this.state.todos) {
@@ -33,6 +32,5 @@ export class ListOutputComponent extends UiComponent {
             }
             this.context.innerHTML = html
         })
-         */
     }
 }
