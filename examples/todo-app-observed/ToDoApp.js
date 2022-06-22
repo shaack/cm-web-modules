@@ -12,7 +12,7 @@ import {Observed} from "../../src/cm-web-modules/observed/Observed.js"
 export class ToDoApp extends Component {
     constructor(context) {
         super({}, {
-            todos: new Observed([]).proxy
+            todos: new Observed([])
         })
         new InputComponent(context.querySelector(".InputComponent"), this.state)
         new ListOutputComponent(context.querySelector(".ListOutputComponent"), this.state)
