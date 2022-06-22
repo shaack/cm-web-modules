@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="ToDoComponent">
+    <h1>ToDo List Example</h1>
+    <div class="InputComponent">
+        <label>Todo <input type="text"/></label>
+        <button data-event-Listener="click" data-action="add">Add</button>
+    </div>
+    <ul class="ListOutputComponent" data-event-listener="change" data-delegate="input[type='checkbox']"
+        data-action="check">
+        <!-- li rendered by js -->
+    </ul>
+</div>
+<script type="module">
+    import {ToDoApp} from "./ToDoApp.js"
+
+    new ToDoApp(document.body)
+</script>
+</body>
+</html>

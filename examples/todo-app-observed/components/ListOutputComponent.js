@@ -24,15 +24,13 @@ export class ListOutputComponent extends UiComponent {
         EventUtils.delegate(context, "change", "input[type='checkbox']", (event) => {
             this.actions.check(event)
         })
-
-        /*
-        Observe.property(this.state, "todos", () => {
+        this.state.todos.addObserver(() => {
+            console.log("callback")
             let html = ""
             for (const value of this.state.todos) {
                 html += `<li><label><input data-id="${value.id}" type="checkbox" ${(value.done ? "checked" : "")} />${value.text}</label></li>`
             }
             this.context.innerHTML = html
         })
-         */
     }
 }
