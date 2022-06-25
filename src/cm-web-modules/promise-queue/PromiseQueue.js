@@ -56,4 +56,8 @@ export class PromiseQueue {
         return true
     }
 
+    destroy() {
+        this.stop = true
+    }
+
 }
