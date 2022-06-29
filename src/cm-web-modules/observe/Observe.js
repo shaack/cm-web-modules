@@ -125,6 +125,7 @@ export class Observe {
      * @param callback
      */
     static property(object, propertyName, callback) {
+        console.warn("`Observe` is deprecated, use `Observed`")
         if (Array.isArray(propertyName)) {
             let removes = []
             propertyName.forEach((propertyNameItem) => {

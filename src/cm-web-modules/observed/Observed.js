@@ -8,15 +8,18 @@ export function Observed(target) {
     const self = this
     this.target = target
     this.observers = []
-    this.target.addObserver = (callback, propertyName = undefined) => {
-        self.observers.push({callback: callback, property: propertyName})
+    this.target.addObserver = (callback, properties = []) => {
+        if(!Array.isArray(properties)) {
+            throw new Error("properties must be in an array")
+        }
+        self.observers.push({callback: callback, properties: properties})
         // console.log(this.observers)
     }
-    this.target.removeObserver = (callback, propertyName = undefined) => {
+    this.target.removeObserver = (callback, properties = []) => {
         let i = 0
         for (const observer of this.observers) {
             if (observer.callback === callback) {
-                if (propertyName === undefined || observer.property === propertyName) {
+                if (properties.length === 0 || observer.properties === properties) {
                     self.observers.splice(i, 1)
                     break
                 }
@@ -30,13 +33,15 @@ export function Observed(target) {
             target[property] = value
             // console.log("set", "property", property, "value", value)
             for (const observer of self.observers) {
-                if (!observer.property || observer.property === property) {
-                    observer.callback({
-                        target: target,
-                        property: property,
-                        value: value,
-                        oldValue: oldValue
-                    })
+                if(value !== oldValue) {
+                    if (observer.properties.length === 0 || observer.properties.includes(property)) {
+                        observer.callback({
+                            target: target,
+                            property: property,
+                            value: value,
+                            oldValue: oldValue
+                        })
+                    }
                 }
             }
             return true

@@ -20,12 +20,12 @@ describe("Observed", function () {
         observedState.addObserver((target, property, value, oldValue) => {
             console.log("number changed", target, property, value, oldValue)
             numberChanged = true
-        }, "number")
+        }, ["number"])
         observedState.number = 200
         observedState.addObserver((target, property, value, oldValue) => {
             console.log("string changed", target, property, value, oldValue)
             stringChanged = true
-        }, "string")
+        }, ["string"])
         observedState.string = "World"
 
         observedState.arrayInternalA.addObserver((target, property, value, oldValue) => {
@@ -42,5 +42,15 @@ describe("Observed", function () {
         assert.true(numberChanged)
         assert.true(stringChanged)
         assert.true(arrayChanged)
+    })
+    it("should observe an array", function () {
+        const array = new Observed([])
+        array.addObserver((properties) => {
+            console.log("array", properties)
+        })
+        array.push("add 1")
+        array.push("add 2")
+        array.pop()
+        array.splice(0)
     })
 })
