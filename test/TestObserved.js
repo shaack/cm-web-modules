@@ -53,4 +53,27 @@ describe("Observed", function () {
         array.pop()
         array.splice(0)
     })
+    class TestClass {
+        constructor(props) {
+            this.props = props
+            this.innerObject = {
+
+            }
+        }
+        getProps() {
+            return this.props
+        }
+        setProps(props) {
+            this.props = props
+        }
+    }
+    it.only("should observe a class", function() {
+        const observedClass = new Observed(new TestClass("test"))
+        observedClass.addObserver((event) => {
+            console.log(event)
+        })
+        observedClass.props = "test1"
+        observedClass.setProps("test2")
+        observedClass.innerObject.lala = "Lulu"
+    })
 })
