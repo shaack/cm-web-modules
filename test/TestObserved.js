@@ -8,6 +8,7 @@ import {Observed} from "../src/cm-web-modules/observed/Observed.js"
 
 describe("Observed", function () {
     it("should observe properties", function () {
+        // todo test async with Promise
         const observedState = new Observed({
             number: 100,
             string: "Test",
@@ -44,6 +45,7 @@ describe("Observed", function () {
         assert.true(arrayChanged)
     })
     it("should observe an array", function () {
+        // todo test async with Promise
         const array = new Observed([])
         array.addObserver((properties) => {
             console.log("array", properties)
@@ -67,7 +69,8 @@ describe("Observed", function () {
             this.props = props
         }
     }
-    it.only("should observe a class", function() {
+    it("should observe a class", function() {
+        // todo test async with Promise
         const observedClass = new Observed(new TestClass("test"))
         observedClass.addObserver((event) => {
             console.log(event)
