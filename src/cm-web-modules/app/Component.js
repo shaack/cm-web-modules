@@ -53,7 +53,11 @@ export class UiComponent extends Component {
                 if(this.props.debug) {
                     console.log("addEventListener", eventName, action)
                 }
-                eventListenerElement.addEventListener(eventName, this.actions[action].bind(this))
+                if(!this.actions[action]) {
+                    console.error("no action", "\"" + action + "\"", "is defined")
+                } else {
+                    eventListenerElement.addEventListener(eventName, this.actions[action].bind(this))
+                }
             }
         }
         return this

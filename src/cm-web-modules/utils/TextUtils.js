@@ -22,6 +22,12 @@ export class TextUtils {
         }
     }
 
+    static stripHtml(html) {
+        let tmp = document.createElement("div")
+        tmp.innerHTML = html
+        return tmp.innerText
+    }
+
     static escapeHtml(raw) {
         return String(raw).replace(/[&<>"']/g, (s) => {
             return entityMap[s]
