@@ -9,7 +9,7 @@ export class Stopwatch {
 
     constructor(props = {}) {
         this.props = {
-            onStateChanged: () => {}, // callback an start and stop
+            onStateChanged: () => {}, // callback for start and stop
             onTimeChanged: () => {}, // callback, to read out the time value, called every `tickResolution` ms
             tickResolution: 100 // milliseconds of the time resolution
         }
