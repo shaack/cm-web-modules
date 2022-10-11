@@ -59,7 +59,6 @@ export class Stopwatch {
         this.dateAtLatestStart = new Date()
         this.props.onTimeChanged(this.secondsExpired())
         this.props.onStateChanged(this.running())
-
     }
 
     tick() {
