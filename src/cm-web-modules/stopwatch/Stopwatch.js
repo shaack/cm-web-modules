@@ -14,17 +14,16 @@ export class Stopwatch {
             tickResolution: 100 // milliseconds of the time resolution
         }
         Object.assign(this.props, props)
-        this.startDate = new Date()
+        this.startDate = null
         this.endDate = null
         this.dateAtLatestStart = null
         this.secondsExpiredTillLastPause = 0.0
         this.secondsExpiredSinceLastStart = 0.0
-        this.additionalSeconds = 0
         this.timer = null
     }
 
     secondsExpired() {
-        return this.secondsExpiredTillLastPause + this.secondsExpiredSinceLastStart + this.additionalSeconds
+        return this.secondsExpiredTillLastPause + this.secondsExpiredSinceLastStart
     }
 
     start() {
@@ -38,7 +37,7 @@ export class Stopwatch {
                 this.tick()
             }, this.props.tickResolution)
             this.props.onStateChanged(this.running())
-            this.props.onTimeChanged(this.secondsExpired())
+            this.props.onTimeChanged(this.secondsExpiredTillLastPause)
         }
     }
 
@@ -47,7 +46,7 @@ export class Stopwatch {
             clearInterval(this.timer)
             this.timer = null
             this.endDate = new Date()
-            this.secondsExpiredTillLastPause = this.secondsExpiredTillLastPause + this.secondsExpiredSinceLastStart
+            this.secondsExpiredTillLastPause = this.secondsExpired()
             this.secondsExpiredSinceLastStart = 0
             this.props.onStateChanged(this.running())
         }
@@ -56,16 +55,10 @@ export class Stopwatch {
     reset() {
         this.secondsExpiredSinceLastStart = 0
         this.secondsExpiredTillLastPause = 0
-        this.additionalSeconds = 0
         this.startDate = new Date()
         this.dateAtLatestStart = new Date()
         this.props.onTimeChanged(this.secondsExpired())
         this.props.onStateChanged(this.running())
-    }
-
-    addSeconds(seconds) {
-        this.additionalSeconds =  this.additionalSeconds + seconds
-        this.props.onTimeChanged(this.secondsExpired())
     }
 
     tick() {

@@ -15,8 +15,6 @@
     <button id="button-start">Start</button>
     <button id="button-stop">Stop</button>
     <button id="button-reset">Reset</button>
-    <button id="button-minus">-15 sec.</button>
-    <button id="button-plus">+15 sec.</button>
 </p>
 <p id="debug-output">
 
@@ -45,8 +43,7 @@
         endDate: ${stopwatch.endDate}<br/>
         dateAtLatestStart: ${stopwatch.dateAtLatestStart}<br/>
         secondsExpiredTillLastPause: ${stopwatch.secondsExpiredTillLastPause}<br/>
-        secondsExpiredSinceLastStart: ${stopwatch.secondsExpiredSinceLastStart}<br/>
-        additionalSeconds: ${stopwatch.additionalSeconds}
+        secondsExpiredSinceLastStart: ${stopwatch.secondsExpiredSinceLastStart}
         `
     }
     document.getElementById("button-start").addEventListener("click", () => {
@@ -57,12 +54,6 @@
     })
     document.getElementById("button-reset").addEventListener("click", () => {
         stopwatch.reset()
-    })
-    document.getElementById("button-minus").addEventListener("click", () => {
-        stopwatch.addSeconds(-15)
-    })
-    document.getElementById("button-plus").addEventListener("click", () => {
-        stopwatch.addSeconds(+15)
     })
 </script>
 </body>
