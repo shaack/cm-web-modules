@@ -16,4 +16,18 @@ export class CoreUtils {
         }
     }
 
+    static mergeObjects(target, source) {
+        const isObject = (obj) => obj && typeof obj === 'object'
+        if (!isObject(target) || !isObject(source)) {
+            return source
+        }
+        for (const key of Object.keys(source)) {
+            if (source[key] instanceof Object) {
+                Object.assign(source[key], CoreUtils.mergeObjects(target[key], source[key]))
+            }
+        }
+        Object.assign(target || {}, source)
+        return target
+    }
+
 }
