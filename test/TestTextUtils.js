@@ -31,7 +31,7 @@ ein Test.`
         assert.equal(TextUtils.linkify(raw), "Das ist ein <a href=\"https://chessmail.de/~shaack\">https://chessmail.de/~shaack</a> Link.")
     })
     // write a test for TextUtils.wrap()
-    it.only("should wrap", () => {
+    it("should wrap", () => {
         const raw = "Das ist ein langer Text mit vielen Wörtern."
         assert.equal(TextUtils.wrap(raw, 12), `Das ist ein
 langer Text
