@@ -22,6 +22,23 @@ export class TextUtils {
         }
     }
 
+    static wrap(str, maxLength) {
+        const words = str.split(" ")
+        let lines = []
+        let line = ""
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i]
+            if (line.length + word.length < maxLength) {
+                line += word + " "
+            } else {
+                lines.push(line.trim())
+                line = word + " "
+            }
+        }
+        lines.push(line.trim())
+        return lines.join("\n")
+    }
+
     static stripHtml(html) {
         let tmp = document.createElement("div")
         tmp.innerHTML = html

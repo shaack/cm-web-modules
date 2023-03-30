@@ -8,11 +8,11 @@ import {TextUtils} from "../src/cm-web-modules/utils/TextUtils.js"
 
 describe("TextUtils", () => {
     it("should strip HTML", () => {
-        const htmlText = "<b>bold</b> <a href='#'>link</a> text";
+        const htmlText = "<b>bold</b> <a href='#'>link</a> text"
         assert.equal(TextUtils.stripHtml(htmlText), "bold link text")
     })
     it("should crop a text", () => {
-        const longText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+        const longText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
         assert.equal(TextUtils.crop(longText, 10), "Lorem ipsu…")
     })
     it("shouldEscapeHtml", () => {
@@ -29,5 +29,13 @@ ein Test.`
     it("should linkify", () => {
         const raw = "Das ist ein https://chessmail.de/~shaack Link."
         assert.equal(TextUtils.linkify(raw), "Das ist ein <a href=\"https://chessmail.de/~shaack\">https://chessmail.de/~shaack</a> Link.")
+    })
+    // write a test for TextUtils.wrap()
+    it("should wrap", () => {
+        const raw = "Das ist ein langer Text mit vielen Wörtern."
+        assert.equal(TextUtils.wrap(raw, 12), `Das ist ein
+langer Text
+mit vielen
+Wörtern.`)
     })
 })
