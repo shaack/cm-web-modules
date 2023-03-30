@@ -3,6 +3,7 @@
   "version": "1.18.10",
   "description": "Collection of clean and small ES6 modules for the web",
   "main": "src/LibraryManager.js",
+  "type": "module",
   "directories": {
     "src": "source",
     "test": "test"
