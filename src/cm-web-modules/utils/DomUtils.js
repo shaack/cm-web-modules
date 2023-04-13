@@ -82,6 +82,10 @@ export class DomUtils {
         return template.content.firstChild
     }
 
+    static removeElement(element) {
+        element.parentNode.removeChild(element)
+    }
+
     static insertAfter(newChild, refChild) {
         refChild.parentNode.insertBefore(newChild, refChild.nextSibling)
     }
