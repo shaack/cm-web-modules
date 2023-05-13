@@ -13,7 +13,7 @@ export class Notifications {
     }
 
     show(title, body) {
-        const notification = new Notification(title, {body: body});
+        new Notification(title, {body: body});
     }
 }
 

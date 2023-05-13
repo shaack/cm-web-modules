@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {MessageBroker} from "../src/cm-web-modules/message-broker/MessageBroker.js"
+import {MessageBroker} from "../src/message-broker/MessageBroker.js"
 
 describe("MessageBroker", function () {
 

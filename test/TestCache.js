@@ -3,7 +3,7 @@
  * Date: 2020-05-04
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {Cache} from "../src/cm-web-modules/cache/Cache.js"
+import {Cache} from "../src/cache/Cache.js"
 
 describe("Cache", function () {
 

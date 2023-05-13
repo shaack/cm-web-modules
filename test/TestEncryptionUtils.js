@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {EncryptionUtils} from "../src/cm-web-modules/utils/EncryptionUtils.js"
+import {EncryptionUtils} from "../src/utils/EncryptionUtils.js"
 
 describe("EncryptionUtils", function () {
 

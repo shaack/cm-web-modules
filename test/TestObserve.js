@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {Observe} from "../src/cm-web-modules/observe/Observe.js"
+import {Observe} from "../src/observe/Observe.js"
 
 describe("Observe", function () {
     it("should observe properties", function () {

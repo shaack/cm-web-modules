@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {DomUtils} from "../src/cm-web-modules/utils/DomUtils.js"
+import {DomUtils} from "../src/utils/DomUtils.js"
 
 describe("DomUtils", function () {
 

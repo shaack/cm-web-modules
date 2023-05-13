@@ -3,7 +3,7 @@
  * Date: 2020-11-09
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {Cookie, DURATION} from "../src/cm-web-modules/cookie/Cookie.js"
+import {Cookie, DURATION} from "../src/cookie/Cookie.js"
 
 describe("Cookie", function () {
     it("should store and read a session cookie", () => {

@@ -4,10 +4,10 @@
  * License: MIT, see file 'LICENSE'
  */
 
-import {Component} from "../../src/cm-web-modules/app/Component.js"
+import {Component} from "../../src/app/Component.js"
 import {InputComponent} from "./components/InputComponent.js";
 import {ListOutputComponent} from "./components/ListOutputComponent.js";
-import {Observed} from "../../src/cm-web-modules/observed/Observed.js"
+import {Observed} from "../../src/observed/Observed.js"
 
 export class ToDoApp extends Component {
     constructor(context) {

@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {ColorUtils} from "../src/cm-web-modules/utils/ColorUtils.js"
+import {ColorUtils} from "../src/utils/ColorUtils.js"
 
 describe("ColorUtils", function () {
 

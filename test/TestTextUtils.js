@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {TextUtils} from "../src/cm-web-modules/utils/TextUtils.js"
+import {TextUtils} from "../src/utils/TextUtils.js"
 
 describe("TextUtils", () => {
     it("should strip HTML", () => {

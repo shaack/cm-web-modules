@@ -5,7 +5,7 @@
  */
 
 import {describe, it} from "../node_modules/teevi/src/teevi.js"
-import {PromiseQueue} from "../src/cm-web-modules/promise-queue/PromiseQueue.js"
+import {PromiseQueue} from "../src/promise-queue/PromiseQueue.js"
 
 describe("PromiseQueue", function () {
     it("Should queue some promises and execute them in the right Order", function () {

@@ -4,7 +4,7 @@
  */
 
 import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
-import {Template} from "../src/cm-web-modules/template/Template.js";
+import {Template} from "../src/template/Template.js";
 
 describe("Template", function () {
     it("should render a simple template", () => {
