@@ -4,7 +4,7 @@
  * License: MIT, see file 'LICENSE'
  */
 
-
+/** @deprecated */
 export class Tag {
 
     constructor(context, name, props = {}) {

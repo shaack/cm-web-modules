@@ -1,10 +1,9 @@
-import {DomUtils} from "../utils/DomUtils.js"
-
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
+import {DomUtils} from "../utils/DomUtils.js"
 
 export class Component {
 
@@ -15,6 +14,7 @@ export class Component {
 
 }
 
+/** @deprecated */
 export class UiComponent extends Component {
 
     constructor(context, props = {}, state = {}) {

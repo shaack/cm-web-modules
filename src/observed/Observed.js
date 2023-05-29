@@ -13,7 +13,6 @@ export function Observed(target) {
             throw new Error("properties must be in an array")
         }
         self.observers.push({callback: callback, properties: properties})
-        // console.log(this.observers)
     }
     this.target.removeObserver = (callback, properties = []) => {
         let i = 0
@@ -31,17 +30,14 @@ export function Observed(target) {
         set(target, property, value) {
             const oldValue = target[property]
             target[property] = value
-            // console.log("set", "property", property, "value", value)
             for (const observer of self.observers) {
-                if(value !== oldValue) {
-                    if (observer.properties.length === 0 || observer.properties.includes(property)) {
-                        observer.callback({
-                            target: target,
-                            property: property,
-                            value: value,
-                            oldValue: oldValue
-                        })
-                    }
+                if (observer.properties.length === 0 || observer.properties.includes(property)) {
+                    observer.callback({
+                        target: target,
+                        property: property,
+                        value: value,
+                        oldValue: oldValue
+                    })
                 }
             }
             return true

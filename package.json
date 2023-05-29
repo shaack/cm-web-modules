@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo request test/test.html in a browser for testing"
+    "test": "echo request test/index.html in a browser for testing"
   },
   "repository": {
     "type": "git",
