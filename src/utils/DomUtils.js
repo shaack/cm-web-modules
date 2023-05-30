@@ -86,6 +86,12 @@ export class DomUtils {
         element.parentNode.removeChild(element)
     }
 
+    static clearElement(element) {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild)
+        }
+    }
+
     static insertAfter(newChild, refChild) {
         refChild.parentNode.insertBefore(newChild, refChild.nextSibling)
     }
