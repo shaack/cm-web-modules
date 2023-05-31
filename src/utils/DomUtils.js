@@ -49,17 +49,17 @@ export class DomUtils {
     }
 
     static isBrowserDarkMode() {
-        return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
     }
 
     static browserSupportsPreferredColorScheme() {
         return window.matchMedia &&
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ||
-                window.matchMedia('(prefers-color-scheme: light)').matches)
+            (window.matchMedia("(prefers-color-scheme: dark)").matches ||
+                window.matchMedia("(prefers-color-scheme: light)").matches)
     }
 
     static loadJs(src) {
-        const element = document.createElement('script')
+        const element = document.createElement("script")
         element.setAttribute("type", "text/javascript")
         element.setAttribute("src", src)
         document.getElementsByTagName("head")[0].appendChild(element)
@@ -78,11 +78,11 @@ export class DomUtils {
     }
 
     static getCustomProperty(name, element = document.documentElement) {
-        return getComputedStyle(element).getPropertyValue('--' + name).trim()
+        return getComputedStyle(element).getPropertyValue("--" + name).trim()
     }
 
     static createElement(html) {
-        const template = document.createElement('template')
+        const template = document.createElement("template")
         template.innerHTML = html.trim()
         return template.content.firstChild
     }
@@ -124,7 +124,7 @@ export class DomUtils {
         for (let i = 0; i < links.length; i++) {
             const target = links[i].target
             if (links[i].hostname !== window.location.hostname && target !== "_self") {
-                links[i].target = '_blank'
+                links[i].target = "_blank"
             }
         }
     }

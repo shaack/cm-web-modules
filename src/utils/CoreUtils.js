@@ -6,13 +6,20 @@
 
 export class CoreUtils {
 
-    static debounce(func, timeout = 0) {
-        let timer
-        return (...args) => {
-            clearTimeout(timer)
-            timer = setTimeout(() => {
-                func.apply(this, args)
-            }, timeout)
+    static debounce(callback, wait = 0, immediate = false) {
+        let timeout
+        return function executedFunction(...args) {
+            if (immediate && !timeout) {
+                callback(...args)
+                timeout = true
+            } else {
+                const debounced = () => {
+                    clearTimeout(timeout)
+                    callback(...args)
+                }
+                clearTimeout(timeout)
+                timeout = setTimeout(debounced, wait)
+            }
         }
     }
 
