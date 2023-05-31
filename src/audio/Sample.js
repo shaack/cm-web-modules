@@ -11,7 +11,8 @@ export class Sample {
     constructor(src, props = {}) {
         this.src = src
         this.props = {
-            gain: 1
+            gain: 1,
+            startWithoutAudioContext: false // start to play, without enabled audio context
         }
         Object.assign(this.props, props)
         this.gainNode = Audio.context().createGain()
@@ -25,11 +26,13 @@ export class Sample {
     }
 
     play(when = undefined, offset = undefined, duration = undefined) {
-        this.loading.then(() => {
-            let source
-            source = this.createBufferSource()
-            source.start(when, offset, duration)
-        })
+        if (this.props.startWithoutAudioContext || Audio.isEnabled()) {
+            this.loading.then(() => {
+                let source
+                source = this.createBufferSource()
+                source.start(when, offset, duration)
+            })
+        }
 
     }
 

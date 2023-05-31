@@ -47,4 +47,8 @@ export class Audio {
         mainGainNode.gain.setValueAtTime(gain, audioContext.currentTime)
     }
 
+    static isEnabled() {
+        return audioContext.state === "running"
+    }
+
 }
