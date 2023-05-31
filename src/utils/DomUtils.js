@@ -6,6 +6,11 @@
 
 export class DomUtils {
 
+    static onDocumentReady(callback) {
+        this.documentReady(callback)
+    }
+
+    /** @deprecated 2023-05-31 use onDocumentReady() */
     static documentReady(callback) {
         document.addEventListener("DOMContentLoaded", callback)
         if (document.readyState === "interactive" || document.readyState === "complete") {
