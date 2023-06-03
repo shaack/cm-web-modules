@@ -12,7 +12,7 @@ export class Sample {
         this.src = src
         this.props = {
             gain: 1,
-            startWithoutAudioContext: false // start to play, without enabled audio context
+            startWithoutAudioContext: true // start to play, without enabled audio context
         }
         Object.assign(this.props, props)
         this.gainNode = Audio.context().createGain()
