@@ -9,8 +9,11 @@ export function Observed(target) {
     this.target = target
     this.observers = []
     this.target.addObserver = (callback, properties = []) => {
-        if(!Array.isArray(properties)) {
-            throw new Error("properties must be in an array")
+        if (typeof properties === 'string' || properties instanceof String) {
+            properties = [properties]
+        }
+        if (!Array.isArray(properties)) {
+            throw new Error("properties must be a string or array")
         }
         self.observers.push({callback: callback, properties: properties})
     }
