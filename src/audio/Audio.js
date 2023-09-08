@@ -24,14 +24,33 @@ if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== de
         mainGainNode.connect(audioContext.destination)
     })
 }
+
+const events = ['click', 'touchstart', 'keydown', 'mousedown', 'mouseup', 'dblclick']
+
+function addEventListeners() {
+    events.forEach(event => {
+        document.addEventListener(event, resumeAudioContext)
+    })
+}
+
+function removeEventListeners() {
+    events.forEach(event => {
+        document.removeEventListener(event, resumeAudioContext)
+    })
+}
+
 // start context after user interaction
-const resumeAudio = function () {
+function resumeAudioContext() {
     if (audioContext.state !== "running") {
-        document.removeEventListener("mousedown", resumeAudio)
-        return audioContext.resume()
+        audioContext.resume().then(() => {
+            console.log('Playback resumed successfully')
+            // Remove all event listeners after successfully resuming the AudioContext
+            removeEventListeners()
+        })
     }
 }
-document.addEventListener("mousedown", resumeAudio)
+console.log("AudioContext.state", audioContext.state)
+addEventListeners()
 
 export class Audio {
 

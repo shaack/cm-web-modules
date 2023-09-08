@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio example</title>
+    <input type="range" min="0" max="1" step="0.01" value="0.7" id="volume-slider">
+</head>
+<body>
+<script type="module">
+    import {Sample} from "../src/audio/Sample.js"
+    const moveSound = new Sample("../assets/move.mp3")
+    const volumeSlider = document.getElementById("volume-slider")
+    volumeSlider.addEventListener("change", () => {
+        moveSound.setGain(volumeSlider.value)
+        moveSound.play()
+    })
+</script>
+</body>
+</html>
