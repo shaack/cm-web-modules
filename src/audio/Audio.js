@@ -25,7 +25,7 @@ if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== de
     })
 }
 
-const events = ['click', 'touchstart', 'keydown', 'mousedown', 'mouseup', 'dblclick']
+const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousedown', 'mouseup', 'dblclick']
 
 function addEventListeners() {
     events.forEach(event => {
