@@ -6,24 +6,10 @@
  */
 window.AudioContext = window.AudioContext || window.webkitAudioContext
 
-const desiredSampleRate = 44100
-// ios safari fix from https://github.com/Jam3/ios-safe-audio-context
 let audioContext = new AudioContext()
 const mainGainNode = audioContext.createGain()
 mainGainNode.gain.value = 1
 mainGainNode.connect(audioContext.destination)
-if (/(iPhone|iPad)/i.test(navigator.userAgent) && audioContext.sampleRate !== desiredSampleRate) {
-    const buffer = audioContext.createBuffer(1, 1, desiredSampleRate)
-    const sound = audioContext.createBufferSource()
-    sound.buffer = buffer
-    sound.connect(audioContext.destination)
-    sound.start(0)
-    sound.disconnect()
-    audioContext.close().then(() => {
-        audioContext = new AudioContext()
-        mainGainNode.connect(audioContext.destination)
-    })
-}
 
 const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousedown', 'mouseup', 'dblclick']
 
