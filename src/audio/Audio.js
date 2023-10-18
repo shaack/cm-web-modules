@@ -29,13 +29,12 @@ function removeEventListeners() {
 function resumeAudioContext() {
     if (audioContext.state !== "running") {
         audioContext.resume().then(() => {
-            console.log('Playback resumed successfully')
-            // Remove all event listeners after successfully resuming the AudioContext
+            console.log('AudioContext resumed successfully, state:', audioContext.state)
             removeEventListeners()
         })
     }
 }
-console.log("AudioContext.state", audioContext.state)
+console.log("AudioContext.state:", audioContext.state)
 addEventListeners()
 
 export class Audio {
