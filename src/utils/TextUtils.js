@@ -63,4 +63,24 @@ export class TextUtils {
         })
     }
 
+    static formatTime(milliseconds, millisecondDecimalPlaces = 0) {
+        let seconds = Math.floor(milliseconds / 1000)
+        let minutes = Math.floor(seconds / 60)
+        seconds = seconds % 60
+        minutes = minutes < 10 ? '0' + minutes : minutes
+        seconds = seconds < 10 ? '0' + seconds : seconds
+        /*
+        millisecondDecimalPlaces === 0: 00:00
+        millisecondDecimalPlaces === 1: 00:00.0
+        millisecondDecimalPlaces === 2: 00:00.00
+         */
+        if (millisecondDecimalPlaces > 0) {
+            let millisecondsStr = (Math.floor(milliseconds % 1000) / 1000).toFixed(millisecondDecimalPlaces).substring(2)
+            return minutes + ':' + seconds + '.' + millisecondsStr
+        } else {
+            return minutes + ':' + seconds
+        }
+
+    }
+
 }

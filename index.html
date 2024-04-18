@@ -9,6 +9,7 @@
 <h2>Stopwatch example</h2>
 <p>
     seconds: <span id="seconds-output">0</span><br/>
+    clock: <span id="clock-output">0</span><br/>
     running: <span id="state-output">false</span>
 </p>
 <p>
@@ -23,17 +24,21 @@
 <a href="test/index.html">Run tests</a>
 <script type="module">
     import {Stopwatch} from "./src/stopwatch/Stopwatch.js"
+    import {TextUtils} from "./src/utils/TextUtils.js"
 
     const secondsOutput = document.getElementById("seconds-output")
+    const clockOutput = document.getElementById("clock-output")
     const stateOutput = document.getElementById("state-output")
     const debugOutput = document.getElementById("debug-output")
     const stopwatch = new Stopwatch({
+        tickResolution: 10,
         onStateChanged: (running) => {
             stateOutput.innerText = running
             debugInfo()
         },
         onTimeChanged: (seconds) => {
-            secondsOutput.innerText = seconds.toFixed(1)
+            secondsOutput.innerText = seconds.toFixed(2)
+            clockOutput.innerText = TextUtils.formatTime(seconds * 1000, 1)
             debugInfo()
         }
     })
