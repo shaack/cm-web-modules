@@ -17,6 +17,11 @@ function addEventListeners() {
     events.forEach(event => {
         document.addEventListener(event, resumeAudioContext)
     })
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            setTimeout(resumeAudioContext, 200)
+        }
+    })
 }
 
 function removeEventListeners() {
@@ -31,9 +36,12 @@ function resumeAudioContext() {
         audioContext.resume().then(() => {
             console.log('AudioContext resumed successfully, state:', audioContext.state)
             removeEventListeners()
+        }).catch(error => {
+            console.log('Failed to resume AudioContext:', error)
         })
     }
 }
+
 console.log("AudioContext.state:", audioContext.state)
 addEventListeners()
 
@@ -53,6 +61,10 @@ export class Audio {
 
     static isEnabled() {
         return audioContext.state === "running"
+    }
+
+    static addStateListener(listener) {
+        audioContext.addEventListener("statechange", listener)
     }
 
 }
