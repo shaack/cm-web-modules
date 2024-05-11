@@ -19,6 +19,20 @@ export class DomUtils {
         }
     }
 
+    // todo test, if it works with document.body
+    static onDomNodeRemoved(elementToWatch, callback, parent = document.querySelector('body')){
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    if (mutation.removedNodes.length > 0 && mutation.removedNodes[0] === elementToWatch) {
+                        callback(elementToWatch)
+                    }
+                }
+            })
+        })
+        observer.observe(parent, { childList: true });
+    };
+
     // https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
     static isElementVisible(element) {
         return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)
