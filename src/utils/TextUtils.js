@@ -82,7 +82,7 @@ export class TextUtils {
         }
     }
 
-    static mask(text, maskChar = "—") {
+    static mask(text, maskChar = "*") {
         return text.replace(/./g, maskChar + "‎")
     }
 
