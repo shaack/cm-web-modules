@@ -80,7 +80,10 @@ export class TextUtils {
         } else {
             return minutes + ':' + seconds
         }
+    }
 
+    static mask(text, maskChar = "—") {
+        return text.replace(/./g, maskChar + "‎")
     }
 
 }

@@ -7,6 +7,11 @@ import {describe, it, assert} from "../node_modules/teevi/src/teevi.js"
 import {TextUtils} from "../src/utils/TextUtils.js"
 
 describe("TextUtils", () => {
+    it("should mask text", () => {
+        const test = "Lorem ipsum dolor."
+        console.log(TextUtils.mask(test))
+        assert.equal(TextUtils.mask(test), "—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎—‎")
+    })
     it("should strip HTML", () => {
         const htmlText = "<b>bold</b> <a href='#'>link</a> text"
         assert.equal(TextUtils.stripHtml(htmlText), "bold link text")
