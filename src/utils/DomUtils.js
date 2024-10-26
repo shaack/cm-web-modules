@@ -159,7 +159,7 @@ export class DomUtils {
      *  - `data-action`: The action in this.actions, called on the event
      *  - `data-delegate`: Query selector, to delegate the event from a child element
      */
-    static addDataEventListeners(controller, props = {}) {
+    static autoBindDataEvents(controller, props = {}) {
         const context = controller.context
         const eventListenerElements = context.querySelectorAll("[data-event-listener]")
         this.props = {

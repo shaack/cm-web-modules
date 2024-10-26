@@ -32,7 +32,7 @@ export class UiComponent extends Component {
      */
     addDataEventListeners() {
         // moved to DomUtils
-        DomUtils.addDataEventListeners(this)
+        DomUtils.autoBindDataEvents(this)
     }
 
 }
