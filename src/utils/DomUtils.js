@@ -161,7 +161,7 @@ export class DomUtils {
      */
     static autoBindDataEvents(controller, props = {}) {
         const context = controller.context
-        const eventListenerElements = context.querySelectorAll("[data-event-listener]")
+        const eventListenerElements = context.querySelectorAll("[data-event]")
         this.props = {
             debug: false,
             ...props
@@ -170,8 +170,8 @@ export class DomUtils {
             console.log("eventListenerElements", context, eventListenerElements)
         }
         for (const eventListenerElement of eventListenerElements) {
-            const eventName = eventListenerElement.dataset.eventListener
-            const action = eventListenerElement.dataset.action
+            const eventName = eventListenerElement.dataset.event
+            const action = eventListenerElement.dataset.listener
             const delegate = eventListenerElement.dataset.delegate
             if (!controller.actions[action]) {
                 console.error(context, "You have to add the action \"" + action + "\" to your component.")

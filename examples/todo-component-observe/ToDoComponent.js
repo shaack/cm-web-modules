@@ -3,12 +3,12 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-import {UiComponent} from "../../src/app/Component.js"
 import {Observe} from "../../src/observe/Observe.js";
+import {DomUtils} from "../../src/utils/DomUtils.js"
 
-export class ToDoComponent extends UiComponent {
+export class ToDoComponent {
     constructor(context) {
-        super(context)
+        this.context = context
         this.state = {
             todos: []
         }
@@ -17,20 +17,8 @@ export class ToDoComponent extends UiComponent {
             listOutput: context.querySelector(".list-output")
         }
         this.actions = {
-            "add": () => {
-                if (this.elements.input.value) {
-                    this.state.todos.unshift(new ToDo(this.elements.input.value))
-                    this.elements.input.value = ""
-                }
-            },
-            "check": (event) => {
-                for (const todo of this.state.todos) {
-                    if (todo.id === parseInt(event.target.dataset.id, 10)) {
-                        todo.done = event.target.checked
-                        break
-                    }
-                }
-            }
+            add: this.handleAdd.bind(this),
+            check: this.handleCheck.bind(this)
         }
         Observe.property(this.state, "todos", () => {
             let html = ""
@@ -39,8 +27,26 @@ export class ToDoComponent extends UiComponent {
             }
             this.elements.listOutput.innerHTML = html
         })
-        this.addDataEventListeners(context) // map element events to actions
+        DomUtils.autoBindDataEvents(this, {debug: false}) // map element events to handler methods
     }
+
+    handleAdd() {
+        if (this.elements.input.value) {
+            this.state.todos.unshift(new ToDo(this.elements.input.value))
+            this.elements.input.value = ""
+        }
+    }
+
+    handleCheck(event) {
+        for (const todo of this.state.todos) {
+            if (todo.id === parseInt(event.target.dataset.id, 10)) {
+                todo.done = event.target.checked
+                break
+            }
+        }
+    }
+
+
 }
 
 let id = 1
