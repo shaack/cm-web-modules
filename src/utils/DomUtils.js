@@ -20,7 +20,7 @@ export class DomUtils {
     }
 
     // todo test, if it works with document.body
-    static onDomNodeRemoved(elementToWatch, callback, parent = document.querySelector('body')){
+    static onDomNodeRemoved(elementToWatch, callback, parent = document.querySelector('body')) {
         const observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 if (mutation.type === 'childList') {
@@ -30,7 +30,7 @@ export class DomUtils {
                 }
             })
         })
-        observer.observe(parent, { childList: true });
+        observer.observe(parent, {childList: true})
     };
 
     // https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
@@ -139,6 +139,59 @@ export class DomUtils {
             const target = links[i].target
             if (links[i].hostname !== window.location.hostname && target !== "_self") {
                 links[i].target = "_blank"
+            }
+        }
+    }
+
+    static disableButtonsOnSubmit() {
+        const buttons = document.querySelectorAll("button[data-disable-on-submit]")
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                button.setAttribute("disabled", "disabled")
+            })
+        })
+    }
+
+    /**
+     * Searches for "data-event-listener" attributes in the HTML, and couples them with actions.
+     * Tag Attributes:
+     *  - `data-event-listener`: The event "click", "change",...
+     *  - `data-action`: The action in this.actions, called on the event
+     *  - `data-delegate`: Query selector, to delegate the event from a child element
+     */
+    static addDataEventListeners(controller, props = {}) {
+        const context = controller.context
+        const eventListenerElements = context.querySelectorAll("[data-event-listener]")
+        this.props = {
+            debug: false,
+            ...props
+        }
+        if (this.props.debug) {
+            console.log("eventListenerElements", context, eventListenerElements)
+        }
+        for (const eventListenerElement of eventListenerElements) {
+            const eventName = eventListenerElement.dataset.eventListener
+            const action = eventListenerElement.dataset.action
+            const delegate = eventListenerElement.dataset.delegate
+            if (!controller.actions[action]) {
+                console.error(context, "You have to add the action \"" + action + "\" to your component.")
+            }
+            if (delegate) {
+                DomUtils.delegate(eventListenerElement, eventName, delegate, (target) => {
+                    if (this.props.debug) {
+                        console.log("delegate", action, target)
+                    }
+                    controller.actions[action](target)
+                })
+            } else {
+                if (this.props.debug) {
+                    console.log("addEventListener", eventName, action)
+                }
+                if (!controller.actions[action]) {
+                    console.error("no action", "\"" + action + "\"", "is defined")
+                } else {
+                    eventListenerElement.addEventListener(eventName, controller.actions[action].bind(this))
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ import {Observe} from "../../src/observe/Observe.js";
 
 export class ToDoComponent extends UiComponent {
     constructor(context) {
-        super()
+        super(context)
         this.state = {
             todos: []
         }
