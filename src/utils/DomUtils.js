@@ -171,8 +171,11 @@ export class DomUtils {
         }
         for (const eventListenerElement of eventListenerElements) {
             const eventName = eventListenerElement.dataset.event
-            const action = eventListenerElement.dataset.listener
+            const action = eventListenerElement.dataset.action
             const delegate = eventListenerElement.dataset.delegate
+            if(!action) {
+                console.error("no action defined", eventListenerElement)
+            }
             if (!controller.actions[action]) {
                 console.error(context, "You have to add the action \"" + action + "\" to your component.")
             }
@@ -190,7 +193,7 @@ export class DomUtils {
                 if (!controller.actions[action]) {
                     console.error("no action", "\"" + action + "\"", "is defined")
                 } else {
-                    eventListenerElement.addEventListener(eventName, controller.actions[action].bind(this))
+                    eventListenerElement.addEventListener(eventName, controller.actions[action].bind(controller))
                 }
             }
         }
