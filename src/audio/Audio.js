@@ -3,35 +3,52 @@
  * Repository: https://github.com/shaack/cm-web-modules
  * License: MIT, see file 'LICENSE'
  */
-window.AudioContext = window.AudioContext || window.webkitAudioContext
-
-let audioContext = new AudioContext()
-const mainGainNode = audioContext.createGain()
-mainGainNode.gain.value = 1
-mainGainNode.connect(audioContext.destination)
-
 const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousedown', 'mouseup', 'dblclick']
+let audioProps = undefined
+window.cmAudioDebug = false
 
-// console.log("AudioContext.state:", audioContext.state)
-
-addEventListeners()
+export const createAudioContext = (props) => {
+    audioProps = {
+        debug: false,
+        ...props
+    }
+    window.cmAudioDebug = audioProps.debug
+    window.AudioContext = window.AudioContext || window.webkitAudioContext
+    if (window.AudioContext) {
+        if (audioProps.debug) {
+            console.log('Web Audio API (AudioContext) supported by this browser')
+        }
+        window.cmAudioContext = new AudioContext()
+    } else if (window.webkitAudioContext) {
+        if (audioProps.debug) {
+            console.log('Web Audio API (window.webkitAudioContext) supported by this browser')
+        }
+        window.cmAudioContext = new webkitAudioContext()
+    } else {
+        console.error('Web Audio API is not supported by this browser')
+    }
+    window.cmMainGainNode = window.cmAudioContext.createGain()
+    window.cmMainGainNode.gain.value = 1
+    cmMainGainNode.connect(window.cmAudioContext.destination)
+    addEventListeners()
+}
 
 export class Audio {
 
     static context() {
-        return audioContext
+        return window.cmAudioContext
     }
 
     static destination() {
-        return mainGainNode
+        return window.cmMainGainNode
     }
 
     static setGain(gain) {
-        mainGainNode.gain.setValueAtTime(gain, audioContext.currentTime)
+        window.cmMainGainNode.gain.setValueAtTime(gain, window.cmAudioContext.currentTime)
     }
 
     static isEnabled() {
-        return audioContext.state === "running"
+        return window.cmAudioContext.state === "running"
     }
 
     /*
@@ -41,7 +58,7 @@ export class Audio {
         allowing you to execute custom code in response to changes in the AudioContext state.
      */
     static addStateListener(listener) {
-        audioContext.addEventListener("statechange", listener)
+        window.cmAudioContext.addEventListener("statechange", listener)
     }
 
     /*
@@ -73,9 +90,11 @@ function removeEventListeners() {
 
 // start context after user interaction
 function resumeAudioContext() {
-    if (audioContext.state !== "running") {
-        audioContext.resume().then(() => {
-            console.log('AudioContext resumed successfully, state:', audioContext.state)
+    if (window.cmAudioContext.state !== "running") {
+        window.cmAudioContext.resume().then(() => {
+            if (audioProps.debug) {
+                console.log('AudioContext resumed successfully, state:', window.cmAudioContext.state)
+            }
             removeEventListeners()
         }).catch(error => {
             console.error('Failed to resume AudioContext:', error)

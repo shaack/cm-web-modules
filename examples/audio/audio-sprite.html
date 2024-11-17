@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio example</title>
+</head>
+<body>
+<div style="text-align: center">
+    <h1>AudioSprite example</h1>
+    <button class="button-play" data-sound="check">check</button>
+    <button class="button-play" data-sound="wrong_move">wrong_move</button>
+    <button class="button-play" data-sound="take_back">take_back</button>
+</div>
+<script type="module">
+    import {createAudioContext} from "../../src/audio/Audio.js"
+    import {AudioSprite} from "../../src/audio/AudioSprite.js"
+
+    createAudioContext({debug: true})
+    const audioSprite = new AudioSprite("../../assets/audio-sprite.mp3",
+        {
+            gain: 1,
+            slices: {
+                "game_start": {offset: 0, duration: 0.9},
+                "game_won": {offset: 0.9, duration: 1.8},
+                "game_lost": {offset: 2.7, duration: 0.9},
+                "game_draw": {offset: 9.45, duration: 1.35},
+                "check": {offset: 3.6, duration: 0.45},
+                "wrong_move": {offset: 4.05, duration: 0.45},
+                "move": {offset: 4.5, duration: 0.2},
+                "capture": {offset: 6.3, duration: 0.2},
+                "castle": {offset: 7.65, duration: 0.2},
+                "take_back": {offset: 8.1, duration: 0.12},
+                "promotion": {offset: 9.0, duration: 0.45},
+                "dialog": {offset: 10.8, duration: 0.45}
+            }
+        })
+    const soundButtons = document.querySelectorAll(".button-play")
+    soundButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const slice = button.getAttribute("data-sound")
+            audioSprite.playSlice(slice)
+        })
+    })
+</script>
+</body>
+</html>

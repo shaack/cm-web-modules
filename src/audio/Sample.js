@@ -22,10 +22,16 @@ export class Sample {
     }
 
     setGain(gain) {
+        if(window.cmAudioDebug) {
+            console.log("Sample.setGain", gain)
+        }
         this.gainNode.gain.setValueAtTime(gain, Audio.context().currentTime)
     }
 
     play(when = undefined, offset = undefined, duration = undefined) {
+        if(window.cmAudioDebug) {
+            console.log("Sample.play", this.src, when, offset, duration)
+        }
         if (this.props.startWithoutAudioContext || Audio.isEnabled()) {
             this.loading.then(() => {
                 let source

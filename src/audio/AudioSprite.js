@@ -8,7 +8,7 @@ import {Sample} from "./Sample.js"
 
 export class AudioSprite extends Sample {
 
-    play(sliceName, when = 0) {
+    playSlice(sliceName, when = 0) {
         const slice = this.props.slices[sliceName]
         if (!slice) {
             throw new Error(`slice ${sliceName} not found in sprite`)
