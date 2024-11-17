@@ -80,5 +80,8 @@ function resumeAudioContext() {
         }).catch(error => {
             console.error('Failed to resume AudioContext:', error)
         })
+    } else {
+        console.log('AudioContext already running')
+        removeEventListeners()
     }
 }
