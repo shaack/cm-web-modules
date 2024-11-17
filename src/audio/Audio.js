@@ -36,6 +36,9 @@ export const createAudioContext = (props) => {
 export class Audio {
 
     static context() {
+        if (!window.cmAudioContext) {
+            console.error("Audio.context() called before createAudioContext()")
+        }
         return window.cmAudioContext
     }
 

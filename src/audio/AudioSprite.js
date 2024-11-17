@@ -8,6 +8,11 @@ import {Sample} from "./Sample.js"
 
 export class AudioSprite extends Sample {
 
+    // noinspection JSCheckFunctionSignatures
+    play(sliceName, when = 0) {
+        this.playSlice(sliceName, when)
+    }
+
     playSlice(sliceName, when = 0) {
         const slice = this.props.slices[sliceName]
         if (!slice) {
