@@ -1,6 +1,6 @@
-# cm-web-modules – Library of ES6 Web Modules
+# cm-web-modules 
 
-`cm-web-modules` is a library of JavaScript ES6 (ECMAScript 6) modules, used for coding [chessmail](http://www.chessmail.eu).
+A library of JavaScript ES6 (ECMAScript 6) modules, used for coding [chessmail.de](https://www.chessmail.de).
 
 The main purpose of `cm-web-modules` is, to prevent the usage of large libraries, and to provide needed functionality with the smallest and cleanest amount of code possible.
 
