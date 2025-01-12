@@ -91,9 +91,19 @@ preferences.
 
 ### MessageBroker
 
+TODO documentation
+
 ### Observe
 
 Module to observe object properties used for reactive coding the simple way.
+
+### Observed
+
+TODO documentation, replaces "Observe"
+
+### Promise Queue
+
+TODO documentation
 
 ### Stopwatch
 
@@ -123,38 +133,9 @@ Module to render SVG elements and load sprites.
 
 ### Template
 
+TODO documentation
+
 ### Utils
 
 ArrayUtils, ColorUtils, CoreUtils, DateUtils, DomUtils, EncryptionUtils,
 EventUtils, TextUtils
-
-## LibraryManager
-
-The LibraryManager is the glue between the web-modules. 
-
-It is configured in `postinstall.js`. Add `postinstall.js` to the automtically excuted install-scripts from npm by adding it to `package.json` like this
-
-`package.json`
-```json
-"scripts": {
-    "test": "mocha --require babel-core/register ./test/*.js",
-    "postinstall": "node postinstall.js"
-  }
-```
-
-In `postinstall.js`, add the used modules via `manager.addProject("module-name")`
-
-The source of the module is then copied to `PROJECT_ROOT/lib/modules/name`. It provides
-the same include-folder (/lib) for the local and for the via npm installed modules.
-
-You must call `npm install` after every `npm update`, because it is only automatically started by
-the initial install.  
-
-Example `postinstall.js`
-```js
-const LibraryManager = require("cm-web-modules/src/LibraryManager.js")
-const manager = new LibraryManager(__dirname)
-
-manager.addProject("cm-web-modules")
-manager.addProject("chess.js", "", "chess.js")
-```
