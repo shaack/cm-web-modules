@@ -93,17 +93,22 @@ function removeEventListeners() {
 
 // start context after user interaction
 function resumeAudioContext() {
-    if (window.cmAudioContext.state !== "running") {
-        window.cmAudioContext.resume().then(() => {
-            if (audioProps.debug) {
-                console.log('AudioContext resumed successfully, state:', window.cmAudioContext.state)
-            }
+    if (window.cmAudioContext) {
+        if (window.cmAudioContext.state !== "running") {
+            window.cmAudioContext.resume().then(() => {
+                if (audioProps.debug) {
+                    console.log('AudioContext resumed successfully, state:', window.cmAudioContext.state)
+                }
+                removeEventListeners()
+            }).catch(error => {
+                console.error('Failed to resume AudioContext:', error)
+            })
+        } else {
+            console.warn('AudioContext already running')
             removeEventListeners()
-        }).catch(error => {
-            console.error('Failed to resume AudioContext:', error)
-        })
+        }
     } else {
-        console.log('AudioContext already running')
-        removeEventListeners()
+        console.error("AudioContext not created")
     }
+
 }
