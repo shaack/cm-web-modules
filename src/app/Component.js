@@ -14,7 +14,6 @@ export class Component {
 
 }
 
-/** @deprecated */
 export class UiComponent extends Component {
 
     constructor(context, props = {}, state = {}) {

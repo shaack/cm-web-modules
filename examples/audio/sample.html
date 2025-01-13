@@ -7,8 +7,9 @@
 <body>
 <div style="text-align: center">
     <h1>Audio Sample example</h1>
-    <p>Move the slider to change the volume of the sound</p>
-    <input style="width: 600px" type="range" min="0" max="1" step="0.01" value="0.7" id="volume-slider">
+    <label for="volume-slider">Move the slider to change the volume of the sound</label><br/>
+    <input style="width: 600px" type="range" min="0" max="1" step="0.01" value="0.7" id="volume-slider"><br/>
+    <button id="play-button">Play Sound</button>
 </div>
 <script type="module">
     import {Sample} from "../../src/audio/Sample.js"
@@ -16,8 +17,11 @@
     createAudioContext({debug: true})
     const moveSound = new Sample("../../assets/move.mp3")
     const volumeSlider = document.getElementById("volume-slider")
+    const playButton = document.getElementById("play-button")
     volumeSlider.addEventListener("change", () => {
         moveSound.setGain(volumeSlider.value)
+    })
+    playButton.addEventListener("click", () => {
         moveSound.play()
     })
 </script>
