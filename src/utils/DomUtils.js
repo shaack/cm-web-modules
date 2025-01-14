@@ -133,11 +133,15 @@ export class DomUtils {
         }
     }
 
-    static openExternalLinksBlank() {
-        const links = document.links
+    static isExternalLink(link) {
+        return link.hostname !== window.location.hostname;
+    }
+
+    static openExternalLinksBlank(context = document) {
+        const links = context.links
         for (let i = 0; i < links.length; i++) {
             const target = links[i].target
-            if (links[i].hostname !== window.location.hostname && target !== "_self") {
+            if (this.isExternalLink(target) && target !== "_self") {
                 links[i].target = "_blank"
             }
         }
