@@ -140,8 +140,7 @@ export class DomUtils {
     static openExternalLinksBlank(context = document) {
         const links = context.links
         for (let i = 0; i < links.length; i++) {
-            const target = links[i].target
-            if (this.isExternalLink(target) && target !== "_self") {
+            if (this.isExternalLink(links[i]) && links[i].target !== "_self") {
                 links[i].target = "_blank"
             }
         }
