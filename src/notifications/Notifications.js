@@ -9,11 +9,12 @@ export class Notifications {
     requestPermission() {
         Notification.requestPermission((permission) => {
             console.log(permission)
-        })
+        }).then(() => console.log("Permission granted"))
     }
 
     show(title, body) {
         new Notification(title, {body: body});
     }
+
 }
 
