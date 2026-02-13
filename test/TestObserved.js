@@ -69,8 +69,49 @@ describe("Observed", function () {
             this.props = props
         }
     }
+    it("should makeDirty for a specific property", function () {
+        const state = new Observed({name: "Alice", count: 0})
+        let called = false
+        let receivedEvent = null
+        state.addObserver((event) => {
+            called = true
+            receivedEvent = event
+        }, "name")
+        state.makeDirty("name")
+        assert.true(called)
+        assert.equal(receivedEvent.property, "name")
+        assert.equal(receivedEvent.value, "Alice")
+        assert.equal(receivedEvent.oldValue, "Alice")
+    })
+    it("should makeDirty without property to notify all observers", function () {
+        const state = new Observed({name: "Alice", count: 0})
+        let nameObserverCalled = false
+        let allObserverCalled = false
+        state.addObserver(() => {
+            nameObserverCalled = true
+        }, "name")
+        state.addObserver(() => {
+            allObserverCalled = true
+        })
+        state.makeDirty()
+        assert.true(nameObserverCalled)
+        assert.true(allObserverCalled)
+    })
+    it("should makeDirty only notify matching observers", function () {
+        const state = new Observed({name: "Alice", count: 0})
+        let nameObserverCalled = false
+        let countObserverCalled = false
+        state.addObserver(() => {
+            nameObserverCalled = true
+        }, "name")
+        state.addObserver(() => {
+            countObserverCalled = true
+        }, "count")
+        state.makeDirty("name")
+        assert.true(nameObserverCalled)
+        assert.true(!countObserverCalled)
+    })
     it("should observe a class", function() {
-        // todo test async with Promise
         const observedClass = new Observed(new TestClass("test"))
         observedClass.addObserver((event) => {
             console.log(event)

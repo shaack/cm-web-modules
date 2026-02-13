@@ -29,6 +29,19 @@ export function Observed(target) {
             i++
         }
     }
+    this.target.makeDirty = (property) => {
+        const value = property !== undefined ? self.target[property] : undefined
+        for (const observer of self.observers) {
+            if (property === undefined || observer.properties.length === 0 || observer.properties.includes(property)) {
+                observer.callback({
+                    target: self.target,
+                    property: property,
+                    value: value,
+                    oldValue: value
+                })
+            }
+        }
+    }
     this.proxy = new Proxy(this.target, {
         set(target, property, value) {
             const oldValue = target[property]
