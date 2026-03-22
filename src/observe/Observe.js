@@ -12,6 +12,7 @@ const collectionMutationMethods = {
 
 const registry = new Map()
 
+/** @deprecated use Observed instead */
 export class Observe {
 
     /**

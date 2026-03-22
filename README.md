@@ -1,141 +1,48 @@
-# cm-web-modules 
+# cm-web-modules
 
-A library of JavaScript ES6 (ECMAScript 6) modules, used for coding [chessmail.de](https://www.chessmail.de).
+Zero-dependency ES6 module library for web development, used in production at [chessmail.de](https://www.chessmail.de).
 
-The main purpose of `cm-web-modules` is, to prevent the usage of large libraries, and to provide needed functionality with the smallest and cleanest amount of code possible.
+Provides needed functionality with the smallest and cleanest amount of code possible. No build step required — modules are native ES6 imports used directly in browsers.
 
-The `cm-web-modules` modules have no external dependencies, they don't use jQuery or other frameworks. They are written with modern vanilla JavaScript in ECMAScript 6 syntax.
+## Installation
 
-The `cm-web-modules` modules are:
+```bash
+npm install cm-web-modules
+```
 
 ## Modules
 
-### Audio
+| Module | Description |
+|--------|-------------|
+| [Audio](src/audio/) | Web Audio API playback with gain control, looping, and audio sprites |
+| [Cache](src/cache/) | Simple in-memory key-value cache with auto-clearing |
+| [Component](src/app/) | Base classes for components with props, state, and declarative event binding |
+| [Cookie](src/cookie/) | Read, write, and delete browser cookies |
+| [I18n](src/i18n/) | Internationalization with fallback languages and placeholder substitution |
+| [Md5](src/md5/) | Pure JavaScript MD5 hash implementation |
+| [MessageBroker](src/message-broker/) | Pub/Sub messaging with wildcard topic support |
+| [Notifications](src/notifications/) | Web Notifications API wrapper |
+| [Observed](src/observed/) | Proxy-based reactive property observation |
+| [PromiseQueue](src/promise-queue/) | Sequential promise execution queue |
+| [Stopwatch](src/stopwatch/) | Timer with start, stop, reset, and tick callbacks |
+| [Svg](src/svg/) | SVG DOM creation and manipulation |
+| [Template](src/template/) | Simple `${key}` template rendering |
+| [Utils](src/utils/) | ArrayUtils, ColorUtils, CoreUtils, DateUtils, DomUtils, EncryptionUtils, HttpUtils, TextUtils |
 
-Module for the [Web Audio API](https://developer.mozilla.org/de/docs/Web/API/Web_Audio_API). For playing audio samples in a web page.
+## Usage
 
-### Cache
-
-Cache data on client site.
-
-### Cookie
-
-Module to read, write and delete cookies.
-
-### I18n
-
-Module to handle the internationalisation of frontend text.
-
-```js
-const i18n = new I18n(props)
-```
-
-default props:
-
-```js
-this.props = {
-    locale: null,
-    fallbackLang: "en" // used, when the translation was not found for locale
-}
-```
-
-load language files:
+Import modules individually — there is no barrel export or bundling:
 
 ```js
-i18n.load("translations.json").then(() => {
-    // do this after loading
-})
+import {Audio} from "cm-web-modules/src/audio/Audio.js"
+import {Sample} from "cm-web-modules/src/audio/Sample.js"
+import {Observed} from "cm-web-modules/src/observed/Observed.js"
 ```
 
-where the json file has the form
+## Testing
 
-```json
-{
-  "de": {
-    "start_game": "Ein neues Spiel starten",
-    "undo_move": "Zug zurück nehmen"
-  },
-  "en": {
-    "start_game": "Start a new game",
-    "undo_move": "Undo move"
-  }
-}
-```
+Browser-based only — open `test/index.html` in a browser. There is no CLI test runner.
 
-or directly add the translations in your js code
+## License
 
-```js
-i18n.load({
-    de: {
-        "0_starts_game": "$0 startet ein neues Spiel",
-        "undo_move": "Zug zurück nehmen"
-    },
-    en: {
-        "0_starts_game": "$0 starts a new game",
-        "undo_move": "Undo move"
-    }
-})
-```
-
-Use placeholder $n [0-9] to replace them when using.  
-
-To handle the translations in your frontend code use
-
-```js
-i18n.t("0_starts_game", ["John Doe"])
-i18n.t("undo_move")
-```
-to render the needed text in the needed language. You can specify
-the language in the `props` when calling new or it uses the browser
-preferences.
-
-### MessageBroker
-
-TODO documentation
-
-### Observe
-
-Module to observe object properties used for reactive coding the simple way.
-
-### Observed
-
-TODO documentation, replaces "Observe"
-
-### Promise Queue
-
-TODO documentation
-
-### Stopwatch
-
-```js
-const stopwatch = new Stopwatch({
-    onStateChanged: (running) => {
-        stateOutput.innerText = running
-    },
-    onTimeChanged: (seconds) => {
-        secondsOutput.innerText = seconds.toFixed(1)
-    }
-})
-buttonStart.addEventListener("click", () => {
-    stopwatch.start()
-})
-buttonStop.addEventListener("click", () => {
-    stopwatch.stop()
-})
-buttonReset.addEventListener("click", () => {
-    stopwatch.reset()
-})
-```
-
-### SVG
-
-Module to render SVG elements and load sprites.
-
-### Template
-
-TODO documentation
-
-### Utils
-
-ArrayUtils, ColorUtils, CoreUtils, DateUtils, DomUtils, EncryptionUtils,
-EventUtils, TextUtils
+MIT
