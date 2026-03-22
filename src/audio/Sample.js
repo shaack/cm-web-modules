@@ -12,12 +12,15 @@ export class Sample {
         this.src = src
         this.props = {
             gain: 1,
+            loop: false,
             startWithoutAudioContext: true // start to play, without enabled audio context
         }
         Object.assign(this.props, props)
         this.gainNode = Audio.context().createGain()
+        this.gainNode.connect(Audio.destination())
         this.setGain(this.props.gain)
         this.audioBuffer = null
+        this.source = null
         this.load()
     }
 
@@ -34,38 +37,36 @@ export class Sample {
         }
         if (this.props.startWithoutAudioContext || Audio.isEnabled()) {
             this.loading.then(() => {
-                let source
-                source = this.createBufferSource()
-                source.start(when, offset, duration)
+                this.source = this.createBufferSource()
+                this.source.loop = this.props.loop
+                this.source.start(when, offset, duration)
             })
         }
+    }
 
+    stop(when = undefined) {
+        if(window.cmAudioDebug) {
+            console.log("Sample.stop", this.src, when)
+        }
+        if (this.source) {
+            this.source.stop(when)
+            this.source = null
+        }
     }
 
     createBufferSource() {
         const source = Audio.context().createBufferSource()
         source.buffer = this.audioBuffer
         source.connect(this.gainNode)
-        this.gainNode.connect(Audio.destination())
         return source
     }
 
     load() {
-        this.loading = new Promise(((resolve, reject) => {
-            const request = new XMLHttpRequest()
-            request.open('GET', this.src, true)
-            request.responseType = 'arraybuffer'
-            request.onload = () => {
-                Audio.context().decodeAudioData(request.response, (audioBuffer) => {
-                    this.audioBuffer = audioBuffer
-                    resolve()
-                }, () => {
-                    console.error("error loading sound", this.src)
-                    reject()
-                })
-            }
-            request.send()
-        }))
+        this.loading = fetch(this.src)
+            .then(response => response.arrayBuffer())
+            .then(buffer => Audio.context().decodeAudioData(buffer))
+            .then(audioBuffer => { this.audioBuffer = audioBuffer })
+            .catch(() => { console.error("error loading sound", this.src) })
         return this.loading
     }
 
