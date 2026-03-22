@@ -12,10 +12,10 @@
     <button class="button-play" data-sound="take_back">take_back</button>
 </div>
 <script type="module">
-    import {createAudioContext} from "../../src/audio/Audio.js"
+    import {Audio} from "../../src/audio/Audio.js"
     import {AudioSprite} from "../../src/audio/AudioSprite.js"
 
-    createAudioContext({debug: true})
+    Audio.createContext({debug: true})
     const audioSprite = new AudioSprite("../../assets/audio-sprite.mp3",
         {
             gain: 1,

@@ -5,53 +5,58 @@
  */
 const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousedown', 'mouseup', 'dblclick']
 let audioProps = undefined
-window.cmAudioDebug = false
+let audioContext = null
+let mainGainNode = null
 
+/** @deprecated Use Audio.createContext() instead */
 export const createAudioContext = (props) => {
-    audioProps = {
-        debug: false,
-        ...props
-    }
-    window.cmAudioDebug = audioProps.debug
-    window.AudioContext = window.AudioContext || window.webkitAudioContext
-    if (window.AudioContext) {
-        if (audioProps.debug) {
-            console.log('Web Audio API (AudioContext) supported by this browser')
-        }
-        window.cmAudioContext = new AudioContext()
-    } else if (window.webkitAudioContext) {
-        if (audioProps.debug) {
-            console.log('Web Audio API (window.webkitAudioContext) supported by this browser')
-        }
-        window.cmAudioContext = new webkitAudioContext()
-    } else {
-        console.error('Web Audio API is not supported by this browser')
-    }
-    window.cmMainGainNode = window.cmAudioContext.createGain()
-    window.cmMainGainNode.gain.value = 1
-    cmMainGainNode.connect(window.cmAudioContext.destination)
-    addEventListeners()
+    console.warn("createAudioContext() is deprecated, use Audio.createContext() instead")
+    Audio.createContext(props)
 }
 
 export class Audio {
 
-    static context() {
-        if (!window.cmAudioContext) {
-            console.error("Audio.context() called before createAudioContext()")
+    static createContext(props) {
+        audioProps = {
+            debug: false,
+            ...props
         }
-        return window.cmAudioContext
+        window.cmAudioDebug = audioProps.debug
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext
+        if (AudioContextClass) {
+            if (audioProps.debug) {
+                console.log('Web Audio API supported by this browser')
+            }
+            audioContext = new AudioContextClass()
+        } else {
+            console.error('Web Audio API is not supported by this browser')
+        }
+        mainGainNode = audioContext.createGain()
+        mainGainNode.gain.value = 1
+        mainGainNode.connect(audioContext.destination)
+        // legacy global access
+        window.cmAudioContext = audioContext
+        window.cmMainGainNode = mainGainNode
+        addEventListeners()
+    }
+
+    static context() {
+        if (!audioContext) {
+            console.error("Audio.context() called before Audio.createContext()")
+        }
+        return audioContext
     }
 
     static destination() {
-        return window.cmMainGainNode
+        return mainGainNode
     }
 
     static setGain(gain) {
-        window.cmMainGainNode.gain.setValueAtTime(gain, window.cmAudioContext.currentTime)
+        mainGainNode.gain.setValueAtTime(gain, audioContext.currentTime)
     }
 
     static isEnabled() {
-        return window.cmAudioContext.state === "running"
+        return audioContext.state === "running"
     }
 
     /*
@@ -61,7 +66,7 @@ export class Audio {
         allowing you to execute custom code in response to changes in the AudioContext state.
      */
     static addStateListener(listener) {
-        window.cmAudioContext.addEventListener("statechange", listener)
+        audioContext.addEventListener("statechange", listener)
     }
 
     /*
@@ -93,11 +98,11 @@ function removeEventListeners() {
 
 // start context after user interaction
 function resumeAudioContext() {
-    if (window.cmAudioContext) {
-        if (window.cmAudioContext.state !== "running") {
-            window.cmAudioContext.resume().then(() => {
+    if (audioContext) {
+        if (audioContext.state !== "running") {
+            audioContext.resume().then(() => {
                 if (audioProps.debug) {
-                    console.log('AudioContext resumed successfully, state:', window.cmAudioContext.state)
+                    console.log('AudioContext resumed successfully, state:', audioContext.state)
                 }
                 removeEventListeners()
             }).catch(error => {

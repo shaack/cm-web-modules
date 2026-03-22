@@ -14,14 +14,14 @@
 </div>
 <script type="module">
     import {Sample} from "../../src/audio/Sample.js"
-    import {createAudioContext} from "../../src/audio/Audio.js"
-    createAudioContext({debug: true})
+    import {Audio} from "../../src/audio/Audio.js"
+    Audio.createContext({debug: true})
     const loopSound = new Sample("../../assets/move.mp3", {loop: true})
     const volumeSlider = document.getElementById("volume-slider")
     const playButton = document.getElementById("play-button")
     const stopButton = document.getElementById("stop-button")
     volumeSlider.addEventListener("change", () => {
-        loopSound.setGain(volumeSlider.value)
+        Audio.setGain(volumeSlider.value)
     })
     playButton.addEventListener("click", () => {
         loopSound.play()

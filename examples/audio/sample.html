@@ -13,13 +13,14 @@
 </div>
 <script type="module">
     import {Sample} from "../../src/audio/Sample.js"
-    import {createAudioContext} from "../../src/audio/Audio.js"
-    createAudioContext({debug: true})
+    import {Audio} from "../../src/audio/Audio.js"
+
+    Audio.createContext({debug: true})
     const moveSound = new Sample("../../assets/move.mp3")
     const volumeSlider = document.getElementById("volume-slider")
     const playButton = document.getElementById("play-button")
     volumeSlider.addEventListener("change", () => {
-        moveSound.setGain(volumeSlider.value)
+        Audio.setGain(volumeSlider.value)
     })
     playButton.addEventListener("click", () => {
         moveSound.play()
