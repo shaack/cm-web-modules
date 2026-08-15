@@ -85,9 +85,29 @@ function addEventListeners() {
     })
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
+            flushAudioPipeline()
             setTimeout(resumeAudioContext, 200)
         }
     })
+}
+
+/*
+    Safari on macOS queues audio frames while a background tab is throttled,
+    instead of dropping them. After returning to the tab, every sound then
+    plays permanently late by the queued amount. A short suspend/resume
+    cycle drains the pipeline. Only needed (and only run) in desktop Safari.
+ */
+function flushAudioPipeline() {
+    const userAgent = navigator.userAgent
+    const isMacSafari = userAgent.includes("Macintosh") && userAgent.includes("Safari") &&
+        !userAgent.includes("Chrome") && !userAgent.includes("Chromium")
+    if (!isMacSafari || !audioContext || audioContext.state !== "running") {
+        return
+    }
+    if (audioProps.debug) {
+        console.log('flushing audio pipeline (Safari)')
+    }
+    audioContext.suspend().then(() => audioContext.resume()).catch(() => {})
 }
 
 function removeEventListeners() {
